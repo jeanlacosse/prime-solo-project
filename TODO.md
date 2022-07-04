@@ -1,6 +1,6 @@
 SPIKE
-[] ask a few questions that can be answered on a sliding scale
-    [] slider sets a local state
+[x] ask a few questions that can be answered on a sliding scale
+    [x] slider sets a local state
         [] local state sent to saga
         [] saga send to a post_state 
             [] post_state POST to DB
