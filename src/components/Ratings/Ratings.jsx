@@ -6,6 +6,9 @@ function Ratings() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // only need to add to store if I would be submitting this in another page and not one
+    // where I can just use local state
+
     const [howManyHotDogsEaten, setHowManyHotDogsEaten] = useState(5);
     const [howGoodFireworks, setHowGoodFireworks] = useState(5);
     const [howBadNeedVacation, setHowBadNeedVacation] = useState(5);
@@ -27,8 +30,7 @@ function Ratings() {
 
         })
 
-        //   PUSH TO FEEDBACK/THAN YOUPAGE
-        history.push('/extra-comments');
+        history.push('/successPage');
     }
 
     return (

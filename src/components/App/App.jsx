@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Ratings from '../Ratings/Ratings';
+import SuccessPage from '../Ratings/SuccessPage';
 
 import './App.css';
 
@@ -119,6 +120,14 @@ function App() {
           >
             <Ratings />
           </Route>
+
+          <Route
+          exact
+          path="/successPage"
+          >
+            <SuccessPage />
+          </Route>
+
           <Route>
             <h1>404</h1>
           </Route>
