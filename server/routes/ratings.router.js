@@ -56,7 +56,7 @@ router.get('/qrCode', (req, res) => {
         method: 'GET',
         url: 'https://api.qrserver.com/v1/create-qr-code/',
         params: {
-            data: 'https://tragically-goose-78342.herokuapp.com/#/'
+            data: 'https://serene-lassen-volcanic-92087.herokuapp.com/#/ratings'
         }
     })
         .then(apiRes => {
