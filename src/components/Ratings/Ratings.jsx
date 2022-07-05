@@ -31,7 +31,7 @@ function Ratings() {
 
         })
 
-        history.push('/successPage');
+        history.push('/success-page');
     }
 
     return (
