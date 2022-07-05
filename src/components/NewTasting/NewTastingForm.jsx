@@ -8,7 +8,7 @@ function NewTastingForm() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // this will set todays date in the input field
+    // this will set todays date in the calendar input field
     const today = new Date();
     const date = today.setDate(today.getDate());
     const todaysDate = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
@@ -31,9 +31,13 @@ function NewTastingForm() {
         console.log(newWineInfo)
         // this will dispatch the local state to the saga to be placed in store
         dispatch({
-            type: 'ADD_NEW_WINE',
+            type: 'ADD_WINE_INFO',
             payload: newWineInfo
         })
+        // this will push to the ratings page
+        // this page will be a link to the api endpoint for this specific wine
+        // using /api/wineInfo/wine.id where wine is imported from store after dispatch
+
     }
 
     
