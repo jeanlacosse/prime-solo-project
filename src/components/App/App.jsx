@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Ratings from '../Ratings/Ratings';
 import SuccessPage from '../Ratings/SuccessPage';
 import HomePage from '../HomePage/HomePage';
+import NewTastingForm from '../NewTasting/NewTastingForm';
 
 import './App.css';
 
@@ -116,7 +117,7 @@ function App() {
 
 {/* Do i need to make a conditional for every one of my routes or can I just add in a rejectUnauthenticated right from the start of the page?? */}
 
-          <Route
+          {/* <Route
           exact
           path="/appearance-rating"
           >
@@ -149,7 +150,7 @@ function App() {
           path="/success-page"
           >
             <SuccessPage />
-          </Route>
+          </Route> */}
 
           <Route
           exact
@@ -158,12 +159,20 @@ function App() {
             <NewTastingForm />
           </Route>
 
-          <Route
+          {/* <Route
           exact
           path="/wine-journal"
           >
             <WineJournalList />
           </Route>
+
+
+          <Route
+          exact
+          path="/tasting-tips"
+          >
+            <TastingTipsList />
+          </Route> */}
 
             {/* If none of the other routes matched, we will show a 404. */}
           <Route>
