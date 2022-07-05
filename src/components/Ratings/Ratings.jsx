@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import './Ratings.css';
 
 function Ratings() {
     const dispatch = useDispatch();
