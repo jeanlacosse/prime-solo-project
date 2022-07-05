@@ -4,7 +4,8 @@ import axios from 'axios';
 function* addWineInfo(action) {
     try {
         const result = yield axios.post('/api/wineInfo/new-wine', action.payload)
-        yield put({ type: 'FETCH_WINE_INFO', payload: action.payload.id});
+        // don't need to fetch, can just set in store from here!
+        yield put({ type: 'SET_WINE_DETAIL', payload: result.data});
         console.log('action payload is:', result.data)
     }
     catch (error) {
@@ -31,7 +32,6 @@ function* addWineInfo(action) {
 
 function* newWineSaga() {
     yield takeLatest('ADD_WINE_INFO', addWineInfo);
-    // yield takeLatest('FETCH_WINE_INFO', fetchSpecificWineInfo);
     // yield takeLatest('ADD-ALL-RATINGS', addUserRatings);
 }
 

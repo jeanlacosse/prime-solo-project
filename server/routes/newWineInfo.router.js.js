@@ -7,6 +7,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.post('/new-wine', rejectUnauthenticated, (req, res) => {
     console.log('wine info is ', req.body);
     console.log('user id is', req.user.id);
+    // this will post the entry to the DB while returning that information posted to be sent back to 
+    // the saga, which is then used to set the store in the wine reducer
     let queryText = `
     INSERT INTO "journal_entry" ("user_id", "date", "winery_name", "varietal", "vintage", "region")
     VALUES ($1, $2, $3, $4, $5, $6)
