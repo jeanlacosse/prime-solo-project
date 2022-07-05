@@ -15,7 +15,7 @@ function NewTastingForm() {
 
 
     // this is the local state the wine information is stored inside
-    let [newWineInfo, setNewWineInfo] = useState({
+    const [newWineInfo, setNewWineInfo] = useState({
         date: todaysDate
     })
 
@@ -25,10 +25,15 @@ function NewTastingForm() {
             ...newWineInfo, [event.target.name]: event.target.value
         })
     }
+
     const addWineInformation = (event) => {
         event.preventDefault();
         console.log(newWineInfo)
         // this will dispatch the local state to the saga to be placed in store
+        dispatch({
+            type: 'ADD_NEW_WINE',
+            payload: newWineInfo
+        })
     }
 
     
