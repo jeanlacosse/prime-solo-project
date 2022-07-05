@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+// imported components/links
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -21,6 +22,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Ratings from '../Ratings/Ratings';
 import SuccessPage from '../Ratings/SuccessPage';
+import HomePage from '../HomePage/HomePage';
+import NewTastingForm from '../NewTasting/NewTastingForm';
 
 import './App.css';
 
@@ -55,11 +58,11 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows HomePage else shows LoginPage
             exact
-            path="/user"
+            path="/home"
           >
-            <UserPage />
+            <HomePage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -77,7 +80,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -91,7 +94,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -104,32 +107,76 @@ function App() {
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
+              // redirect them to the /home page
+              <Redirect to="/home" />
               :
               // Otherwise, show the Landing page
-              <LandingPage />
+              <RegisterPage />
             }
           </Route>
 
-          {/* If none of the other routes matched, we will show a 404. */}
+{/* Do i need to make a conditional for every one of my routes or can I just add in a rejectUnauthenticated right from the start of the page?? */}
 
-          <Route
+          {/* <Route
           exact
-          path="/ratings"
+          path="/appearance-rating"
           >
-            <Ratings />
+            <AppearanceRating />
           </Route>
 
           <Route
           exact
-          path="/successPage"
+          path="/nose-rating"
+          >
+            <NoseRating />
+          </Route>
+
+          <Route
+          exact
+          path="/palate-rating"
+          >
+            <PalateRating />
+          </Route>
+
+          <Route
+          exact
+          path="/overall-rating"
+          >
+            <OverallRating />
+          </Route>
+
+          <Route
+          exact
+          path="/success-page"
           >
             <SuccessPage />
+          </Route> */}
+
+          <Route
+          exact
+          path="/new-tasting"
+          >
+            <NewTastingForm />
           </Route>
 
+          {/* <Route
+          exact
+          path="/wine-journal"
+          >
+            <WineJournalList />
+          </Route>
+
+
+          <Route
+          exact
+          path="/tasting-tips"
+          >
+            <TastingTipsList />
+          </Route> */}
+
+            {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <h1>404 PAge Not Found</h1>
           </Route>
         </Switch>
         <Footer />

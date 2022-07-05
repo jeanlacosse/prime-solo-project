@@ -29,13 +29,24 @@ function Nav() {
               Ratings
             </Link>
 
-            <Link className="navLink" to="/user">
+            <Link className="navLink" to="/home">
               Home
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/new-tasting">
+              Start a New Tasting
             </Link>
+
+            <Link className="navLink" to="/wine-journal">
+              View My Wine Journal
+            </Link>
+
+            <Link className="navLink" to="/tasting-tips">
+              Wine Tasting Tips
+            </Link>
+            {/* <Link className="navLink" to="/info">
+              Info Page
+            </Link> */}
 
             <LogOutButton className="navLink" />
           </>
