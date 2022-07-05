@@ -1,0 +1,1 @@
+creating rooms with socket.io - can be a place to get multiple people in the same place at once. - Neil is using this tech and I could ask him if wanting to incorporate.

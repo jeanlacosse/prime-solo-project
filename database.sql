@@ -9,21 +9,39 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
-CREATE TABLE "feedback" (
+CREATE TABLE "journal_entry" (
   "id" serial primary key,
-  "feeling" INT not null,
-  "understanding" INT not null,
-  "support" INT not null,
-  "comments" text,
-  "flagged" boolean default false,
-  "date" date not null default CURRENT_DATE
+  "user_id" INT not null REFERENCES "user",
+  "favorited" boolean DEFAULT false,
+  "date" DATE,
+  "winery_name" VARCHAR (250) not null,
+  "varietal" VARCHAR (250) not null,
+  "vintage" VARCHAR (250) not null,
+  "region" VARCHAR (250) not null
 ); 
 
--- Sample feedback item
-INSERT INTO "feedback" ("feeling", "understanding", "support", "comments")
-VALUES (4, 4, 5, 'Doing Great!');
+CREATE TABLE "scores" (
+	"id" serial primary key,
+	"journal_entry_id" INT not null REFERENCES "journal_entry",
+	"user_display_name" VARCHAR (250),
+	"appearance_score" INT not null,
+	"nose_score" INT not null,
+	"palate_score" INT not null,
+	"overall_score" INT not null,
+	"appearance_notes" VARCHAR (500),
+	"nose_notes" VARCHAR (500),
+	"palate_notes" VARCHAR (500),
+	"overall_notes" VARCHAR (500)
+);
 
+--sample data to test
+INSERT INTO "journal_entry" ("user_id", "favorited", "date", "winery_name", "varietal", "vintage", "region")
+VALUES (1, false, '07/05/2022', 'Phelps Creek', 'Pinot Noir', '2015', 'Willamette Valley');
 
+INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
+VALUES (1, 8, 8, 6, 7, 'bright red, relatively clear. Not opaque at all.', 'fresh berries, plum, and slightly peppery.', 'long finish, low tannins, good acid levels.', 'Overall a great wine, light on the tounge but carries a lot of depth.')
+
+-- this is still for the 4th of july averages, must change
 SELECT
 	AVG(feedback.understanding) AS understanding_avg,
 	AVG(feedback.feeling) AS feeling_avg,
