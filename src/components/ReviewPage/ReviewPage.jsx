@@ -14,7 +14,7 @@ import 'reactjs-popup/dist/index.css';
     [] runs saga to post to db
     [] history.push to success page
 [] favorite btn to run saga to put to DB journal__entry favorited
-[] no back btn yet
+[x] no back btn yet
 */
 function ReveiwPage() {
 
@@ -29,6 +29,15 @@ function ReveiwPage() {
 
       const wineInfo = useSelector((store) => store.wineInfo.wineDetail);
       const wineRatingsAndNotes = useSelector((store) => store.wineInfo.wineRatingsAndNotes);
+
+      function submitRatings() {
+        dispatch({
+            type: 'ADD-ALL-RATINGS',
+            payload: wineRatingsAndNotes
+        })
+         // push to next page, change to the success page
+        //  history.push(`/nose-rating/${wineInfo.id}`)
+      }
 
     return(
         <>
@@ -48,6 +57,15 @@ function ReveiwPage() {
         <div>Overall {wineRatingsAndNotes.overallRating}
         <Popup trigger={<button>Notes</button>}><div className='popup'>{wineRatingsAndNotes.overallNotes}</div></Popup>
         </div>
+        <span>
+        {/* this will add the wine to the favorites list */}
+        <button>Favorite</button>
+        {/* this will send the ratings to the db via sagas */}
+        <button
+        onClick={submitRatings}
+        >Submit Rating</button>
+        </span>
+        
         </>
     )
 };

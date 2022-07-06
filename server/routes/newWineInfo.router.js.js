@@ -4,6 +4,7 @@ const pool = require('../modules/pool');
 const axios = require('axios');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 
+
 router.post('/new-wine', rejectUnauthenticated, (req, res) => {
     console.log('wine info is ', req.body);
     console.log('user id is', req.user.id);
@@ -34,6 +35,18 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500)
         });
 });
+
+router.post('/ratings', rejectUnauthenticated, (req, res) => {
+    console.log('wine ratings is ', req.body);
+    console.log('user id is', req.user.id);
+
+    // want to post all info returning *, then fetch detail again and select averages
+    let queryText = `
+    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+    `
+})
+
 
 // this is fetching the next wine id in order to create a linked page to it so I can 
 // create a specific qr code for each api endpoint

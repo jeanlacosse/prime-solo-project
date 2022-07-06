@@ -26,6 +26,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/wineInfo', newWineInfoRouter);
 
+
 // Serve static files
 app.use(express.static('build'));
 
