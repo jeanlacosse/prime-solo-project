@@ -4,15 +4,15 @@ import { useParams, Link, useHistory } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 
 
-function AppearanceRating() {
+function PalateRating() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
     
     // This is local state to hold the rating and the comments to be sent to the Redux store
-    const [appearanceRatingAndNotes, setAppearanceRatingAndNotes] = useState({
-        appearanceRating: 5,
-        appearanceNotes: ''
+    const [palateRatingAndNotes, setPalateRatingAndNotes] = useState({
+        palateRating: 5,
+        palateNotes: ''
     });
 
     useEffect(() => {
@@ -27,20 +27,21 @@ function AppearanceRating() {
 
         // sends local state to store, not sent through a saga yet
         dispatch({
-            type: 'ADD_APPEARANCE_INFO',
-            payload: appearanceRatingAndNotes
+            type: 'ADD_PALATE_INFO',
+            payload: palateRatingAndNotes
         })
-        // push to next page, do I need to do a url thing?
-        history.push(`/nose-rating/${wineInfo.id}`)
+        // push to next page
+        history.push(`/overall-rating/${wineInfo.id}`)
       }
+
 
     return (
         <>
         <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
-        <h3>Appearance Rating</h3>
+        <h3>Palate Rating</h3>
         {/* need to link this button to tips when I build out the tips page */}
         <button><Link to=""> 
-        Tips on Evaluating Appearance
+        Tips on Evaluating Palate
         </Link></button>
         <form onSubmit={(event) => addNotesAndRating(event)}>
             {/* slider input to change appearance rating */}
@@ -48,23 +49,23 @@ function AppearanceRating() {
             type="range"
             min='0'
             max='10'
-            value={appearanceRatingAndNotes.appearanceRating} 
-            onChange={event => setAppearanceRatingAndNotes({
-                ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+            value={palateRatingAndNotes.palateRating} 
+            onChange={event => setPalateRatingAndNotes({
+                ...palateRatingAndNotes, palateRating: (Number(event.target.value))
             })}
             />
-            <h5>{appearanceRatingAndNotes.appearanceRating}</h5>
+            <h5>{palateRatingAndNotes.palateRating}</h5>
 
             {/* text box for tasting notes */}
             <input 
             type="text"
-            placeholder='Notes on wines appearance'
-            onChange={event => setAppearanceRatingAndNotes({
-                ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
+            placeholder='Notes on wines nose'
+            onChange={event => setPalateRatingAndNotes({
+                ...palateRatingAndNotes, palateNotes: (event.target.value)
             })}
             />
             <button 
-            onClick={() => {history.push('/new-tasting')}}
+            onClick={() => {history.push(`/nose-rating/${wineInfo.id}`)}}
             >Back</button>
             <button type='submit'>Next</button>
             {/* back btn will go to wine inputs page again
@@ -74,4 +75,4 @@ function AppearanceRating() {
     )
 };
 
-export default AppearanceRating;
+export default PalateRating;

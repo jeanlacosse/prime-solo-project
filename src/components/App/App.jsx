@@ -135,14 +135,14 @@ function App() {
             <NoseRating />
           </Route>
 
-          {/* <Route
+          <Route
           exact
           path="/palate-rating"
           >
             <PalateRating />
           </Route>
 
-          <Route
+          {/* <Route
           exact
           path="/overall-rating"
           >
