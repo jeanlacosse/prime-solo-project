@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import wineInfoReducer from './wineInfo/wineInfo.reducer';
+import wineInfo from './wineInfo/wineInfo.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -12,7 +12,7 @@ import wineInfoReducer from './wineInfo/wineInfo.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  wineInfoReducer, // all the wine information stored here
+  wineInfo, // all the wine information stored here
 });
 
 export default rootReducer;
