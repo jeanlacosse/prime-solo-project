@@ -35,6 +35,7 @@ const wineRatingsAndNotes = (state = {}, action) => {
                 ...state, 
                 overallRating: action.payload.overallRating,
                 overallNotes: action.payload.overallNotes,
+                journal_entry_id: Number(action.payload.journal_entry_id)
             }
         default:
             return state;
