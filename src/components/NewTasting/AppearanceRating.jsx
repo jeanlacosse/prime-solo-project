@@ -1,10 +1,36 @@
-import {useSelector} from 'react-redux';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function AppearanceRating() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // this is to fetch wine detail for the last id inputted into the DB
+        // It will line up exactly with the url endpoint and always get the last wines id
+        axios.get('/api/wineInfo/wine-id')
+            .then(response => {
+                console.log('id response is', response.data.max)
+                dispatch({ type: 'FETCH_WINE_DETAIL', payload: response.data.max});
+            })
+            .catch((error) => {
+                console.error('error is', error)
+            })
+        
+      }, []);
+
 
     const wineInfo = useSelector((store) => store.wineInfo.wineDetail)
-
-console.log('wine info is ', wineInfo)
+    console.log('wine info on appearance is is', wineInfo)
+/*TODO
+[] useeffect to fetch wine detail
+[]use store to display wine infor at top of page
+[] create button for tips - no link yet
+[] 1-10 slider create, set to local state
+[] notes section input create, set to same local state or to store via a non saga dispatch
+[] back button to go to wine inputs again,
+[] next button goes to nose-rating
+*/
 
     return (
         <>

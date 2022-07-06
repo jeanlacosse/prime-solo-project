@@ -38,11 +38,13 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
 // this is fetching the next wine id in order to create a linked page to it so I can 
 // create a specific qr code for each api endpoint
 router.get('/wine-id', rejectUnauthenticated, (req, res) => {
+    
     const sqlQuery = `
-    SELECT MAX(Id) FROM journal_entry;
+    SELECT MAX(Id) FROM journal_entry
+    WHERE user_id = $1;
     `;
 
-    pool.query(sqlQuery)
+    pool.query(sqlQuery, [req.user.id])
         .then(result => {
             console.log()
             res.send(result.rows[0]);
