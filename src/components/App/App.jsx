@@ -25,6 +25,7 @@ import SuccessPage from '../Ratings/SuccessPage';
 import HomePage from '../HomePage/HomePage';
 import NewTastingForm from '../NewTasting/NewTastingForm';
 import AppearanceRating from '../NewTasting/AppearanceRating';
+import NoseRating from '../NewTasting/NoseRating';
 
 import './App.css';
 
@@ -127,14 +128,14 @@ function App() {
             <AppearanceRating />
           </Route>
 
-          {/* <Route
+          <Route
           exact
-          path="/nose-rating"
+          path="/nose-rating/:id"
           >
             <NoseRating />
           </Route>
 
-          <Route
+          {/* <Route
           exact
           path="/palate-rating"
           >

@@ -4,7 +4,7 @@ import { useParams, Link, useHistory } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 
 
-function AppearanceRating() {
+function NoseRating() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
@@ -84,4 +84,4 @@ function AppearanceRating() {
     )
 };
 
-export default AppearanceRating;
+export default NoseRating;

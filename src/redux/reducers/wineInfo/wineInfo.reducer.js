@@ -9,6 +9,16 @@ const wineDetail = (state = [], action) => {
     }
 }
 
+const wineRatingsAndNotes = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_APPEARANCE_INFO':
+            return [ ...state, action.payload ]
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     wineDetail,
+    wineRatingsAndNotes
 })
