@@ -15,6 +15,10 @@ const wineRatingsAndNotes = (state = [], action) => {
             return [ ...state, action.payload ]
         case 'ADD_NOSE_INFO':
             return [ ...state, action.payload ]
+        case 'ADD_PALATE_INFO':
+            return [ ...state, action.payload ]
+        case 'ADD_OVERALL_INFO':
+            return [ ...state, action.payload ]
         default:
             return state;
     }

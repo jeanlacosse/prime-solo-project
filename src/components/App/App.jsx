@@ -26,6 +26,8 @@ import HomePage from '../HomePage/HomePage';
 import NewTastingForm from '../NewTasting/NewTastingForm';
 import AppearanceRating from '../NewTasting/AppearanceRating';
 import NoseRating from '../NewTasting/NoseRating';
+import PalateRating from '../NewTasting/PalateRating';
+import OverallRating from '../NewTasting/OverallRating';
 
 import './App.css';
 
@@ -137,19 +139,19 @@ function App() {
 
           <Route
           exact
-          path="/palate-rating"
+          path="/palate-rating/:id"
           >
             <PalateRating />
           </Route>
 
-          {/* <Route
+          <Route
           exact
-          path="/overall-rating"
+          path="/overall-rating/:id"
           >
             <OverallRating />
           </Route>
 
-          <Route
+          {/* <Route
           exact
           path="/success-page"
           >
