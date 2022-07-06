@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const wineInfo = (state = [], action) => {
+const wineDetail = (state = [], action) => {
     switch (action.type) {
         case 'SET_WINE_DETAIL':
             return action.payload
@@ -9,6 +9,22 @@ const wineInfo = (state = [], action) => {
     }
 }
 
+const wineRatingsAndNotes = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_APPEARANCE_INFO':
+            return [ ...state, action.payload ]
+        case 'ADD_NOSE_INFO':
+            return [ ...state, action.payload ]
+        case 'ADD_PALATE_INFO':
+            return [ ...state, action.payload ]
+        case 'ADD_OVERALL_INFO':
+            return [ ...state, action.payload ]
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
-    wineInfo,
+    wineDetail,
+    wineRatingsAndNotes
 })
