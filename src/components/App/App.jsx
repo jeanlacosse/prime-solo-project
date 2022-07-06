@@ -28,6 +28,7 @@ import AppearanceRating from '../NewTasting/AppearanceRating';
 import NoseRating from '../NewTasting/NoseRating';
 import PalateRating from '../NewTasting/PalateRating';
 import OverallRating from '../NewTasting/OverallRating';
+import ReveiwPage from '../ReviewPage/ReviewPage';
 
 import './App.css';
 
@@ -149,6 +150,13 @@ function App() {
           path="/overall-rating/:id"
           >
             <OverallRating />
+          </Route>
+
+          <Route
+          exact
+          path="/review-page/:id"
+          >
+            <ReveiwPage />
           </Route>
 
           {/* <Route
