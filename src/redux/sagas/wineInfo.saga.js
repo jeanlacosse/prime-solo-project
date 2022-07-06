@@ -6,18 +6,13 @@ function* addWineInfo(action) {
         const result = yield axios.post('/api/wineInfo/new-wine', action.payload)
         // don't need to fetch, can just set in store from here!
         yield put({ type: 'SET_WINE_DETAIL', payload: result.data});
-        console.log('action payload is:', result.data)
     }
     catch (error) {
         console.log('error in POST wine info', error)
     }
 }
 
-// function* fetchSpecificWineInfo(action) {
-//     try {
-//         const wineData = yield axios.get(`/api/wineInfo/`)
-//     }
-// }
+
 
 
 // function* addUserRatings(action) {

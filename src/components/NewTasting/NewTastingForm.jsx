@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 function NewTastingForm() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    
 
     // this will set todays date in the calendar input field
     const today = new Date();
@@ -28,7 +30,6 @@ function NewTastingForm() {
 
     const addWineInformation = (event) => {
         event.preventDefault();
-        console.log(newWineInfo)
         // this will dispatch the local state to the saga to be placed in store
         dispatch({
             type: 'ADD_WINE_INFO',
@@ -36,9 +37,18 @@ function NewTastingForm() {
         })
         // this will push to the ratings page
         // this page will be a link to the api endpoint for this specific wine
-        // using /api/wineInfo/wine.id where wine is imported from store after dispatch
-
+        // using /api/wineInfo/wine.id where wine id is grabbed from DB SQL
+        // via an axios.get id and add 1 to it
+        axios.get('/api/wineInfo/wine-id')
+            .then(response => {
+                // console.log('id response is', response.data.max + 1)
+                history.push(`/appearance-rating/${response.data.max + 1}`)
+            })
+            .catch((error) => {
+                console.error('error is', error)
+            })
     }
+    
 
     
 

@@ -35,6 +35,22 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// this is fetching the next wine id in order to create a linked page to it so I can create aa specific qr code for each page
+router.get('/wine-id', (req, res) => {
+    const sqlQuery = `
+    SELECT MAX(Id) FROM journal_entry;
+    `;
+
+    pool.query(sqlQuery)
+        .then(result => {
+            res.send(result.rows[0]);
+        })
+        .catch(error => {
+            console.log('error in get request', error)
+            res.sendStatus(500);
+        })
+})
+
 // here is where i am getting the rating average from the server
 router.get('/', (req, res) => {
     const sqlQuery = `
