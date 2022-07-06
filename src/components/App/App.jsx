@@ -31,6 +31,7 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
+  const wineDetail = useSelector(store => store.wineInfoReducer);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -117,14 +118,14 @@ function App() {
 
 {/* Do i need to make a conditional for every one of my routes or can I just add in a rejectUnauthenticated right from the start of the page?? */}
 
-          {/* <Route
+          <Route
           exact
           path="/appearance-rating"
           >
             <AppearanceRating />
           </Route>
 
-          <Route
+          {/* <Route
           exact
           path="/nose-rating"
           >
@@ -176,7 +177,7 @@ function App() {
 
             {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404 PAge Not Found</h1>
+            <h1>404 Page Not Found</h1>
           </Route>
         </Switch>
         <Footer />

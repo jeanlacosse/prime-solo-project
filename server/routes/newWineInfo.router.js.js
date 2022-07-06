@@ -1,33 +1,55 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
-const axios = require('axios')
+const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 
-router.post('/', (req, res) => {
-    console.log('ratings are', req.body);
+router.post('/new-wine', rejectUnauthenticated, (req, res) => {
+    console.log('wine info is ', req.body);
+    console.log('user id is', req.user.id);
+    // this will post the entry to the DB while returning that information posted to be sent back to 
+    // the saga, which is then used to set the store in the wine reducer
     let queryText = `
-    INSERT INTO "fourth_of_july_ratings"
-    ("hotdogs", "fireworks", "vacation", "watermelon")
-    VALUES ($1, $2, $3, $4);
+    INSERT INTO "journal_entry" ("user_id", "date", "winery_name", "varietal", "vintage", "region")
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *;
     `;
 
-    pool.query(queryText,
-        [
-            req.body.howManyHotDogsEaten,
-            req.body.howGoodFireworks,
-            req.body.howBadNeedVacation,
-            req.body.howMuchLikeWatermelon
-        ])
+    let queryParams = [
+        req.user.id,
+        req.body.date,
+        req.body.winery_name,
+        req.body.varietal,
+        req.body.vintage,
+        req.body.region
+    ]
+
+    pool.query(queryText, queryParams)
         .then(result => {
-            res.sendStatus(201)
+            res.send(result.rows[0]);
+
         })
         .catch(error => {
             console.error('error adding in ratings', error);
             res.sendStatus(500)
         });
-
-        
 });
+
+// this is fetching the next wine id in order to create a linked page to it so I can create aa specific qr code for each page
+router.get('/wine-id', (req, res) => {
+    const sqlQuery = `
+    SELECT MAX(Id) FROM journal_entry;
+    `;
+
+    pool.query(sqlQuery)
+        .then(result => {
+            res.send(result.rows[0]);
+        })
+        .catch(error => {
+            console.log('error in get request', error)
+            res.sendStatus(500);
+        })
+})
 
 // here is where i am getting the rating average from the server
 router.get('/', (req, res) => {

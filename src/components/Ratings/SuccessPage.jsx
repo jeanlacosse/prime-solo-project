@@ -18,7 +18,7 @@ function SuccessPage() {
     }, [])
 
     const setQR = () => {
-        axios.get('/api/ratings/qrCode')
+        axios.get('/api/wineInfo/qrCode')
             .then(response => {
                 console.log('response is', response.data.qrCode)
                 setQrCode(response.data.qrCode);
@@ -30,7 +30,7 @@ function SuccessPage() {
     }
 
     const avgRating = () => {
-        axios.get('/api/ratings')
+        axios.get('/api/wineInfo')
             .then(response => {
                 console.log('response for rating is:', response.data)
                 setRatingAverage({
