@@ -56,12 +56,20 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
 })
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('req.user.id is', req.user.id)
+    
     const sqlQuery = `
     SELECT * FROM journal_entry 
-    WHERE id = $1;   
+    WHERE id = $1
+    AND user_id = $2;   
     `;
 
-    pool.query(sqlQuery, [req.params.id])
+    sqlParams = [
+        req.params.id,
+        req.user.id
+    ]
+
+    pool.query(sqlQuery, sqlParams)
         .then(result => {
             res.send(result.rows[0]);
         })

@@ -28,21 +28,10 @@ function NewTastingForm() {
         })
     }
 
-    // this will push to the ratings page
-    // this page will be a link to the api endpoint for this specific wine
-    // using /api/wineInfo/wine.id where wine id is grabbed from DB SQL
-    // via an axios.get id and add 1 to it
+
     const addWineInformation = (event) => {
         event.preventDefault();
 
-        axios.get('/api/wineInfo/wine-id')
-            .then(response => {
-                console.log('id response is', response.data.max + 1)
-                history.push(`/appearance-rating/${response.data.max + 1}`)
-            })
-            .catch((error) => {
-                console.error('error is', error)
-            })
 
         // this will dispatch the local state to the saga to be placed in store
         dispatch({
@@ -50,6 +39,18 @@ function NewTastingForm() {
             payload: newWineInfo
         })
 
+        // this will push to the ratings page
+        // this page will be a link to the api endpoint for this specific wine
+        // using /api/wineInfo/wine.id where wine id is grabbed from DB SQL
+        // via an axios.get id and add 1 to it
+        axios.get('/api/wineInfo/wine-id')
+            .then(response => {
+                console.log('id response is', response.data.max)
+                history.push(`/appearance-rating/${response.data.max}`)
+            })
+            .catch((error) => {
+                console.error('error is', error)
+            })
 
     }
 

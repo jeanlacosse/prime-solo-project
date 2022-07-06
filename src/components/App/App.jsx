@@ -122,7 +122,7 @@ function App() {
             {/* this route will be for any numbers after the push to /appearance-rating b/c not exact */}
           <Route
           // exact
-          path="/appearance-rating/"
+          path="/appearance-rating/:id"
           >
             <AppearanceRating />
           </Route>

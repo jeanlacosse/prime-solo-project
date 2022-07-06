@@ -1,23 +1,26 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
 
 function AppearanceRating() {
     const dispatch = useDispatch();
+    const { id } = useParams();
+    console.log('params id', id);
 
     useEffect(() => {
-        // this is to fetch wine detail for the last id inputted into the DB
+        // this is to fetch wine detail for the last id inputed into the DB for that user,
         // It will line up exactly with the url endpoint and always get the last wines id
-        axios.get('/api/wineInfo/wine-id')
-            .then(response => {
-                console.log('id response is', response.data.max)
-                dispatch({ type: 'FETCH_WINE_DETAIL', payload: response.data.max});
-            })
-            .catch((error) => {
-                console.error('error is', error)
-            })
+        // axios.get('/api/wineInfo/wine-id')
+        //     .then(response => {
+                // console.log('id response is', response.data.max)
+                dispatch({ type: 'FETCH_WINE_DETAIL', payload: id});
+            // })
+            // .catch((error) => {
+            //     console.error('error is', error)
+            // })
         
-      }, []);
+      }, [ id ]);
 
 
     const wineInfo = useSelector((store) => store.wineInfo.wineDetail)
