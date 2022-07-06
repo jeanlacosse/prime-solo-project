@@ -50,8 +50,6 @@ function NewTastingForm() {
     }
     
 
-    
-
     return (
         <>
             <h2>Please enter the wines information below</h2>

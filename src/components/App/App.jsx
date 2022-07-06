@@ -24,6 +24,7 @@ import Ratings from '../Ratings/Ratings';
 import SuccessPage from '../Ratings/SuccessPage';
 import HomePage from '../HomePage/HomePage';
 import NewTastingForm from '../NewTasting/NewTastingForm';
+import AppearanceRating from '../NewTasting/AppearanceRating';
 
 import './App.css';
 
@@ -118,9 +119,10 @@ function App() {
 
 {/* Do i need to make a conditional for every one of my routes or can I just add in a rejectUnauthenticated right from the start of the page?? */}
 
+            {/* this route will be for any numbers after the push to /appearance-rating b/c not exact */}
           <Route
-          exact
-          path="/appearance-rating"
+          // exact
+          path="/appearance-rating/"
           >
             <AppearanceRating />
           </Route>

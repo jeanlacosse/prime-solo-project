@@ -36,7 +36,7 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
 });
 
 // this is fetching the next wine id in order to create a linked page to it so I can create aa specific qr code for each page
-router.get('/wine-id', (req, res) => {
+router.get('/wine-id', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
     SELECT MAX(Id) FROM journal_entry;
     `;
