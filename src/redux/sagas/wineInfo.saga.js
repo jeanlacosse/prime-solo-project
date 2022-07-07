@@ -55,7 +55,17 @@ function* fetchAllWines() {
 
 function* deleteWineItem(action) {
     try {
-        yield axios.delete(`/api/${action.payload.id}/delete`);
+        yield axios.delete(`/api/wineInfo/${action.payload}/delete`);
+        yield put({ type: 'FETCH_ALL_WINES' });
+    }
+    catch (err) {
+        console.error('error is', err)
+    }    
+}
+
+function* favoriteWineItem(action) {
+    try {
+        yield axios.put(`/api/wineInfo/${action.payload}/favorite`);
         yield put({ type: 'FETCH_ALL_WINES' });
     }
     catch (err) {
@@ -70,6 +80,7 @@ function* newWineSaga() {
     yield takeLatest('FETCH_RATINGS_AND_INFO', fetchRatingsAndInfo);
     yield takeLatest('FETCH_ALL_WINES', fetchAllWines);
     yield takeLatest('DELETE_WINE_ITEM', deleteWineItem);
+    yield takeLatest('FAVORITE_WINE_ITEM', favoriteWineItem);
 }
 
 export default newWineSaga;

@@ -14,14 +14,10 @@ function WineJournal() {
 
     const allWines = useSelector(store => store.wineInfo.allWinesList);
 
-
-    function favoriteListItem() {
-        
-    }
-
     return (
         <>
-        <h1>made it to journal page</h1>
+        <h2>Completed Wine Tastings</h2>
+        {/* mapping over the wines array to display them all on the dom */}
         {allWines.map((wineItem) => {
             return (
                 <div key={wineItem.id}
@@ -35,12 +31,15 @@ function WineJournal() {
                     {Number(wineItem.avg_overall).toFixed(2)}
                     <button 
                     onClick={() => {
+                        console.log('wine item id is', wineItem.id)
                         dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })
                     }}
                     >delete icon
                     </button>
                     <button 
-                    onClick={favoriteListItem}
+                    onClick={() => {
+                        dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id })
+                    }}
                     >favorite icon
                     </button>
                 </div>
