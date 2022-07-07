@@ -82,8 +82,14 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
 
     pool.query(sqlQuery, [req.user.id])
         .then(result => {
-            console.log()
-            res.send(result.rows[0]);
+            // this allows a max to be sent even if the DB is empty
+            if (result.rows[0].max < 1) {
+                res.send({ max: 1})
+            }
+            else {
+                res.send(result.rows[0]);
+            }
+            
         })
         .catch(error => {
             console.log('error in get request', error)
@@ -190,10 +196,11 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 FROM journal_entry
 JOIN scores
 	ON journal_entry.id = scores.journal_entry_id
+    WHERE journal_entry.user_id = $1
 	GROUP BY journal_entry.id;
     `;
 
-    pool.query(sqlQuery)
+    pool.query(sqlQuery, [req.user.id])
         .then(result => {
             // console.log('result is', result.rows);
             res.send(result.rows);
@@ -203,5 +210,19 @@ JOIN scores
             res.sendStatus(500);
         })
 })
+
+router.delete('/:id/delete', (req, res) => {
+
+    const queryText = `
+    DELETE FROM plant WHERE id = $1;
+    `;
+
+    pool.query(queryText, [req.params.id])
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error completing SELECT plant query', err);
+        res.sendStatus(500);
+      });
+  });
 
 module.exports = router;

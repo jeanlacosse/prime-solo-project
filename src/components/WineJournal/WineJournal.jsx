@@ -15,10 +15,6 @@ function WineJournal() {
     const allWines = useSelector(store => store.wineInfo.allWinesList);
 
 
-    function deleteListItem() {
-
-    }
-
     function favoriteListItem() {
         
     }
@@ -38,7 +34,9 @@ function WineJournal() {
                     {wineItem.varietal}
                     {Number(wineItem.avg_overall).toFixed(2)}
                     <button 
-                    onClick={deleteListItem}
+                    onClick={() => {
+                        dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })
+                    }}
                     >delete icon
                     </button>
                     <button 
