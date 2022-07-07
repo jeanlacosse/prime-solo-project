@@ -117,7 +117,7 @@ router.get('/:id/info', rejectUnauthenticated, (req, res) => {
 
 
 // here is where i am getting the rating average from the server
-router.get('/:id/all', rejectUnauthenticated, (req, res) => {
+router.get('/:id/ratings_info', rejectUnauthenticated, (req, res) => {
     console.log('req.user.id is', req.user.id)
     console.log('req.params.id is', req.params.id)
 
@@ -151,7 +151,7 @@ JOIN scores
         })
 })
 
-router.get('/:id/qrCode', (req, res) => {
+router.get('/:id/qrCode', rejectUnauthenticated, (req, res) => {
     // add req.params into the params for qr code
     axios({
         method: 'GET',
@@ -172,5 +172,36 @@ router.get('/:id/qrCode', (req, res) => {
         })
 })
 
+// here is where i am getting all wines back from server
+router.get('/all', rejectUnauthenticated, (req, res) => {
+
+    const sqlQuery = `
+    SELECT 
+    journal_entry.id,
+	journal_entry.date,
+	journal_entry.winery_name,
+	journal_entry.varietal,
+	journal_entry.vintage,
+	journal_entry.region,
+	AVG(scores.appearance_score) AS avg_appearance,
+	AVG(scores.nose_score) AS avg_nose,
+	AVG(scores.palate_score) AS avg_palate,
+	AVG(scores.overall_score) AS avg_overall
+FROM journal_entry
+JOIN scores
+	ON journal_entry.id = scores.journal_entry_id
+	GROUP BY journal_entry.id;
+    `;
+
+    pool.query(sqlQuery)
+        .then(result => {
+            // console.log('result is', result.rows);
+            res.send(result.rows);
+        })
+        .catch(err => {
+            console.error('error in getting average ratings', err);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;
