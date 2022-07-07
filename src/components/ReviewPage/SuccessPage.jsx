@@ -35,7 +35,7 @@ function SuccessPage() {
 
     return (
         <>
-            <h3>Wine Ratings Submitted Successfully!</h3>
+            <h3>Wine Ratings For:</h3>
             <h4>{allWineInfo.vintage} {allWineInfo.winery_name} {allWineInfo.varietal} from {allWineInfo.region}</h4>
             <div>The appearance rating for this wine is {Number(allWineInfo.avg_appearance).toFixed(2)}</div>
             <div>The nose rating for this wine is {Number(allWineInfo.avg_nose).toFixed(2)}</div>
@@ -53,6 +53,11 @@ function SuccessPage() {
                 history.push('/home');
               }}
             >Home</button>
+            <button
+            onClick={() => {
+                history.push('/wine-journal');
+              }}
+            >To my wine journal</button>
         </>
     )
 };
