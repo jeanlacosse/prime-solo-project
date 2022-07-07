@@ -29,6 +29,7 @@ import OverallRating from '../NewTasting/OverallRating';
 import ReveiwPage from '../ReviewPage/ReviewPage';
 import SuccessPage from '../ReviewPage/SuccessPage';
 import WineJournal from '../WineJournal/WineJournal';
+import Favorites from '../WineJournal/Favorites';
 
 import './App.css';
 
@@ -48,7 +49,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/wine-journal" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -66,9 +67,9 @@ function App() {
           <ProtectedRoute
             // logged in shows HomePage else shows LoginPage
             exact
-            path="/home"
+            path="/wine-journal"
           >
-            <HomePage />
+            <WineJournal />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -85,8 +86,8 @@ function App() {
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/home" />
+              // redirect to the /wine-journal page
+              <Redirect to="/wine-journal" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -99,8 +100,8 @@ function App() {
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/home" />
+              // redirect them to the /wine-journal page
+              <Redirect to="/wine-journal" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -109,12 +110,12 @@ function App() {
 
           <Route
             exact
-            path="/home"
+            path="/wine-journal"
           >
             {user.id ?
               // If the user is already logged in, 
-              // redirect them to the /home page
-              <Redirect to="/home" />
+              // redirect them to the /wine-journal page
+              <Redirect to="/wine-journal" />
               :
               // Otherwise, show the Landing page
               <RegisterPage />
@@ -167,27 +168,34 @@ function App() {
             <SuccessPage />
           </Route>
 
-          <Route
+          <ProtectedRoute
           exact
           path="/new-tasting"
           >
             <NewTastingForm />
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
           exact
           path="/wine-journal"
           >
             <WineJournal />
-          </Route>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+          exact
+          path="/favorites"
+          >
+            <Favorites />
+          </ProtectedRoute>
 
 
-          {/* <Route
+          {/* <ProtectedRoute
           exact
           path="/tasting-tips"
           >
             <TastingTipsList />
-          </Route> */}
+          </ProtectedRoute> */}
 
             {/* If none of the other routes matched, we will show a 404. */}
           <Route>

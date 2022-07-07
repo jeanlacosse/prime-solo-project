@@ -36,7 +36,7 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
         });
 });
 
-router.post('/ratings', rejectUnauthenticated, (req, res) => {
+router.post('/ratings', (req, res) => {
     console.log('wine ratings is ', req.body);
     // console.log('user id is', req.user.id);
 
@@ -97,17 +97,16 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
         })
 })
 
-router.get('/:id/info', rejectUnauthenticated, (req, res) => {
+router.get('/:id/info', (req, res) => {
 
     const sqlQuery = `
     SELECT * FROM journal_entry 
-    WHERE id = $1
-    AND user_id = $2;   
+    WHERE id = $1;
     `;
 
     sqlParams = [
         req.params.id,
-        req.user.id
+        // req.user.id
     ]
 
     pool.query(sqlQuery, sqlParams)
@@ -123,8 +122,8 @@ router.get('/:id/info', rejectUnauthenticated, (req, res) => {
 
 
 // here is where i am getting the rating average from the server
-router.get('/:id/ratings_info', rejectUnauthenticated, (req, res) => {
-    console.log('req.user.id is', req.user.id)
+router.get('/:id/ratings_info', (req, res) => {
+    // console.log('req.user.id is', req.user.id)
     console.log('req.params.id is', req.params.id)
 
     const sqlQuery = `
@@ -157,7 +156,7 @@ JOIN scores
         })
 })
 
-router.get('/:id/qrCode', rejectUnauthenticated, (req, res) => {
+router.get('/:id/qrCode', (req, res) => {
     // add req.params into the params for qr code
     axios({
         method: 'GET',

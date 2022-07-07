@@ -16,35 +16,44 @@ function WineJournal() {
 
     return (
         <>
-        <h2>Completed Wine Tastings</h2>
+        <h2>All Your Previous Tastings</h2>
         {/* mapping over the wines array to display them all on the dom */}
         {allWines.map((wineItem) => {
             return (
                 <div key={wineItem.id}
-                onClick={() => {
-                    history.push(`/success-page/${wineItem.id}`)
-                }}
-                >
+                onClick={() => history.push(`/success-page/${wineItem.id}`)}>
                     {wineItem.date}
                     {wineItem.winery_name}
                     {wineItem.varietal}
                     {Number(wineItem.avg_overall).toFixed(2)}
                     <button 
-                    onClick={() => {
-                        console.log('wine item id is', wineItem.id)
-                        dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })
-                    }}
+                    onClick={() => dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })}
                     >delete icon
                     </button>
                     <button 
-                    onClick={() => {
-                        dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id })
-                    }}
+                    onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id }) }
                     >favorite icon
                     </button>
                 </div>
             )
         })}
+         <button>
+                <Link to="/new-tasting">
+                    Start a New Tasting
+                </Link>
+            </button>
+
+            <button>
+                <Link to="/tasting-tips">
+                    Wine Tasting Tips
+                </Link>
+            </button>
+
+            <button>
+                <Link to="/favorites">
+                    Favorited Wines
+                </Link>
+            </button>
         </>
     )
 };
