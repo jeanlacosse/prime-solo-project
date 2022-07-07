@@ -30,7 +30,7 @@ function AppearanceRating() {
             type: 'ADD_APPEARANCE_INFO',
             payload: appearanceRatingAndNotes
         })
-        // push to next page, do I need to do a url thing?
+        // push to next page
         history.push(`/nose-rating/${wineInfo.id}`)
       }
 

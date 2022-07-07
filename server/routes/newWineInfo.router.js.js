@@ -4,6 +4,7 @@ const pool = require('../modules/pool');
 const axios = require('axios');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 
+
 router.post('/new-wine', rejectUnauthenticated, (req, res) => {
     console.log('wine info is ', req.body);
     console.log('user id is', req.user.id);
@@ -35,6 +36,41 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.post('/ratings', rejectUnauthenticated, (req, res) => {
+    console.log('wine ratings is ', req.body);
+    // console.log('user id is', req.user.id);
+
+    // want to post all info returning *, then fetch detail again and select averages
+    let queryText = `
+    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *;
+    `;
+
+    let queryParams = [
+        req.body.journal_entry_id,
+        req.body.appearanceRating,
+        req.body.noseRating,
+        req.body.palateRating,
+        req.body.overallRating,
+        req.body.appearanceNotes,
+        req.body.noseNotes,
+        req.body.palateNotes,
+        req.body.overallNotes
+    ]
+
+    pool.query(queryText, queryParams)
+        .then(result => {
+            res.send(result.rows[0]);
+
+        })
+        .catch(error => {
+            console.error('error adding in ratings', error);
+            res.sendStatus(500)
+        });
+})
+
+
 // this is fetching the next wine id in order to create a linked page to it so I can 
 // create a specific qr code for each api endpoint
 router.get('/wine-id', rejectUnauthenticated, (req, res) => {
@@ -55,8 +91,7 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
         })
 })
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('req.user.id is', req.user.id)
+router.get('/:id/info', rejectUnauthenticated, (req, res) => {
     
     const sqlQuery = `
     SELECT * FROM journal_entry 
@@ -82,19 +117,32 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 
 // here is where i am getting the rating average from the server
-router.get('/', (req, res) => {
+router.get('/:id/all', rejectUnauthenticated, (req, res) => {
+    console.log('req.user.id is', req.user.id)
+    console.log('req.params.id is', req.params.id)
+
     const sqlQuery = `
-SELECT
-    AVG(fourth_of_july_ratings.hotdogs) AS hotdogs_avg,
-    AVG(fourth_of_july_ratings.fireworks) AS fireworks_avg,
-    AVG(fourth_of_july_ratings.vacation) AS vacation_avg,
-    AVG(fourth_of_july_ratings.watermelon) AS watermelon_avg
-FROM fourth_of_july_ratings;
+    SELECT 
+    journal_entry.id,
+	journal_entry.date,
+	journal_entry.winery_name,
+	journal_entry.varietal,
+	journal_entry.vintage,
+	journal_entry.region,
+	AVG(scores.appearance_score) AS avg_appearance,
+	AVG(scores.nose_score) AS avg_nose,
+	AVG(scores.palate_score) AS avg_palate,
+	AVG(scores.overall_score) AS avg_overall
+FROM journal_entry
+JOIN scores
+	ON journal_entry.id = scores.journal_entry_id
+	WHERE journal_entry.id = $1
+	GROUP BY journal_entry.id;
     `;
 
-    pool.query(sqlQuery)
+    pool.query(sqlQuery, [req.params.id])
         .then(result => {
-            console.log('result is', result.rows);
+            // console.log('result is', result.rows);
             res.send(result.rows[0]);
         })
         .catch(err => {
@@ -103,12 +151,13 @@ FROM fourth_of_july_ratings;
         })
 })
 
-router.get('/qrCode', (req, res) => {
+router.get('/:id/qrCode', (req, res) => {
+    // add req.params into the params for qr code
     axios({
         method: 'GET',
         url: 'https://api.qrserver.com/v1/create-qr-code/',
         params: {
-            data: 'https://serene-lassen-volcanic-92087.herokuapp.com/#/ratings'
+            data: `http://localhost:3000/#/appearance-rating/${req.params.id}`
         }
     })
         .then(apiRes => {

@@ -20,14 +20,14 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Ratings from '../Ratings/Ratings';
-import SuccessPage from '../Ratings/SuccessPage';
 import HomePage from '../HomePage/HomePage';
 import NewTastingForm from '../NewTasting/NewTastingForm';
 import AppearanceRating from '../NewTasting/AppearanceRating';
 import NoseRating from '../NewTasting/NoseRating';
 import PalateRating from '../NewTasting/PalateRating';
 import OverallRating from '../NewTasting/OverallRating';
+import ReveiwPage from '../ReviewPage/ReviewPage';
+import SuccessPage from '../ReviewPage/SuccessPage';
 
 import './App.css';
 
@@ -151,12 +151,19 @@ function App() {
             <OverallRating />
           </Route>
 
-          {/* <Route
+          <Route
           exact
-          path="/success-page"
+          path="/review-page/:id"
+          >
+            <ReveiwPage />
+          </Route>
+
+          <Route
+          exact
+          path="/success-page/:id"
           >
             <SuccessPage />
-          </Route> */}
+          </Route>
 
           <Route
           exact

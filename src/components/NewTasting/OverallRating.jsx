@@ -12,7 +12,8 @@ function OverallRating() {
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [overallRatingAndNotes, setOverallRatingAndNotes] = useState({
         overallRating: 5,
-        overallNotes: ''
+        overallNotes: '',
+        journal_entry_id: id
     });
 
     useEffect(() => {
