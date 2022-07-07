@@ -25,6 +25,12 @@ function HomePage() {
                     Wine Tasting Tips
                 </Link>
             </button>
+
+            <button>
+                <Link to="/favorites">
+                    Favorited Wines
+                </Link>
+            </button>
         </>
     );
 };

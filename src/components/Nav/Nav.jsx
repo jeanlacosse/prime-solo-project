@@ -9,7 +9,7 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
+      <Link to="/WineJournal">
         <h2 className="nav-title">Sip Central</h2>
       </Link>
       <div>
@@ -25,7 +25,7 @@ function Nav() {
         {user.id && (
           <>
 
-            <Link className="navLink" to="/home">
+            <Link className="navLink" to="/wine-journal">
               Home
             </Link>
 
@@ -33,16 +33,9 @@ function Nav() {
               Start a New Tasting
             </Link>
 
-            <Link className="navLink" to="/wine-journal">
-              View My Wine Journal
-            </Link>
-
             <Link className="navLink" to="/tasting-tips">
               Wine Tasting Tips
             </Link>
-            {/* <Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
 
             <LogOutButton className="navLink" />
           </>
