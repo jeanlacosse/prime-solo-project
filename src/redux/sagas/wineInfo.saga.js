@@ -13,10 +13,9 @@ function* addWineInfo(action) {
 }
 
 function* addUserRatings(action) {
-    console.log('action is,', action)
     try {
-        yield axios.post('/api/wineInfo/ratings', action.payload);
-        // yield put({ type: 'FETCH_RATINGS_AND_INFO'});
+        const result = yield axios.post('/api/wineInfo/ratings', action.payload);
+        yield put({ type: 'FETCH_RATINGS_AND_INFO', payload: result.data.journal_entry_id});
     } catch (error) {
         console.error('post ratings error', error)
     }
@@ -33,12 +32,23 @@ function* fetchWineDetail(action) {
     }
 }
 
+function* fetchRatingsAndInfo(action) {
+    try {
+        console.log('action payload id is', action.payload)
+        const result = yield axios.get(`/api/wineInfo/all/${action.payload}`);
+        yield put({ type: 'SET_RATINGS_AND_INFO', payload: result.data })
+    }
+    catch (err) {
+        console.error('error is', err)
+    }
+}
 
 
 function* newWineSaga() {
     yield takeLatest('ADD_WINE_INFO', addWineInfo);
     yield takeLatest('FETCH_WINE_DETAIL', fetchWineDetail);
     yield takeLatest('ADD-ALL-RATINGS', addUserRatings);
+    yield takeLatest('FETCH_RATINGS_AND_INFO', fetchRatingsAndInfo);
 }
 
 export default newWineSaga;

@@ -5,17 +5,6 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
-
-/*TODO
-[x] fetch wine detail on page load
-[x] grab ratings and notes from store
-[x] show wineInfo and  scores on dom in a table
-[] submit notes button
-    [] runs saga to post to db
-    [] history.push to success page
-[] favorite btn to run saga to put to DB journal__entry favorited
-[x] no back btn yet
-*/
 function ReveiwPage() {
 
     const dispatch = useDispatch();
@@ -35,8 +24,8 @@ function ReveiwPage() {
             type: 'ADD-ALL-RATINGS',
             payload: wineRatingsAndNotes
         })
-         // push to next page, change to the success page
-        //  history.push(`/nose-rating/${wineInfo.id}`)
+         // push to next page
+         history.push(`/success-page/${wineInfo.id}`)
       }
 
     return(
