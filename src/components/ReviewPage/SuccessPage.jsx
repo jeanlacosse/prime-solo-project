@@ -39,10 +39,15 @@ function SuccessPage() {
 
             <h5>Want your friends to rate this wine?
                 <Popup
-                    trigger={<button>Share</button>}>
+                    trigger={<button>QR Code to Share</button>}>
                     <div className='popup'><img src={qrCode} /></div>
                 </Popup>
             </h5>
+            <button
+            onClick={() => {
+                history.push('/home');
+              }}
+            >Home</button>
         </>
     )
 };

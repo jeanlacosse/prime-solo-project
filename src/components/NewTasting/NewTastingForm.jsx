@@ -40,7 +40,7 @@ function NewTastingForm() {
         // using /api/wineInfo/wine.id where wine id is grabbed from DB SQL
         axios.get('/api/wineInfo/wine-id')
             .then(response => {
-                console.log('id response is', response.data.max)
+                // console.log('id response is', response.data.max + 1)
                 history.push(`/appearance-rating/${response.data.max}`)
             })
             .catch((error) => {
