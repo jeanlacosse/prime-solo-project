@@ -51,8 +51,18 @@ const allInfoRatingsAndNotes = (state = [], action) => {
     }
 }
 
+const allWinesList = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_WINE_LIST':
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     wineDetail,
     wineRatingsAndNotes,
-    allInfoRatingsAndNotes
+    allInfoRatingsAndNotes,
+    allWinesList
 })

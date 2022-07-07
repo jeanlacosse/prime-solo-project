@@ -74,7 +74,7 @@ router.post('/ratings', rejectUnauthenticated, (req, res) => {
 // this is fetching the next wine id in order to create a linked page to it so I can 
 // create a specific qr code for each api endpoint
 router.get('/wine-id', rejectUnauthenticated, (req, res) => {
-    
+
     const sqlQuery = `
     SELECT MAX(Id) FROM journal_entry
     WHERE user_id = $1;
@@ -82,8 +82,14 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
 
     pool.query(sqlQuery, [req.user.id])
         .then(result => {
-            console.log()
-            res.send(result.rows[0]);
+            // this allows a max to be sent even if the DB is empty
+            if (result.rows[0].max < 1) {
+                res.send({ max: 1 })
+            }
+            else {
+                res.send(result.rows[0]);
+            }
+
         })
         .catch(error => {
             console.log('error in get request', error)
@@ -92,7 +98,7 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
 })
 
 router.get('/:id/info', rejectUnauthenticated, (req, res) => {
-    
+
     const sqlQuery = `
     SELECT * FROM journal_entry 
     WHERE id = $1
@@ -117,7 +123,7 @@ router.get('/:id/info', rejectUnauthenticated, (req, res) => {
 
 
 // here is where i am getting the rating average from the server
-router.get('/:id/all', rejectUnauthenticated, (req, res) => {
+router.get('/:id/ratings_info', rejectUnauthenticated, (req, res) => {
     console.log('req.user.id is', req.user.id)
     console.log('req.params.id is', req.params.id)
 
@@ -151,7 +157,7 @@ JOIN scores
         })
 })
 
-router.get('/:id/qrCode', (req, res) => {
+router.get('/:id/qrCode', rejectUnauthenticated, (req, res) => {
     // add req.params into the params for qr code
     axios({
         method: 'GET',
@@ -172,5 +178,71 @@ router.get('/:id/qrCode', (req, res) => {
         })
 })
 
+// here is where i am getting all wines back from server
+router.get('/all', rejectUnauthenticated, (req, res) => {
+
+    const sqlQuery = `
+    SELECT 
+    journal_entry.id,
+	journal_entry.date,
+	journal_entry.winery_name,
+	journal_entry.varietal,
+	journal_entry.vintage,
+	journal_entry.region,
+    journal_entry.favorited,
+	AVG(scores.appearance_score) AS avg_appearance,
+	AVG(scores.nose_score) AS avg_nose,
+	AVG(scores.palate_score) AS avg_palate,
+	AVG(scores.overall_score) AS avg_overall
+FROM journal_entry
+JOIN scores
+	ON journal_entry.id = scores.journal_entry_id
+    WHERE journal_entry.user_id = $1
+	GROUP BY journal_entry.id;
+    `;
+
+    pool.query(sqlQuery, [req.user.id])
+        .then(result => {
+            // console.log('result is', result.rows);
+            res.send(result.rows);
+        })
+        .catch(err => {
+            console.error('error in getting average ratings', err);
+            res.sendStatus(500);
+        })
+})
+
+router.delete('/:id/delete', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `
+    DELETE FROM journal_entry
+    WHERE id = $1
+    AND user_id = $2;
+    `;
+
+    pool.query(queryText, [req.params.id, req.user.id])
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.error('Error completing DELETE query', err);
+            res.sendStatus(500);
+        });
+});
+
+router.put('/:id/favorite', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `
+    UPDATE journal_entry
+    SET favorited = true
+    WHERE id = $1
+    AND user_id = $2;
+    `;
+
+    pool.query(queryText, [req.params.id, req.user.id])
+        .then(() => { res.sendStatus(200); })
+        .catch((err) => {
+            console.error('Error completing DELETE query', err);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;

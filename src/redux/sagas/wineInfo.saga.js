@@ -35,7 +35,7 @@ function* fetchWineDetail(action) {
 function* fetchRatingsAndInfo(action) {
     try {
         console.log('action payload id is', action.payload)
-        const result = yield axios.get(`/api/wineInfo/${action.payload}/all`);
+        const result = yield axios.get(`/api/wineInfo/${action.payload}/ratings_info`);
         yield put({ type: 'SET_RATINGS_AND_INFO', payload: result.data })
     }
     catch (err) {
@@ -43,12 +43,44 @@ function* fetchRatingsAndInfo(action) {
     }
 }
 
+function* fetchAllWines() {
+    try {
+        const result = yield axios.get(`/api/wineInfo/all`);
+        yield put({ type: 'SET_WINE_LIST', payload: result.data })
+    }
+    catch (err) {
+        console.error('error is', err)
+    }
+}
+
+function* deleteWineItem(action) {
+    try {
+        yield axios.delete(`/api/wineInfo/${action.payload}/delete`);
+        yield put({ type: 'FETCH_ALL_WINES' });
+    }
+    catch (err) {
+        console.error('error is', err)
+    }    
+}
+
+function* favoriteWineItem(action) {
+    try {
+        yield axios.put(`/api/wineInfo/${action.payload}/favorite`);
+        yield put({ type: 'FETCH_ALL_WINES' });
+    }
+    catch (err) {
+        console.error('error is', err)
+    }    
+}
 
 function* newWineSaga() {
     yield takeLatest('ADD_WINE_INFO', addWineInfo);
     yield takeLatest('FETCH_WINE_DETAIL', fetchWineDetail);
     yield takeLatest('ADD-ALL-RATINGS', addUserRatings);
     yield takeLatest('FETCH_RATINGS_AND_INFO', fetchRatingsAndInfo);
+    yield takeLatest('FETCH_ALL_WINES', fetchAllWines);
+    yield takeLatest('DELETE_WINE_ITEM', deleteWineItem);
+    yield takeLatest('FAVORITE_WINE_ITEM', favoriteWineItem);
 }
 
 export default newWineSaga;
