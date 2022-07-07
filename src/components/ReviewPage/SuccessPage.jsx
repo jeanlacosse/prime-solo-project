@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 function SuccessPage() {
 
-    let [qrCode, setQrCode] = useState('');
-    const allWineInfo = useSelector((store) => store.wineInfo.allInfoRatingsAndNotes);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { id } = useParams();
 
+    let [qrCode, setQrCode] = useState('');
+    
     useEffect(() => {
         setQR();
-    })
+        dispatch({ type: 'FETCH_RATINGS_AND_INFO', payload: id});
+    }, [ id ])
 
-    const history = useHistory();
+    const allWineInfo = useSelector((store) => store.wineInfo.allInfoRatingsAndNotes);
+
 
     const setQR = () => {
         axios.get(`/api/wineInfo/${allWineInfo.id}/qrCode`)

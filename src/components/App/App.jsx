@@ -28,6 +28,7 @@ import PalateRating from '../NewTasting/PalateRating';
 import OverallRating from '../NewTasting/OverallRating';
 import ReveiwPage from '../ReviewPage/ReviewPage';
 import SuccessPage from '../ReviewPage/SuccessPage';
+import WineJournal from '../WineJournal/WineJournal';
 
 import './App.css';
 
@@ -172,15 +173,15 @@ function App() {
             <NewTastingForm />
           </Route>
 
-          {/* <Route
+          <Route
           exact
           path="/wine-journal"
           >
-            <WineJournalList />
+            <WineJournal />
           </Route>
 
 
-          <Route
+          {/* <Route
           exact
           path="/tasting-tips"
           >
