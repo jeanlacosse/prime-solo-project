@@ -91,7 +91,7 @@ router.get('/wine-id', rejectUnauthenticated, (req, res) => {
         })
 })
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/:id/info', rejectUnauthenticated, (req, res) => {
     
     const sqlQuery = `
     SELECT * FROM journal_entry 
@@ -117,12 +117,13 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 
 // here is where i am getting the rating average from the server
-router.get('/all/:id', rejectUnauthenticated, (req, res) => {
+router.get('/:id/all', rejectUnauthenticated, (req, res) => {
     console.log('req.user.id is', req.user.id)
     console.log('req.params.id is', req.params.id)
 
     const sqlQuery = `
     SELECT 
+    journal_entry.id,
 	journal_entry.date,
 	journal_entry.winery_name,
 	journal_entry.varietal,
@@ -150,16 +151,17 @@ JOIN scores
         })
 })
 
-router.get('/qrCode', (req, res) => {
+router.get('/:id/qrCode', (req, res) => {
+    // add req.params into the params for qr code
     axios({
         method: 'GET',
         url: 'https://api.qrserver.com/v1/create-qr-code/',
         params: {
-            data: 'https://serene-lassen-volcanic-92087.herokuapp.com/#/ratings'
+            data: `http://localhost:3000/#/appearance-rating/${req.params.id}`
         }
     })
         .then(apiRes => {
-            console.log('api res is ', apiRes.request.res.responseUrl);
+            // console.log('api res is ', apiRes.request.res.responseUrl);
 
             res.send({
                 qrCode: apiRes.request.res.responseUrl

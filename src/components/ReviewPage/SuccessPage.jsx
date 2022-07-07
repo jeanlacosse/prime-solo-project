@@ -17,9 +17,9 @@ function SuccessPage() {
     const history = useHistory();
 
     const setQR = () => {
-        axios.get('/api/wineInfo/qrCode')
+        axios.get(`/api/wineInfo/${allWineInfo.id}/qrCode`)
             .then(response => {
-                console.log('response is', response.data.qrCode)
+                // console.log('response is', response.data.qrCode)
                 setQrCode(response.data.qrCode);
 
             })

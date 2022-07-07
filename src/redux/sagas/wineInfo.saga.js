@@ -24,7 +24,7 @@ function* addUserRatings(action) {
 function* fetchWineDetail(action) {
     try {
         console.log('action payload id is', action.payload)
-        const result = yield axios.get(`/api/wineInfo/${action.payload}`);
+        const result = yield axios.get(`/api/wineInfo/${action.payload}/info`);
         yield put({ type: 'SET_WINE_DETAIL', payload: result.data })
     }
     catch (err) {
@@ -35,7 +35,7 @@ function* fetchWineDetail(action) {
 function* fetchRatingsAndInfo(action) {
     try {
         console.log('action payload id is', action.payload)
-        const result = yield axios.get(`/api/wineInfo/all/${action.payload}`);
+        const result = yield axios.get(`/api/wineInfo/${action.payload}/all`);
         yield put({ type: 'SET_RATINGS_AND_INFO', payload: result.data })
     }
     catch (err) {
