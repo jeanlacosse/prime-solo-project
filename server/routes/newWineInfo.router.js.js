@@ -162,7 +162,7 @@ router.get('/:id/qrCode', (req, res) => {
         method: 'GET',
         url: 'https://api.qrserver.com/v1/create-qr-code/',
         params: {
-            data: `http://localhost:3000/#/appearance-rating/${req.params.id}`
+            data: `https://serene-lassen-volcanic-92087.herokuapp.com/#/appearance-rating/${req.params.id}`
         }
     })
         .then(apiRes => {
