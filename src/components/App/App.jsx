@@ -21,15 +21,25 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import HomePage from '../HomePage/HomePage';
+// new wine tasting form and ratings
 import NewTastingForm from '../NewTasting/NewTastingForm';
 import AppearanceRating from '../NewTasting/AppearanceRating';
 import NoseRating from '../NewTasting/NoseRating';
 import PalateRating from '../NewTasting/PalateRating';
 import OverallRating from '../NewTasting/OverallRating';
+// review and success pages
 import ReveiwPage from '../ReviewPage/ReviewPage';
 import SuccessPage from '../ReviewPage/SuccessPage';
+// wine journal
 import WineJournal from '../WineJournal/WineJournal';
+// favorites page
 import Favorites from '../WineJournal/Favorites';
+// tips pages
+import TastingTipsList from '../TastingTips/TastingTipsList';
+import AppearanceTips from '../TastingTips/AppearanceTips';
+import NoseTips from '../TastingTips/NoseTips';
+import PalateTips from '../TastingTips/PalateTips';
+import OverallTips from '../TastingTips/OverallTips';
 
 import './App.css';
 
@@ -190,12 +200,40 @@ function App() {
           </ProtectedRoute>
 
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
           exact
           path="/tasting-tips"
           >
             <TastingTipsList />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
+
+          <Route
+          exact
+          path="/appearance-tips"
+          >
+            <AppearanceTips />
+          </Route>
+
+          <Route
+          exact
+          path="/nose-tips"
+          >
+            <NoseTips />
+          </Route>
+
+          <Route
+          exact
+          path="/palate-tips"
+          >
+            <PalateTips />
+          </Route>
+
+          <Route
+          exact
+          path="/overall-tips"
+          >
+            <OverallTips />
+          </Route>
 
             {/* If none of the other routes matched, we will show a 404. */}
           <Route>

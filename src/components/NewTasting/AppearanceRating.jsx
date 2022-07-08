@@ -57,9 +57,11 @@ function AppearanceRating() {
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Appearance Rating</h3>
             {/* need to link this button to tips when I build out the tips page */}
-            <button><Link to="">
-                Tips on Evaluating Appearance
-            </Link></button>
+            <button>
+                <Link to="/appearance-tips">
+                How to Judge Appearance
+                </Link>
+            </button>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <input
