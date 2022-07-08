@@ -4,8 +4,9 @@ import axios from 'axios';
 function* addWineInfo(action) {
     try {
         const result = yield axios.post('/api/wineInfo/new-wine', action.payload)
-        // don't need to fetch, can just set in store from here!
-        yield put({ type: 'FETCH_WINE_DETAIL', payload: result.data.id });
+        // the result will carry the newly added items id and it will push to that 
+        // id URL in the ratings pages
+        action.history.push(`/appearance-rating/${result.data.id}`);
     }
     catch (error) {
         console.log('error in POST wine info', error)
