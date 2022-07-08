@@ -20,9 +20,9 @@ function SuccessPage() {
 
     const allWineInfo = useSelector((store) => store.wineInfo.allInfoRatingsAndNotes);
 
-
+// this will set the qr code to bring others to the beginning of the rating pages for this specific wine
     const setQR = () => {
-        axios.get(`/api/wineInfo/${allWineInfo.id}/qrCode`)
+        axios.get(`/api/wineInfo/${id}/qrCode`)
             .then(response => {
                 // console.log('response is', response.data.qrCode)
                 setQrCode(response.data.qrCode);
@@ -42,7 +42,7 @@ function SuccessPage() {
             <div>The palate rating for this wine is {Number(allWineInfo.avg_palate).toFixed(2)}</div>
             <div>The overall rating for this wine is {Number(allWineInfo.avg_overall).toFixed(2)}</div>
 
-            <h5>Want your friends to rate this wine?
+            <h5>Tasting with friends?
                 <Popup
                     trigger={<button>QR Code to Share</button>}>
                     <div className='popup'><img src={qrCode} /></div>

@@ -25,7 +25,7 @@ function ReveiwPage() {
             payload: wineRatingsAndNotes
         })
          // push to next page
-         history.push(`/success-page/${wineInfo.id}`)
+         history.push(`/success-page/${id}`)
       }
 
     return(

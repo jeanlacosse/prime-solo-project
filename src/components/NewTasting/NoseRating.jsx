@@ -31,7 +31,7 @@ function NoseRating() {
             payload: noseRatingAndNotes
         })
         // push to next page
-        history.push(`/palate-rating/${wineInfo.id}`)
+        history.push(`/palate-rating/${id}`)
       }
 
 
