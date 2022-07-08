@@ -27,6 +27,7 @@ function NewTastingForm() {
             ...newWineInfo, [event.target.name]: event.target.value
         })
     }
+    const wineInfo = useSelector((store) => store.wineInfo.wineDetail)
 
     const addWineInformation = (event) => {
         event.preventDefault();
@@ -35,6 +36,12 @@ function NewTastingForm() {
             type: 'ADD_WINE_INFO',
             payload: newWineInfo
         })
+            console.log('wine id is:', wineInfo.id)
+    
+
+        // history.push(`/appearance-rating/${wineInfo.id}`)
+
+
         // this will push to the ratings page
         // this page will be a link to the api endpoint for this specific wine
         // using /api/wineInfo/wine.id where wine id is grabbed from DB SQL

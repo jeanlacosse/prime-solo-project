@@ -31,7 +31,7 @@ function PalateRating() {
             payload: palateRatingAndNotes
         })
         // push to next page
-        history.push(`/overall-rating/${wineInfo.id}`)
+        history.push(`/overall-rating/${id}`)
       }
 
 
