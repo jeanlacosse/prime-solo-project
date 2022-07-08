@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link, useHistory } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 function PalateRating() {
@@ -39,12 +41,24 @@ function PalateRating() {
         <>
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Palate Rating</h3>
-            {/* need to link this button to tips when I build out the tips page */}
-            <button>
-                <Link to="/palate-tips">
-                    How to Judge Palate
-                </Link>
-            </button>
+            <Popup
+                trigger={<button>How to Judge Palate</button>}
+                modal>
+                <div className='popup'>
+                    <h2>How to judge palate of wine:</h2>
+                    <div>Things to look for:
+                        <div>Sweetness: dry - off-dry - medium-dry - medium-sweet - sweet - luscious</div>
+                        <div>Acidity: low - medium - high</div>
+                        <div>Tannin: low - medium - high</div>
+                        <div>Alcohol: low - medium - high</div>
+                        <div>Body: light - medium - full</div>
+                        <div>Finish: short - medium - long</div>
+                        <div>Flavour Characteristics: What does the wine taste like? Think sweet, salty, savory etc.</div>
+
+                    </div>
+
+                </div>
+            </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <input

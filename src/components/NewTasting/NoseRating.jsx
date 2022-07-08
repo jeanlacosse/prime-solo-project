@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link, useHistory } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 function NoseRating() {
@@ -39,12 +41,20 @@ function NoseRating() {
         <>
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Nose Rating</h3>
-            {/* need to link this button to tips when I build out the tips page */}
-            <button>
-                <Link to="/nose-tips">
-                    How to Judge Nose
-                </Link>
-            </button>
+            <Popup
+                trigger={<button>How to Judge Nose</button>}
+                modal>
+                <div className='popup'>
+                <h2>How to judge nose of wine:</h2>
+            <div>Things to look for: 
+                <div>Cleanliness: Is the smell crisp or does it smell unclean?</div>
+                <div>Intensity: How intense is the smell of the wine? light - medium - pronounced </div>
+                <div>Aroma Characteristics: What does the wine smell like? Try to be specific. A wine can have many different aromas.
+                </div>
+            </div>
+
+                </div>
+            </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <input

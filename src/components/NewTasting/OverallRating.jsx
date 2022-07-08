@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link, useHistory } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 function OverallRating() {
@@ -40,12 +42,23 @@ function OverallRating() {
         <>
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Final/Overall Rating</h3>
-            {/* need to link this button to tips when I build out the tips page */}
-            <button>
-                <Link to="/overall-tips">
-                    How to Judge Wine Overall
-                </Link>
-            </button>
+            <Popup
+                trigger={<button>How to Judge Appearance</button>}
+                modal>
+                <div className='popup'>
+                    <h2>How to judge appearance of wine:</h2>
+                    <div>Things to look for:
+                        <div>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
+                        <div>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
+                        <div>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
+                            <div>White wine: lemon-green - lemon - gold - amber - brown</div>
+                            <div>Rose wine: pink - salmon - orange</div>
+                            <div>Red wine: purple - ruby - garnet - tawny - brown</div>
+                        </div>
+                    </div>
+
+                </div>
+            </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <input

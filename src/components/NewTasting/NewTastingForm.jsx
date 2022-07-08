@@ -37,22 +37,6 @@ function NewTastingForm() {
             payload: newWineInfo, history
         })
             console.log('wine id is:', wineInfo.id)
-    
-
-        // history.push(`/appearance-rating/${wineInfo.id}`)
-
-
-        // this will push to the ratings page
-        // this page will be a link to the api endpoint for this specific wine
-        // using /api/wineInfo/wine.id where wine id is grabbed from DB SQL
-        // axios.get('/api/wineInfo/wine-id')
-        //     .then(response => {
-        //         // console.log('id response is', response.data.max + 1)
-        //         history.push(`/appearance-rating/${response.data.max}`)
-        //     })
-        //     .catch((error) => {
-        //         console.error('error is', error)
-        //     })
     }
 
 
