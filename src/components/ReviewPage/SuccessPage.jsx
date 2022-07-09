@@ -50,11 +50,6 @@ function SuccessPage() {
             </h5>
             <button
             onClick={() => {
-                history.push('/home');
-              }}
-            >Home</button>
-            <button
-            onClick={() => {
                 history.push('/wine-journal');
               }}
             >To my wine journal</button>
