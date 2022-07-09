@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import '../App/App.css';
+
+import Button from '@mui/material/Button';
 
 function NewTastingForm() {
 
@@ -10,15 +13,12 @@ function NewTastingForm() {
     const history = useHistory();
 
 
-    // this will set todays date in the calendar input field
-    const today = new Date();
-    const date = today.setDate(today.getDate());
-    const todaysDate = new Date(date).toISOString().split('T')[0] // yyyy-mm-dd
-
+    // this creates a date for today to be saved in DB
+    const today = new Date().toLocaleDateString('en-US')
 
     // this is the local state the wine information is stored inside
     const [newWineInfo, setNewWineInfo] = useState({
-        date: todaysDate
+        date: today
     })
 
 
@@ -36,7 +36,7 @@ function NewTastingForm() {
             type: 'ADD_WINE_INFO',
             payload: newWineInfo, history
         })
-            console.log('wine id is:', wineInfo.id)
+        console.log('wine id is:', wineInfo.id)
     }
 
 
@@ -44,15 +44,6 @@ function NewTastingForm() {
         <>
             <h2>Please enter the wines information below</h2>
             <form onSubmit={(event) => addWineInformation(event)}>
-                {/* this will set the date to todays date on page load, changeable though */}
-
-                < input
-                    type="date"
-                    name="date"
-                    defaultValue={todaysDate}
-                    onChange={handleWineInfo}
-                    required
-                />
 
                 <input
                     onChange={handleWineInfo}
@@ -90,11 +81,28 @@ function NewTastingForm() {
                     required
                 />
 
-                <button type='submit'>Start Rating</button>
+
+                <Button
+                    sx={{
+                        marginLeft: '25px',
+                    }}
+                    className="button"
+                    type="button"
+                    color="primary"
+                    onClick={() => history.push('/wine-journal')}
+                    variant="outlined">
+                    Back</Button>
+                <Button
+                    sx={{
+                        marginLeft: '15px',
+                    }}
+                    type='submit'
+                    color="primary"
+
+                    variant="contained">
+                    Start Rating</Button>
             </form>
-            <button
-                onClick={() => history.push('/home')}
-            >Back</button>
+
         </>
     )
 };

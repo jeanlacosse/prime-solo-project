@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+import Button from '@mui/material/Button';
+
 
 function AppearanceRating() {
     const dispatch = useDispatch();
@@ -58,7 +60,10 @@ function AppearanceRating() {
             <h3>Appearance Rating</h3>
             {/* popup for seeing wine tasting tips in a modal */}
             <Popup
-                trigger={<button>How to Judge Appearance</button>}
+                trigger={<Button
+                    color="secondary"
+                    variant="outlined">
+                    How to Judge Appearance</Button>}
                 modal>
                 <div className='popup'>
                     <h2>How to judge appearance of wine:</h2>
@@ -76,6 +81,7 @@ function AppearanceRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
+                <div>Poor
                 <input
                     type="range"
                     min='0'
@@ -85,6 +91,8 @@ function AppearanceRating() {
                         ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
                     })}
                 />
+                Outstanding
+                </div>
                 <h5>{appearanceRatingAndNotes.appearanceRating}</h5>
 
                 {/* text box for tasting notes */}
@@ -95,16 +103,40 @@ function AppearanceRating() {
                         ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
                     })}
                 />
-                <button
-                    onClick={() => { history.push('/new-tasting') }}
-                >Back</button>
-                <button type='submit'>Next</button>
-                {/* back btn will go to wine inputs page again
-            is there a way to keep form resubmission here? */}
+                <div>
+                 <Button
+                    sx={{
+                        marginRight: '8px',
+                        width: '25%',
+                        height: '50px'
+                    }}
+                    className="button"
+                    type="button"
+                    color="primary"
+                    onClick={() => history.push('/new-tasting')}
+                    variant="outlined">
+                    Back</Button>
+                <Button
+                    sx={{
+                        marginLeft: '8px',
+                        width: '25%',
+                        height: '50px'
+                    }}
+                    type='submit'
+                    color="primary"
+
+                    variant="contained">
+                    Next</Button>
+                    </div>
             </form>
             <h5>Want your friends to rate this wine?
                 <Popup
-                    trigger={<button>QR Code to Share</button>}>
+                    trigger={
+                        <Button
+                        color="secondary"
+                        variant="contained">
+                        QR Code to Share</Button>
+                    }>
                     <div className='popup'><img src={qrCode} /></div>
                 </Popup>
             </h5>

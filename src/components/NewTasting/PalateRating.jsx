@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+import Button from '@mui/material/Button';
+
 
 function PalateRating() {
     const dispatch = useDispatch();
@@ -42,7 +44,10 @@ function PalateRating() {
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Palate Rating</h3>
             <Popup
-                trigger={<button>How to Judge Palate</button>}
+                trigger={<Button
+                    color="secondary"
+                    variant="outlined">
+                    How to Judge Palate</Button>}
                 modal>
                 <div className='popup'>
                     <h2>How to judge palate of wine:</h2>
@@ -61,6 +66,7 @@ function PalateRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
+                <div>Poor
                 <input
                     type="range"
                     min='0'
@@ -70,6 +76,8 @@ function PalateRating() {
                         ...palateRatingAndNotes, palateRating: (Number(event.target.value))
                     })}
                 />
+                Outstanding
+                </div>
                 <h5>{palateRatingAndNotes.palateRating}</h5>
 
                 {/* text box for tasting notes */}
@@ -80,10 +88,32 @@ function PalateRating() {
                         ...palateRatingAndNotes, palateNotes: (event.target.value)
                     })}
                 />
-                <button
-                    onClick={() => { history.push(`/nose-rating/${wineInfo.id}`) }}
-                >Back</button>
-                <button type='submit'>Next</button>
+                 <div>
+                    <Button
+                        sx={{
+                            marginRight: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        className="button"
+                        type="button"
+                        color="primary"
+                        onClick={() => history.push(`/nose-rating/${wineInfo.id}`)}
+                        variant="outlined">
+                        Back</Button>
+                    <Button
+                        sx={{
+                            marginLeft: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        type='submit'
+                        color="primary"
+
+                        variant="contained">
+                        Next</Button>
+                </div>
+                
                 {/* back btn will go to wine inputs page again
             is there a way to keep form resubmission here? */}
             </form>

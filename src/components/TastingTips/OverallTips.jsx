@@ -9,14 +9,12 @@ function OverallTips() {
 
     return (
         <>
-            <h2>How to judge appearance of wine:</h2>
-            <div>Things to look for: 
-                <div>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
-                <div>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
-                <div>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
-                    <div>White wine: lemon-green - lemon - gold - amber - brown</div>
-                    <div>Rose wine: pink - salmon - orange</div>
-                    <div>Red wine: purple - ruby - garnet - tawny - brown</div>
+            <h2>How to judge a wines overall score:</h2>
+            <div>Things to look for:
+                <div>Quality level: How does the wine hold up to all the ratings given?</div>
+                <div>faulty - poor - acceptable - good - very good - outstanding</div>
+                <div>Level of readiness: 
+                    too young - can drink now, but has potential for ageing - drink now, not suitable for ageing - too old
                 </div>
             </div>
             <button

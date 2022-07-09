@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+import Button from '@mui/material/Button';
+
 
 function NoseRating() {
     const dispatch = useDispatch();
@@ -42,30 +44,38 @@ function NoseRating() {
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Nose Rating</h3>
             <Popup
-                trigger={<button>How to Judge Nose</button>}
+                trigger={
+                    <Button
+                        color="secondary"
+                        variant="outlined">
+                        How to Judge Nose</Button>}
                 modal>
                 <div className='popup'>
-                <h2>How to judge nose of wine:</h2>
-            <div>Things to look for: 
-                <div>Cleanliness: Is the smell crisp or does it smell unclean?</div>
-                <div>Intensity: How intense is the smell of the wine? light - medium - pronounced </div>
-                <div>Aroma Characteristics: What does the wine smell like? Try to be specific. A wine can have many different aromas.
-                </div>
-            </div>
+                    <h2>How to judge nose of wine:</h2>
+                    <div>Things to look for:
+                        <div>Cleanliness: Is the smell crisp or does it smell unclean?</div>
+                        <div>Intensity: How intense is the smell of the wine? light - medium - pronounced </div>
+                        <div>Aroma Characteristics: What does the wine smell like? Try to be specific. A wine can have many different aromas.
+                        </div>
+                    </div>
 
                 </div>
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <input
-                    type="range"
-                    min='0'
-                    max='10'
-                    value={noseRatingAndNotes.noseRating}
-                    onChange={event => setNoseRatingAndNotes({
-                        ...noseRatingAndNotes, noseRating: (Number(event.target.value))
-                    })}
-                />
+                <div>Poor
+                    <input
+                        type="range"
+                        min='0'
+                        max='10'
+                        value={noseRatingAndNotes.noseRating}
+                        onChange={event => setNoseRatingAndNotes({
+                            ...noseRatingAndNotes, noseRating: (Number(event.target.value))
+                        })}
+                    />
+                    Outstanding
+                </div>
+
                 <h5>{noseRatingAndNotes.noseRating}</h5>
 
                 {/* text box for tasting notes */}
@@ -76,10 +86,32 @@ function NoseRating() {
                         ...noseRatingAndNotes, noseNotes: (event.target.value)
                     })}
                 />
-                <button
-                    onClick={() => { history.push(`/appearance-rating/${wineInfo.id}`) }}
-                >Back</button>
-                <button type='submit'>Next</button>
+                <div>
+                    <Button
+                        sx={{
+                            marginRight: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        className="button"
+                        type="button"
+                        color="primary"
+                        onClick={() => history.push(`/appearance-rating/${wineInfo.id}`)}
+                        variant="outlined">
+                        Back</Button>
+                    <Button
+                        sx={{
+                            marginLeft: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        type='submit'
+                        color="primary"
+
+                        variant="contained">
+                        Next</Button>
+                </div>
+
                 {/* back btn will go to wine inputs page again
             is there a way to keep form resubmission here? */}
             </form>

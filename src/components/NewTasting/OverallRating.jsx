@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+import Button from '@mui/material/Button';
+
 
 function OverallRating() {
     const dispatch = useDispatch();
@@ -43,17 +45,18 @@ function OverallRating() {
             <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
             <h3>Final/Overall Rating</h3>
             <Popup
-                trigger={<button>How to Judge Appearance</button>}
+                trigger={<Button
+                    color="secondary"
+                    variant="outlined">
+                    How to Judge Overall Score</Button>}
                 modal>
                 <div className='popup'>
-                    <h2>How to judge appearance of wine:</h2>
+                    <h2>How to judge a wines overall score:</h2>
                     <div>Things to look for:
-                        <div>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
-                        <div>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
-                        <div>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
-                            <div>White wine: lemon-green - lemon - gold - amber - brown</div>
-                            <div>Rose wine: pink - salmon - orange</div>
-                            <div>Red wine: purple - ruby - garnet - tawny - brown</div>
+                        <div>Quality level: How does the wine hold up to all the ratings given?</div>
+                        <div>faulty - poor - acceptable - good - very good - outstanding</div>
+                        <div>Level of readiness:
+                            too young - can drink now, but has potential for ageing - drink now, not suitable for ageing - too old
                         </div>
                     </div>
 
@@ -61,7 +64,8 @@ function OverallRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <input
+                <div>Poor
+                    <input
                     type="range"
                     min='0'
                     max='10'
@@ -70,6 +74,7 @@ function OverallRating() {
                         ...overallRatingAndNotes, overallRating: (Number(event.target.value))
                     })}
                 />
+                Outstanding</div>
                 <h5>{overallRatingAndNotes.overallRating}</h5>
 
                 {/* text box for tasting notes */}
@@ -80,10 +85,32 @@ function OverallRating() {
                         ...overallRatingAndNotes, overallNotes: (event.target.value)
                     })}
                 />
-                <button
-                    onClick={() => { history.push(`/palate-rating/${wineInfo.id}`) }}
-                >Back</button>
-                <button type='submit'>Next</button>
+                 <div>
+                    <Button
+                        sx={{
+                            marginRight: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        className="button"
+                        type="button"
+                        color="primary"
+                        onClick={() => history.push(`/palate-rating/${wineInfo.id}`)}
+                        variant="outlined">
+                        Back</Button>
+                    <Button
+                        sx={{
+                            marginLeft: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        type='submit'
+                        color="primary"
+
+                        variant="contained">
+                        Next</Button>
+                </div>
+                
                 {/* back btn will go to wine inputs page again
             is there a way to keep form resubmission here? */}
             </form>
