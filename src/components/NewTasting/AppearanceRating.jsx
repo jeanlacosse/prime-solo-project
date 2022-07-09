@@ -6,6 +6,8 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
 
 
 function AppearanceRating() {
@@ -15,7 +17,7 @@ function AppearanceRating() {
 
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [appearanceRatingAndNotes, setAppearanceRatingAndNotes] = useState({
-        appearanceRating: 5,
+        appearanceRating: 50,
         appearanceNotes: ''
     });
 
@@ -81,8 +83,25 @@ function AppearanceRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>Poor
-                    <input
+                <div>     Poor
+                    <Slider
+                    sx = {{
+                        width: '60%'
+                    }}
+                        aria-label="Wine Rating"
+                        defaultValue={50}
+                        
+                        valueLabelDisplay="auto"
+                        step={10}
+                        marks
+                        min={0}
+                        max={100}
+                        value={appearanceRatingAndNotes.appearanceRating}
+                        onChange={event => setAppearanceRatingAndNotes({
+                            ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+                        })}
+                    />
+                    {/* <input
                         type="range"
                         min='0'
                         max='10'
@@ -90,19 +109,27 @@ function AppearanceRating() {
                         onChange={event => setAppearanceRatingAndNotes({
                             ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
                         })}
-                    />
+                    /> */}
                     Outstanding
                 </div>
-                <h5>{appearanceRatingAndNotes.appearanceRating}</h5>
+                <h2>{appearanceRatingAndNotes.appearanceRating}</h2>
 
                 {/* text box for tasting notes */}
-                <input
+                <TextField
+                    sx={{
+                        marginBottom: '20px',
+                        width: '75%',
+                    }}
+                    multiline
+                    rows={3}
                     type="text"
-                    placeholder='Notes on wines appearance'
+                    label="Notes on wine appearance"
+                    variant="outlined"
                     onChange={event => setAppearanceRatingAndNotes({
                         ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
                     })}
                 />
+
                 <div>
                     <Button
                         sx={{
@@ -134,13 +161,13 @@ function AppearanceRating() {
                     <Popup
                         trigger={
                             <Button
-                            sx={{
-                                marginTop: '15px'
-                            }}
+                                sx={{
+                                    marginTop: '15px'
+                                }}
                                 color="secondary"
                                 variant="contained">
                                 Share with QR Code</Button>
-                        }>
+                        } modal>
                         <div className='popup'><img src={qrCode} /></div>
                     </Popup>
                 </div>

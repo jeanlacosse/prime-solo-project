@@ -6,6 +6,8 @@ import axios from 'axios';
 import '../App/App.css';
 
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 function NewTastingForm() {
 
@@ -42,51 +44,65 @@ function NewTastingForm() {
 
     return (
         <>
-            <h2>Please enter the wines information below</h2>
-            <form onSubmit={(event) => addWineInformation(event)}>
+            <h2>Begin the tasting by entering some basic information about the wine below.</h2>
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+                onSubmit={(event) => addWineInformation(event)}
 
-                <input
-                    onChange={handleWineInfo}
-                    name="winery_name"
-                    type='text'
-                    placeholder='Winery Name'
-                    value={newWineInfo.winery_name}
-                    required
-                />
-
-                <input
-                    onChange={handleWineInfo}
-                    name="varietal"
-                    type='text'
-                    placeholder='Varietal of Grape'
-                    value={newWineInfo.varietal}
-                    required
-                />
-
-                <input
-                    onChange={handleWineInfo}
-                    name="vintage"
-                    type='number'
-                    placeholder='Vintage/Year Produced'
-                    value={newWineInfo.vintage}
-                    required
-                />
-
-                <input
-                    onChange={handleWineInfo}
-                    name="region"
-                    type='text'
-                    placeholder='Region Wine Was Produced'
-                    value={newWineInfo.region}
-                    required
-                />
-
-
+            >
+                <div>
+                    <TextField
+                        required
+                        name="winery_name"
+                        type='text'
+                        label="Winery Name"
+                        variant="standard"
+                        onChange={handleWineInfo}
+                        value={newWineInfo.winery_name}
+                    />
+                    <TextField
+                        required
+                        name="varietal"
+                        
+                        type='text'
+                        label="Varietal of Grape"
+                        variant="standard"
+                        onChange={handleWineInfo}
+                        value={newWineInfo.varietal}
+                    />
+                    <TextField
+                        required
+                        name="vintage"
+                        
+                        type='text'
+                        label="Vintage/Year Produced"
+                        variant="standard"
+                        onChange={handleWineInfo}
+                        value={newWineInfo.vintage}
+                    />
+                    <TextField
+                        required
+                        name="region"
+                        
+                        type='text'
+                        label="Region Produced"
+                        variant="standard"
+                        onChange={handleWineInfo}
+                        value={newWineInfo.region}
+                    />
+                </div>
                 <Button
                     sx={{
                         marginLeft: '25px',
+                        marginTop: '25px'
                     }}
                     className="button"
+                    size="large"
                     type="button"
                     color="primary"
                     onClick={() => history.push('/wine-journal')}
@@ -95,13 +111,16 @@ function NewTastingForm() {
                 <Button
                     sx={{
                         marginLeft: '15px',
+                        marginTop: '25px'
                     }}
                     type='submit'
                     color="primary"
+                    size="large"
 
                     variant="contained">
                     Start Rating</Button>
-            </form>
+            </Box>
+           
 
         </>
     )
