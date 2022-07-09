@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Button from '@mui/material/Button';
+
 function PalateTips() {
 
     const history = useHistory();
@@ -19,9 +21,18 @@ function PalateTips() {
                 <div>Finish: short - medium - long</div>
                 <div>Flavour Characteristics: What does the wine taste like? Think sweet, salty, savory etc.</div>
             </div>
-            <button
-                onClick={() => { history.push('/tasting-tips') }}>
-                Back</button>
+            <Button
+                sx={{
+                    marginTop: "20px",
+                    width: '25%',
+                    height: '50px'
+                }}
+                className="button"
+                type="button"
+                color="primary"
+                onClick={() => history.push('/tasting-tips')}
+                variant="outlined">
+                Back</Button>
         </>
     )
 };

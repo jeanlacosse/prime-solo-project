@@ -82,16 +82,16 @@ function AppearanceRating() {
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <div>Poor
-                <input
-                    type="range"
-                    min='0'
-                    max='10'
-                    value={appearanceRatingAndNotes.appearanceRating}
-                    onChange={event => setAppearanceRatingAndNotes({
-                        ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
-                    })}
-                />
-                Outstanding
+                    <input
+                        type="range"
+                        min='0'
+                        max='10'
+                        value={appearanceRatingAndNotes.appearanceRating}
+                        onChange={event => setAppearanceRatingAndNotes({
+                            ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+                        })}
+                    />
+                    Outstanding
                 </div>
                 <h5>{appearanceRatingAndNotes.appearanceRating}</h5>
 
@@ -104,41 +104,46 @@ function AppearanceRating() {
                     })}
                 />
                 <div>
-                 <Button
-                    sx={{
-                        marginRight: '8px',
-                        width: '25%',
-                        height: '50px'
-                    }}
-                    className="button"
-                    type="button"
-                    color="primary"
-                    onClick={() => history.push('/new-tasting')}
-                    variant="outlined">
-                    Back</Button>
-                <Button
-                    sx={{
-                        marginLeft: '8px',
-                        width: '25%',
-                        height: '50px'
-                    }}
-                    type='submit'
-                    color="primary"
+                    <Button
+                        sx={{
+                            marginRight: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        className="button"
+                        type="button"
+                        color="primary"
+                        onClick={() => history.push('/new-tasting')}
+                        variant="outlined">
+                        Back</Button>
+                    <Button
+                        sx={{
+                            marginLeft: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        type='submit'
+                        color="primary"
 
-                    variant="contained">
-                    Next</Button>
-                    </div>
-            </form>
-            <h5>Want your friends to rate this wine?
-                <Popup
-                    trigger={
-                        <Button
-                        color="secondary"
                         variant="contained">
-                        QR Code to Share</Button>
-                    }>
-                    <div className='popup'><img src={qrCode} /></div>
-                </Popup>
+                        Next</Button>
+                </div>
+            </form>
+            <h5>Tasting with Friends?
+                <div>
+                    <Popup
+                        trigger={
+                            <Button
+                            sx={{
+                                marginTop: '15px'
+                            }}
+                                color="secondary"
+                                variant="contained">
+                                Share with QR Code</Button>
+                        }>
+                        <div className='popup'><img src={qrCode} /></div>
+                    </Popup>
+                </div>
             </h5>
         </>
     )

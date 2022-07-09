@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Button from '@mui/material/Button';
+
 
 function AppearanceTips() {
 
@@ -20,9 +22,19 @@ function AppearanceTips() {
                     <div>Red wine: purple - ruby - garnet - tawny - brown</div>
                 </div>
             </div>
-            <button
-                onClick={() => { history.push('/tasting-tips') }}>
-            Back</button>
+            <Button
+                    sx={{
+                        marginTop: "20px",
+                        width: '25%',
+                        height: '50px'
+                    }}
+                    className="button"
+                    type="button"
+                    color="primary"
+                    onClick={() => history.push('/tasting-tips')}
+                    variant="outlined">
+                    Back</Button>
+            
         </>
     )
 };

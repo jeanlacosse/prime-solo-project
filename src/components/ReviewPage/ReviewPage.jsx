@@ -5,7 +5,10 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+// material ui
 import Button from '@mui/material/Button';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/material/IconButton';
 
 function ReveiwPage() {
 
@@ -33,7 +36,8 @@ function ReveiwPage() {
     return (
         <>
             <h2>Review Your Tasting Notes</h2>
-            <div>Date tasted: {Date(wineInfo.date)}</div>
+            {/* not yet adding in date until correct format */}
+            {/* <div>Date tasted: {Date(wineInfo.date)}</div> */}
             <span>Wine tasted: {wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</span>
             <div>Scores</div>
             <div>Appearance {wineRatingsAndNotes.appearanceRating}
@@ -90,7 +94,7 @@ function ReveiwPage() {
             </div>
             <span>
                 {/* this will add the wine to the favorites list */}
-                <Button
+                <IconButton
                     sx={{
                         marginRight: '8px',
                         width: '25%',
@@ -102,14 +106,16 @@ function ReveiwPage() {
                     color="primary"
                     onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: id })}
                     variant="outlined">
-                    Favorite</Button>
+                    <FavoriteIcon /></IconButton>
+                    
                     {/* this will send the ratings to the db via sagas */}
                 <Button
                     sx={{
                         marginLeft: '8px',
                         width: '25%',
                         height: '50px',
-                        marginTop: '15px'
+                        marginTop: '15px',
+                        
                     }}
                     onClick={submitRatings}
                     color="primary"
