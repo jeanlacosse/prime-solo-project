@@ -34,41 +34,41 @@ function WineJournal() {
                 return (
                     <>
                         <Card
-                        sx={{
-                            display: 'inline-block'
-                        }}
+                            sx={{
+                                display: 'inline-block'
+                            }}
                             variant='outlined'
                             key={wineItem.id}>
                             <CardContent>
                                 <Typography
-                                onClick={() => history.push(`/success-page/${wineItem.id}`)}>
+                                    onClick={() => history.push(`/success-page/${wineItem.id}`)}>
                                     {/* <div
                                         onClick={() => history.push(`/success-page/${wineItem.id}`)}> */}
-                                        {/* <div>{date.year}</div> */}
-                                        <div>{wineItem.vintage}</div>
-                                        <div>{wineItem.winery_name}</div>
-                                        <div>{wineItem.varietal}</div>
-                                        <div>Overall Rating: {Number(wineItem.avg_overall).toFixed(2)}</div>
+                                    {/* <div>{date.year}</div> */}
+                                    <div>{wineItem.vintage}</div>
+                                    <div>{wineItem.winery_name}</div>
+                                    <div>{wineItem.varietal}</div>
+                                    <div>Overall Rating: {Number(wineItem.avg_overall).toFixed(2)}</div>
                                     {/* </div> */}
                                 </Typography>
-                                </CardContent>
-                                        
-                                <IconButton
+                            </CardContent>
 
-                                    className="button"
-                                    type="button"
-                                    color="secondary"
-                                    onClick={() => dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })}
-                                    variant="outlined">
-                                    <DeleteOutlineOutlinedIcon /></IconButton>
-                                <IconButton
+                            <IconButton
 
-                                    className="button"
-                                    type="button"
-                                    color="primary"
-                                    onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id })}
-                                    variant="outlined">
-                                    <FavoriteIcon /></IconButton>
+                                className="button"
+                                type="button"
+                                color="secondary"
+                                onClick={() => dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })}
+                                variant="outlined">
+                                <DeleteOutlineOutlinedIcon /></IconButton>
+                            <IconButton
+
+                                className="button"
+                                type="button"
+                                color="primary"
+                                onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id })}
+                                variant="outlined">
+                                <FavoriteIcon /></IconButton>
 
                         </Card>
                     </>

@@ -145,3 +145,9 @@ input {
   margin: 4px;
   font-size: 19px;
 }
+
+h1, h2, h3, h4, h5 {
+  color: rgb(98, 80, 80);
+  margin: 27px;
+  font-family: 'Merriweather';
+}
