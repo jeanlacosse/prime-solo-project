@@ -76,13 +76,13 @@ function AppearanceRating() {
                 }}> */}
                 <div className='popup'>
                     <h2>How to judge appearance of wine:</h2>
-                    <div>Things to look for:
-                        <div>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
-                        <div>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
-                        <div>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
-                            <div>White wine: lemon-green - lemon - gold - amber - brown</div>
-                            <div>Rose wine: pink - salmon - orange</div>
-                            <div>Red wine: purple - ruby - garnet - tawny - brown</div>
+                    <div className='body-text'>Things to look for:
+                        <div className='body-text'>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
+                        <div className='body-text'>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
+                        <div className='body-text'>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
+                            <div className='body-text'>White wine: lemon-green - lemon - gold - amber - brown</div>
+                            <div className='body-text'>Rose wine: pink - salmon - orange</div>
+                            <div className='body-text'>Red wine: purple - ruby - garnet - tawny - brown</div>
                         </div>
                     </div>
 

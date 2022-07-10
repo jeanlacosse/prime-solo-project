@@ -4,6 +4,7 @@ import { useHistory, Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import '../App/App.css';
 
 import Button from '@mui/material/Button';
 
@@ -39,10 +40,10 @@ function SuccessPage() {
         <>
             <h3>Wine Ratings For:</h3>
             <h4>{allWineInfo.vintage} {allWineInfo.winery_name} {allWineInfo.varietal} from {allWineInfo.region}</h4>
-            <div>The appearance rating for this wine is {Number(allWineInfo.avg_appearance).toFixed(2)}</div>
-            <div>The nose rating for this wine is {Number(allWineInfo.avg_nose).toFixed(2)}</div>
-            <div>The palate rating for this wine is {Number(allWineInfo.avg_palate).toFixed(2)}</div>
-            <div>The overall rating for this wine is {Number(allWineInfo.avg_overall).toFixed(2)}</div>
+            <div className='body-text'>The appearance rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_appearance).toFixed(2)}</div></div>
+            <div className='body-text'>The nose rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_nose).toFixed(2)}</div></div>
+            <div className='body-text'>The palate rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}</div></div>
+            <div className='body-text'>The overall rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}</div></div>
 
             <h5>Tasting with friends?
                 <div>

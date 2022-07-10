@@ -51,7 +51,8 @@ function WineJournal() {
                                         <div>Overall Rating: {Number(wineItem.avg_overall).toFixed(2)}</div>
                                     {/* </div> */}
                                 </Typography>
-
+                                </CardContent>
+                                        
                                 <IconButton
 
                                     className="button"
@@ -69,7 +70,6 @@ function WineJournal() {
                                     variant="outlined">
                                     <FavoriteIcon /></IconButton>
 
-                            </CardContent>
                         </Card>
                     </>
 
