@@ -107,7 +107,7 @@ function ReveiwPage() {
                     onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: id })}
                     variant="outlined">
                     <FavoriteIcon /></IconButton>
-                    
+
                     {/* this will send the ratings to the db via sagas */}
                 <Button
                     sx={{
@@ -119,7 +119,7 @@ function ReveiwPage() {
                     }}
                     onClick={submitRatings}
                     color="primary"
-
+                    
                     variant="contained">
                     Submit Rating</Button>
                 

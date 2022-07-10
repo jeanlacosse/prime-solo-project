@@ -8,6 +8,8 @@ import 'reactjs-popup/dist/index.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import '../App/App.css';
 
 
 function AppearanceRating() {
@@ -58,8 +60,8 @@ function AppearanceRating() {
 
     return (
         <>
-            <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
-            <h3>Appearance Rating</h3>
+            <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
+            <h3 className='rating-header'>Appearance Rating</h3>
             {/* popup for seeing wine tasting tips in a modal */}
             <Popup
                 trigger={<Button
@@ -67,6 +69,11 @@ function AppearanceRating() {
                     variant="outlined">
                     How to Judge Appearance</Button>}
                 modal>
+                {/* <Box
+                sx={{
+                    width: 200,
+                    height: 200
+                }}> */}
                 <div className='popup'>
                     <h2>How to judge appearance of wine:</h2>
                     <div>Things to look for:
@@ -80,17 +87,19 @@ function AppearanceRating() {
                     </div>
 
                 </div>
+                {/* </Box> */}
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>     Poor
+                <div>
                     <Slider
-                    sx = {{
-                        width: '60%'
-                    }}
+                        sx={{
+                            width: '60%',
+                            justifyContent: 'center'
+                        }}
                         aria-label="Wine Rating"
                         defaultValue={50}
-                        
+
                         valueLabelDisplay="auto"
                         step={10}
                         marks
@@ -101,17 +110,11 @@ function AppearanceRating() {
                             ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
                         })}
                     />
-                    {/* <input
-                        type="range"
-                        min='0'
-                        max='10'
-                        value={appearanceRatingAndNotes.appearanceRating}
-                        onChange={event => setAppearanceRatingAndNotes({
-                            ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
-                        })}
-                    /> */}
-                    Outstanding
                 </div>
+                <span className='poor'>Poor</span>
+                <span className='outstanding'>Outstanding</span>
+
+
                 <h2>{appearanceRatingAndNotes.appearanceRating}</h2>
 
                 {/* text box for tasting notes */}

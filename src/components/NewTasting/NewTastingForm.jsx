@@ -44,7 +44,7 @@ function NewTastingForm() {
 
     return (
         <>
-            <h2>Begin the tasting by entering some basic information about the wine below.</h2>
+            <h2>Begin the tasting by entering some basic information about the wine.</h2>
             <Box
                 component="form"
                 sx={{
