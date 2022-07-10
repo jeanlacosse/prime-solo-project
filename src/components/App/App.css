@@ -5,7 +5,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open-sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
   text-align: center;
 }
@@ -118,4 +118,36 @@ input {
 
 .button {
   margin-left: 10px;
+}
+
+.popup-content {
+  margin: auto;
+  background: #fff0f0;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+.poor {
+  margin-right: 60px;
+}
+
+.outstanding {
+  margin-left: 60px;
+}
+
+.rating-header {
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+.body-text {
+  margin: 4px;
+  font-size: 19px;
+}
+
+h1, h2, h3, h4, h5 {
+  color: rgb(98, 80, 80);
+  margin: 27px;
+  font-family: 'Merriweather';
 }

@@ -6,6 +6,10 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import '../App/App.css';
 
 
 function OverallRating() {
@@ -15,7 +19,7 @@ function OverallRating() {
 
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [overallRatingAndNotes, setOverallRatingAndNotes] = useState({
-        overallRating: 5,
+        overallRating: 50,
         overallNotes: '',
         journal_entry_id: id
     });
@@ -42,8 +46,8 @@ function OverallRating() {
 
     return (
         <>
-            <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
-            <h3>Final/Overall Rating</h3>
+            <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
+            <h3 className='rating-header'>Final/Overall Rating</h3>
             <Popup
                 trigger={<Button
                     color="secondary"
@@ -52,10 +56,10 @@ function OverallRating() {
                 modal>
                 <div className='popup'>
                     <h2>How to judge a wines overall score:</h2>
-                    <div>Things to look for:
-                        <div>Quality level: How does the wine hold up to all the ratings given?</div>
-                        <div>faulty - poor - acceptable - good - very good - outstanding</div>
-                        <div>Level of readiness:
+                    <div className='body-text'>Things to look for:
+                        <div className='body-text'>Quality level: How does the wine hold up to all the ratings given?</div>
+                        <div className='body-text'>faulty - poor - acceptable - good - very good - outstanding</div>
+                        <div className='body-text'>Level of readiness:
                             too young - can drink now, but has potential for ageing - drink now, not suitable for ageing - too old
                         </div>
                     </div>
@@ -64,28 +68,49 @@ function OverallRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>Poor
-                    <input
-                    type="range"
-                    min='0'
-                    max='10'
-                    value={overallRatingAndNotes.overallRating}
-                    onChange={event => setOverallRatingAndNotes({
-                        ...overallRatingAndNotes, overallRating: (Number(event.target.value))
-                    })}
-                />
-                Outstanding</div>
-                <h5>{overallRatingAndNotes.overallRating}</h5>
+                <div>
+                    <Slider
+                        sx={{
+                            width: '60%',
+                            justifyContent: 'center'
+                        }}
+                        aria-label="Wine Rating"
+                        defaultValue={50}
+
+                        valueLabelDisplay="auto"
+                        step={10}
+                        marks
+                        min={0}
+                        max={100}
+                        value={overallRatingAndNotes.overallRating}
+                        onChange={event => setOverallRatingAndNotes({
+                            ...overallRatingAndNotes, overallRating: (Number(event.target.value))
+                        })}
+                    />
+
+                </div>
+                <span className='poor'>Poor</span>
+                <span className='outstanding'>Outstanding</span>
+
+                <h2>{overallRatingAndNotes.overallRating}</h2>
 
                 {/* text box for tasting notes */}
-                <input
+                <TextField
+                    sx={{
+                        marginBottom: '20px',
+                        width: '75%',
+                    }}
+                    multiline
+                    rows={3}
                     type="text"
-                    placeholder='Notes on wine overall'
+                    label="Notes on wine overall"
+                    variant="outlined"
                     onChange={event => setOverallRatingAndNotes({
                         ...overallRatingAndNotes, overallNotes: (event.target.value)
                     })}
                 />
-                 <div>
+                
+                <div>
                     <Button
                         sx={{
                             marginRight: '8px',
@@ -110,7 +135,7 @@ function OverallRating() {
                         variant="contained">
                         Next</Button>
                 </div>
-                
+
                 {/* back btn will go to wine inputs page again
             is there a way to keep form resubmission here? */}
             </form>

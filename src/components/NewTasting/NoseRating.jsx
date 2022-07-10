@@ -6,6 +6,10 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import '../App/App.css';
 
 
 function NoseRating() {
@@ -15,7 +19,7 @@ function NoseRating() {
 
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [noseRatingAndNotes, setNoseRatingAndNotes] = useState({
-        noseRating: 5,
+        noseRating: 50,
         noseNotes: ''
     });
 
@@ -41,8 +45,8 @@ function NoseRating() {
 
     return (
         <>
-            <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
-            <h3>Nose Rating</h3>
+            <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
+            <h3 className='rating-header'>Nose Rating</h3>
             <Popup
                 trigger={
                     <Button
@@ -52,10 +56,10 @@ function NoseRating() {
                 modal>
                 <div className='popup'>
                     <h2>How to judge nose of wine:</h2>
-                    <div>Things to look for:
-                        <div>Cleanliness: Is the smell crisp or does it smell unclean?</div>
-                        <div>Intensity: How intense is the smell of the wine? light - medium - pronounced </div>
-                        <div>Aroma Characteristics: What does the wine smell like? Try to be specific. A wine can have many different aromas.
+                    <div className='body-text'>Things to look for:
+                        <div className='body-text'>Cleanliness: Is the smell crisp or does it smell unclean?</div>
+                        <div className='body-text'>Intensity: How intense is the smell of the wine? light - medium - pronounced </div>
+                        <div className='body-text'>Aroma Characteristics: What does the wine smell like? Try to be specific. A wine can have many different aromas.
                         </div>
                     </div>
 
@@ -63,25 +67,43 @@ function NoseRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>Poor
-                    <input
-                        type="range"
-                        min='0'
-                        max='10'
+                <div>
+                <Slider
+                        sx={{
+                            width: '60%',
+                            justifyContent: 'center'
+                        }}
+                        aria-label="Wine Rating"
+                        defaultValue={50}
+
+                        valueLabelDisplay="auto"
+                        step={10}
+                        marks
+                        min={0}
+                        max={100}
                         value={noseRatingAndNotes.noseRating}
                         onChange={event => setNoseRatingAndNotes({
                             ...noseRatingAndNotes, noseRating: (Number(event.target.value))
                         })}
                     />
-                    Outstanding
+                    
                 </div>
+                <span className='poor'>Poor</span>
+                <span className='outstanding'>Outstanding</span>
 
-                <h5>{noseRatingAndNotes.noseRating}</h5>
+                <h2>{noseRatingAndNotes.noseRating}</h2>
 
                 {/* text box for tasting notes */}
-                <input
+                <TextField
+                    sx={{
+                        marginBottom: '20px',
+                        width: '75%',
+                    }}
+                    multiline
+                    rows={3}
                     type="text"
-                    placeholder='Notes on wines nose'
+                    label="Notes on wine nose"
+                    variant="outlined"
                     onChange={event => setNoseRatingAndNotes({
                         ...noseRatingAndNotes, noseNotes: (event.target.value)
                     })}

@@ -6,6 +6,10 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import '../App/App.css';
 
 
 function PalateRating() {
@@ -15,7 +19,7 @@ function PalateRating() {
 
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [palateRatingAndNotes, setPalateRatingAndNotes] = useState({
-        palateRating: 5,
+        palateRating: 50,
         palateNotes: ''
     });
 
@@ -41,8 +45,8 @@ function PalateRating() {
 
     return (
         <>
-            <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
-            <h3>Palate Rating</h3>
+            <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
+            <h3 className='rating-header'>Palate Rating</h3>
             <Popup
                 trigger={<Button
                     color="secondary"
@@ -51,14 +55,14 @@ function PalateRating() {
                 modal>
                 <div className='popup'>
                     <h2>How to judge palate of wine:</h2>
-                    <div>Things to look for:
-                        <div>Sweetness: dry - off-dry - medium-dry - medium-sweet - sweet - luscious</div>
-                        <div>Acidity: low - medium - high</div>
-                        <div>Tannin: low - medium - high</div>
-                        <div>Alcohol: low - medium - high</div>
-                        <div>Body: light - medium - full</div>
-                        <div>Finish: short - medium - long</div>
-                        <div>Flavour Characteristics: What does the wine taste like? Think sweet, salty, savory etc.</div>
+                    <div className='body-text'>Things to look for:
+                        <div className='body-text'>Sweetness: dry - off-dry - medium-dry - medium-sweet - sweet - luscious</div>
+                        <div className='body-text'>Acidity: low - medium - high</div>
+                        <div className='body-text'>Tannin: low - medium - high</div>
+                        <div className='body-text'>Alcohol: low - medium - high</div>
+                        <div className='body-text'>Body: light - medium - full</div>
+                        <div className='body-text'>Finish: short - medium - long</div>
+                        <div className='body-text'>Flavour Characteristics: What does the wine taste like? Think sweet, salty, savory etc.</div>
 
                     </div>
 
@@ -66,29 +70,50 @@ function PalateRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>Poor
-                <input
-                    type="range"
-                    min='0'
-                    max='10'
-                    value={palateRatingAndNotes.palateRating}
-                    onChange={event => setPalateRatingAndNotes({
-                        ...palateRatingAndNotes, palateRating: (Number(event.target.value))
-                    })}
-                />
-                Outstanding
+                <div>
+                    <Slider
+                        sx={{
+                            width: '60%',
+                            justifyContent: 'center'
+                        }}
+                        aria-label="Wine Rating"
+                        defaultValue={50}
+
+                        valueLabelDisplay="auto"
+                        step={10}
+                        marks
+                        min={0}
+                        max={100}
+                        value={palateRatingAndNotes.palateRating}
+                        onChange={event => setPalateRatingAndNotes({
+                            ...palateRatingAndNotes, palateRating: (Number(event.target.value))
+                        })}
+                    />
+                    
                 </div>
-                <h5>{palateRatingAndNotes.palateRating}</h5>
+                <span className='poor'>Poor</span>
+                <span className='outstanding'>Outstanding</span>
+
+                <h2>{palateRatingAndNotes.palateRating}</h2>
 
                 {/* text box for tasting notes */}
-                <input
+                <TextField
+                    sx={{
+                        marginBottom: '20px',
+                        width: '75%',
+                    }}
+                    multiline
+                    rows={3}
                     type="text"
-                    placeholder='Notes on wines palate'
+                    label="Notes on wine palate"
+                    variant="outlined"
                     onChange={event => setPalateRatingAndNotes({
                         ...palateRatingAndNotes, palateNotes: (event.target.value)
                     })}
                 />
-                 <div>
+                
+                
+                <div>
                     <Button
                         sx={{
                             marginRight: '8px',
@@ -113,7 +138,7 @@ function PalateRating() {
                         variant="contained">
                         Next</Button>
                 </div>
-                
+
                 {/* back btn will go to wine inputs page again
             is there a way to keep form resubmission here? */}
             </form>

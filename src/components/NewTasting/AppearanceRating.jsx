@@ -6,6 +6,10 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import '../App/App.css';
 
 
 function AppearanceRating() {
@@ -15,7 +19,7 @@ function AppearanceRating() {
 
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [appearanceRatingAndNotes, setAppearanceRatingAndNotes] = useState({
-        appearanceRating: 5,
+        appearanceRating: 50,
         appearanceNotes: ''
     });
 
@@ -56,8 +60,8 @@ function AppearanceRating() {
 
     return (
         <>
-            <h4>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h4>
-            <h3>Appearance Rating</h3>
+            <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
+            <h3 className='rating-header'>Appearance Rating</h3>
             {/* popup for seeing wine tasting tips in a modal */}
             <Popup
                 trigger={<Button
@@ -65,80 +69,111 @@ function AppearanceRating() {
                     variant="outlined">
                     How to Judge Appearance</Button>}
                 modal>
+                {/* <Box
+                sx={{
+                    width: 200,
+                    height: 200
+                }}> */}
                 <div className='popup'>
                     <h2>How to judge appearance of wine:</h2>
-                    <div>Things to look for:
-                        <div>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
-                        <div>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
-                        <div>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
-                            <div>White wine: lemon-green - lemon - gold - amber - brown</div>
-                            <div>Rose wine: pink - salmon - orange</div>
-                            <div>Red wine: purple - ruby - garnet - tawny - brown</div>
+                    <div className='body-text'>Things to look for:
+                        <div className='body-text'>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
+                        <div className='body-text'>Intensity: How deep is the color? Think on a scale of pale - medium - deep color </div>
+                        <div className='body-text'>Color: What is the actual color of the wine? Try to be specific. Some colors to use are:
+                            <div className='body-text'>White wine: lemon-green - lemon - gold - amber - brown</div>
+                            <div className='body-text'>Rose wine: pink - salmon - orange</div>
+                            <div className='body-text'>Red wine: purple - ruby - garnet - tawny - brown</div>
                         </div>
                     </div>
 
                 </div>
+                {/* </Box> */}
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>Poor
-                <input
-                    type="range"
-                    min='0'
-                    max='10'
-                    value={appearanceRatingAndNotes.appearanceRating}
-                    onChange={event => setAppearanceRatingAndNotes({
-                        ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
-                    })}
-                />
-                Outstanding
+                <div>
+                    <Slider
+                        sx={{
+                            width: '60%',
+                            justifyContent: 'center'
+                        }}
+                        aria-label="Wine Rating"
+                        defaultValue={50}
+
+                        valueLabelDisplay="auto"
+                        step={10}
+                        marks
+                        min={0}
+                        max={100}
+                        value={appearanceRatingAndNotes.appearanceRating}
+                        onChange={event => setAppearanceRatingAndNotes({
+                            ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+                        })}
+                    />
                 </div>
-                <h5>{appearanceRatingAndNotes.appearanceRating}</h5>
+                <span className='poor'>Poor</span>
+                <span className='outstanding'>Outstanding</span>
+
+
+                <h2>{appearanceRatingAndNotes.appearanceRating}</h2>
 
                 {/* text box for tasting notes */}
-                <input
+                <TextField
+                    sx={{
+                        marginBottom: '20px',
+                        width: '75%',
+                    }}
+                    multiline
+                    rows={3}
                     type="text"
-                    placeholder='Notes on wines appearance'
+                    label="Notes on wine appearance"
+                    variant="outlined"
                     onChange={event => setAppearanceRatingAndNotes({
                         ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
                     })}
                 />
-                <div>
-                 <Button
-                    sx={{
-                        marginRight: '8px',
-                        width: '25%',
-                        height: '50px'
-                    }}
-                    className="button"
-                    type="button"
-                    color="primary"
-                    onClick={() => history.push('/new-tasting')}
-                    variant="outlined">
-                    Back</Button>
-                <Button
-                    sx={{
-                        marginLeft: '8px',
-                        width: '25%',
-                        height: '50px'
-                    }}
-                    type='submit'
-                    color="primary"
 
-                    variant="contained">
-                    Next</Button>
-                    </div>
-            </form>
-            <h5>Want your friends to rate this wine?
-                <Popup
-                    trigger={
-                        <Button
-                        color="secondary"
+                <div>
+                    <Button
+                        sx={{
+                            marginRight: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        className="button"
+                        type="button"
+                        color="primary"
+                        onClick={() => history.push('/new-tasting')}
+                        variant="outlined">
+                        Back</Button>
+                    <Button
+                        sx={{
+                            marginLeft: '8px',
+                            width: '25%',
+                            height: '50px'
+                        }}
+                        type='submit'
+                        color="primary"
+
                         variant="contained">
-                        QR Code to Share</Button>
-                    }>
-                    <div className='popup'><img src={qrCode} /></div>
-                </Popup>
+                        Next</Button>
+                </div>
+            </form>
+            <h5>Tasting with Friends?
+                <div>
+                    <Popup
+                        trigger={
+                            <Button
+                                sx={{
+                                    marginTop: '15px'
+                                }}
+                                color="secondary"
+                                variant="contained">
+                                Share with QR Code</Button>
+                        } modal>
+                        <div className='popup'><img src={qrCode} /></div>
+                    </Popup>
+                </div>
             </h5>
         </>
     )
