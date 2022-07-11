@@ -38,12 +38,39 @@ function SuccessPage() {
 
     return (
         <>
-            <h3>Wine Ratings For:</h3>
-            <h4>{allWineInfo.vintage} {allWineInfo.winery_name} {allWineInfo.varietal} from {allWineInfo.region}</h4>
+            <h2>Wine Ratings For:</h2>
+            <h3>{allWineInfo.vintage} {allWineInfo.winery_name} {allWineInfo.varietal} from {allWineInfo.region}</h3>
             <div className='body-text'>The appearance rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_appearance).toFixed(2)}</div></div>
+            <div><Popup trigger={<Button
+                sx={{ color: '#41a641', borderColor: '#41a641' }}
+                size='small'
+                color="primary"
+                variant="outlined">
+                Notes</Button>}><div className='popup'>{allWineInfo.appearnotes[0]}</div></Popup></div>
+
             <div className='body-text'>The nose rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_nose).toFixed(2)}</div></div>
+            <div><Popup trigger={<Button
+                sx={{ color: '#41a641', borderColor: '#41a641' }}
+                size='small'
+                color="primary"
+                variant="outlined">
+                Notes</Button>}><div className='popup'>{allWineInfo.nosenotes[0]}</div></Popup></div>
+
             <div className='body-text'>The palate rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}</div></div>
+            <div><Popup trigger={<Button
+                sx={{ color: '#41a641', borderColor: '#41a641' }}
+                size='small'
+                color="primary"
+                variant="outlined">
+                Notes</Button>}><div className='popup'>{allWineInfo.palatenotes[0]}</div></Popup></div>
+
             <div className='body-text'>The overall rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}</div></div>
+            <div><Popup trigger={<Button
+                sx={{ color: '#41a641', borderColor: '#41a641' }}
+                size='small'
+                color="primary"
+                variant="outlined">
+                Notes</Button>}><div className='popup'>{allWineInfo.overallnotes[0]}</div></Popup></div>
 
             <h5>Tasting with friends?
                 <div>
@@ -60,9 +87,9 @@ function SuccessPage() {
                 </div>
             </h5>
             <Button
-             onClick={() => {
-                history.push('/wine-journal');
-            }}
+                onClick={() => {
+                    history.push('/wine-journal');
+                }}
                 sx={{
                     height: '50px'
                 }}
@@ -72,7 +99,7 @@ function SuccessPage() {
 
                 variant="contained">
                 To Wine Journal</Button>
-            
+
         </>
     )
 };

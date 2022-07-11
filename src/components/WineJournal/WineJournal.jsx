@@ -28,7 +28,7 @@ function WineJournal() {
 
     return (
         <>
-            <h2>All Previous Tastings</h2>
+            <h2>All Wine Tastings</h2>
             {/* mapping over the wines array to display them all on the dom */}
             {allWines.map((wineItem) => {
                 return (
