@@ -14,7 +14,7 @@ function BottomNavBar() {
     return (
         <>
             <BottomNavigation
-                sx={{ width: '100%', position: 'absolute', bottom: 0}}
+                sx={{ width: '100%', position: 'absolute', bottom: 0, color: 'primary'}}
                 className='bottom-nav'
                 showLabels
                 value={value}

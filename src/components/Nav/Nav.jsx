@@ -16,6 +16,9 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: 'flex-start',
@@ -27,7 +30,21 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
+
+
+const ITEM_HEIGHT = 48;
+
 function Nav() {
+  // Mui functionality
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const user = useSelector((store) => store.user);
 
   return (
@@ -43,102 +60,85 @@ function Nav() {
               sx={{ flexGrow: 1, alignSelf: 'flex-end', marginLeft: '25px' }}
 
             >
-              <Link to="/wine-journal"><h2 className="nav-title">Sip Central</h2></Link>
+              <Link to="/wine-journal">
+              <h2 className="nav-title" key="journallink">
+              Sip Central</h2>
+              </Link>
 
             </Typography>
             <IconButton
               size="large"
               edge="start"
               color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? 'long-menu' : undefined}
+              aria-expanded={open ? 'true' : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
             >
-              <Popup
-                trigger={<MenuIcon />}
-                modal>
-                <div>
-                  {/* If no user is logged in, show these links */}
-                  {!user.id && (
-                    // If there's no user, show login/registration links
-                    <Link className="navLink" to="/login">
-                      Login / Register
-                    </Link>
-                  )}
-
-                  {/* If a user is logged in, show these links */}
-                  {user.id && (
-                    <>
-                      <div>
-                        <Link className="navLink" to="/wine-journal">
-                          Home
-                        </Link>
-                      </div>
-                      <div>
-                        <Link className="navLink" to="/new-tasting">
-                          Start a New Tasting
-                        </Link>
-                      </div>
-                      <div>
-                        <Link className="navLink" to="/tasting-tips">
-                          Wine Tasting Tips
-                        </Link>
-                      </div>
-                      <div>
-                      <LogOutButton className="navLink" />
-                      </div>
-                    </>
-                  )}
-                  <div>
-                    <Link className="navLink" to="/about">
-                      About
-                    </Link>
-                  </div>
-                </div>
-              </Popup>
+              <MenuIcon />
             </IconButton>
+            <Menu
+              id="long-menu"
+              MenuListProps={{
+                'aria-labelledby': 'long-button',
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              PaperProps={{
+                style: {
+                  maxHeight: ITEM_HEIGHT * 4.5,
+                  width: '20ch',
+                },
+              }}
+            >
+              {!user.id && (
+                // If there's no user, show login/registration links
+                <MenuItem onClick={handleClose} key='login'>
+                  <Link className="navLink" to="/login">
+                    Login / Register
+                  </Link>
+                </MenuItem>
+              )}
+              {/* If a user is logged in, show these links */}
+              {user.id && (
+                <div>
+                  <MenuItem onClick={handleClose} key='journal'>
+                    <Link className="navLink" to="/wine-journal">
+                      Home
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} key='tasting'>
+                    <Link className="navLink" to="/new-tasting">
+                      New Tasting
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} key='tips'>
+                    <Link className="navLink" to="/tasting-tips">
+                      Wine Tasting Tips
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} key='logout'>
+                    <LogOutButton className="navLink" />
+                  </MenuItem>
+                </div>
+              )}
+              <MenuItem onClick={handleClose} key='about'>
+                <Link className="navLink" to="/about">
+                  About
+                </Link>
+              </MenuItem>
+
+            </Menu>
+
 
           </StyledToolbar>
         </AppBar>
       </Box>
     </>
-    // <div className="nav">
-    //   <Link to="/wine-journal">
-    //     <h2 className="nav-title">Sip Central</h2>
-    //   </Link>
-    //   <div>
-    //     {/* If no user is logged in, show these links */}
-    //     {!user.id && (
-    //       // If there's no user, show login/registration links
-    //       <Link className="navLink" to="/login">
-    //         Login / Register
-    //       </Link>
-    //     )}
 
-    //     {/* If a user is logged in, show these links */}
-    //     {user.id && (
-    //       <>
-
-    //         <Link className="navLink" to="/wine-journal">
-    //           Home
-    //         </Link>
-
-    //         <Link className="navLink" to="/new-tasting">
-    //           Start a New Tasting
-    //         </Link>
-
-    //         <Link className="navLink" to="/tasting-tips">
-    //           Wine Tasting Tips
-    //         </Link>
-
-    //         <LogOutButton className="navLink" />
-    //       </>
-    //     )}
-
-    //     <Link className="navLink" to="/about">
-    //       About
-    //     </Link>
-    //   </div>
-    // </div>
   );
 }
 
