@@ -40,10 +40,3 @@ VALUES (1, false, '07/05/2022', 'Phelps Creek', 'Pinot Noir', '2015', 'Willamett
 
 INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
 VALUES (1, 8, 8, 6, 7, 'bright red, relatively clear. Not opaque at all.', 'fresh berries, plum, and slightly peppery.', 'long finish, low tannins, good acid levels.', 'Overall a great wine, light on the tounge but carries a lot of depth.')
-
--- this is still for the 4th of july averages, must change
-SELECT
-	AVG(feedback.understanding) AS understanding_avg,
-	AVG(feedback.feeling) AS feeling_avg,
-	AVG(feedback.support) AS support_avg
-FROM feedback;

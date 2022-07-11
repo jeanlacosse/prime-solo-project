@@ -26,7 +26,7 @@ function AppearanceRating() {
     let [qrCode, setQrCode] = useState('');
 
     useEffect(() => {
-        // this is to fetch wine detail for the id of teh url endpoint
+        // this is to fetch wine detail for the id of the url endpoint
         setQR();
         dispatch({ type: 'FETCH_WINE_DETAIL', payload: id });
     }, [id]);
@@ -37,7 +37,6 @@ function AppearanceRating() {
     const setQR = () => {
         axios.get(`/api/wineInfo/${id}/qrCode`)
             .then(response => {
-                // console.log('response is', response.data.qrCode)
                 setQrCode(response.data.qrCode);
 
             })

@@ -17,7 +17,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import HomePage from '../HomePage/HomePage';
@@ -76,7 +76,7 @@ function App() {
         <div className='body-content'>
           <Nav />
           <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+            {/* Visiting localhost:3000 will redirect to localhost:3000/wine-journal */}
             <Redirect exact from="/" to="/wine-journal" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
@@ -150,10 +150,6 @@ function App() {
               }
             </Route>
 
-            {/* Do i need to make a conditional for every one of my routes or can I just add in a rejectUnauthenticated right from the start of the page?? */}
-
-            {/* this route will be for any numbers after the push to /appearance-rating b/c not exact */}
-            {/* turn all into protected route */}
             <Route
               // exact
               path="/appearance-rating/:id"
@@ -253,7 +249,7 @@ function App() {
               <OverallTips />
             </Route>
 
-            {/* If none of the other routes matched, we will show a 404. */}
+            {/* If none of the other routes matched, will show a 404. */}
             <Route>
               <h1>404 Page Not Found</h1>
             </Route>

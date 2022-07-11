@@ -38,9 +38,9 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
 
 router.post('/ratings', (req, res) => {
     console.log('wine ratings is ', req.body);
-    // console.log('user id is', req.user.id);
+    
 
-    // want to post all info returning *, then fetch detail again and select averages
+    // This will post all info, returning *
     let queryText = `
     INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -70,33 +70,7 @@ router.post('/ratings', (req, res) => {
         });
 })
 
-
-// this is fetching the next wine id in order to create a linked page to it so I can 
-// create a specific qr code for each api endpoint
-router.get('/wine-id', rejectUnauthenticated, (req, res) => {
-
-    const sqlQuery = `
-    SELECT MAX(Id) FROM journal_entry
-    WHERE user_id = $1;
-    `;
-
-    pool.query(sqlQuery, [req.user.id])
-        .then(result => {
-            // this allows a max to be sent even if the DB is empty
-            if (result.rows[0].max < 1) {
-                res.send({ max: 1 })
-            }
-            else {
-                res.send(result.rows[0]);
-            }
-
-        })
-        .catch(error => {
-            console.log('error in get request', error)
-            res.sendStatus(500);
-        })
-})
-
+// Getting all the information that was posted to the journal_entry
 router.get('/:id/info', (req, res) => {
 
     const sqlQuery = `
@@ -121,10 +95,8 @@ router.get('/:id/info', (req, res) => {
 })
 
 
-// here is where i am getting the rating average from the server
+// Getting the rating average from the server
 router.get('/:id/ratings_info', (req, res) => {
-    // console.log('req.user.id is', req.user.id)
-    console.log('req.params.id is', req.params.id)
 
     const sqlQuery = `
     SELECT 
@@ -151,7 +123,6 @@ JOIN scores
 
     pool.query(sqlQuery, [req.params.id])
         .then(result => {
-            // console.log('result is', result.rows);
             res.send(result.rows[0]);
         })
         .catch(err => {
@@ -160,18 +131,18 @@ JOIN scores
         })
 })
 
+// 3rd party API call in order to generate a QR code to bring a new user to the same rating url
 router.get('/:id/qrCode', (req, res) => {
-    // add req.params into the params for qr code
+    
     axios({
         method: 'GET',
         url: 'https://api.qrserver.com/v1/create-qr-code/',
         params: {
-            data: `http://localhost:3000/#/appearance-rating/${req.params.id}`
-            // `https://serene-lassen-volcanic-92087.herokuapp.com/#/appearance-rating/${req.params.id}`
+            
+            data: `https://serene-lassen-volcanic-92087.herokuapp.com/#/appearance-rating/${req.params.id}`
         }
     })
         .then(apiRes => {
-            // console.log('api res is ', apiRes.request.res.responseUrl);
 
             res.send({
                 qrCode: apiRes.request.res.responseUrl
@@ -182,7 +153,7 @@ router.get('/:id/qrCode', (req, res) => {
         })
 })
 
-// here is where i am getting all wines back from server
+// Getting all wines and info back from server
 router.get('/all', rejectUnauthenticated, (req, res) => {
 
     const sqlQuery = `
@@ -208,7 +179,6 @@ JOIN scores
 
     pool.query(sqlQuery, [req.user.id])
         .then(result => {
-            // console.log('result is', result.rows);
             res.send(result.rows);
         })
         .catch(err => {
@@ -217,6 +187,7 @@ JOIN scores
         })
 })
 
+// Deleting a specific item from server
 router.delete('/:id/delete', rejectUnauthenticated, (req, res) => {
 
     const queryText = `
@@ -233,6 +204,7 @@ router.delete('/:id/delete', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// Updating item in order to make favorited to true, will send to favorites page on DOM
 router.put('/:id/favorite', rejectUnauthenticated, (req, res) => {
 
     const queryText = `

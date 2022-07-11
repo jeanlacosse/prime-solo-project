@@ -17,7 +17,6 @@ function BottomNavBar() {
         <>
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
             <BottomNavigation
-                // sx={{ width: '100%', position: 'absolute', bottom: 0, borderTop: '1px, solid, black'}}
                 className='bottom-nav'
                 showLabels
                 value={value}

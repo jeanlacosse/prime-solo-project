@@ -27,7 +27,7 @@ function SuccessPage() {
     const setQR = () => {
         axios.get(`/api/wineInfo/${id}/qrCode`)
             .then(response => {
-                // console.log('response is', response.data.qrCode)
+
                 setQrCode(response.data.qrCode);
 
             })

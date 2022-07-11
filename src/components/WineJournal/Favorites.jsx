@@ -25,7 +25,7 @@ function Favorites() {
 
     const allWines = useSelector(store => store.wineInfo.allWinesList);
 
-    // this will only display a wine if it has bee npreviously favorited
+    // this will only display a wine if it has been previously favorited
     return (
         <>
             <h2>My Favorite Wines</h2>

@@ -17,7 +17,7 @@ function ReveiwPage() {
     const history = useHistory();
 
     useEffect(() => {
-        // this is to fetch wine detail for the id of teh url endpoint
+        // this is to fetch wine detail for the id of the url endpoint
         dispatch({ type: 'FETCH_WINE_DETAIL', payload: id });
     }, [id]);
 
