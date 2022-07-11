@@ -46,7 +46,7 @@ function SuccessPage() {
                 size='small'
                 color="primary"
                 variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.appearnotes[0]}</div></Popup></div>
+                Notes</Button>}><div className='popup'>{allWineInfo.appearnotes}</div></Popup></div>
 
             <div className='body-text'>The nose rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_nose).toFixed(2)}</div></div>
             <div><Popup trigger={<Button
@@ -54,7 +54,7 @@ function SuccessPage() {
                 size='small'
                 color="primary"
                 variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.nosenotes[0]}</div></Popup></div>
+                Notes</Button>}><div className='popup'>{allWineInfo.nosenotes}</div></Popup></div>
 
             <div className='body-text'>The palate rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}</div></div>
             <div><Popup trigger={<Button
@@ -62,7 +62,7 @@ function SuccessPage() {
                 size='small'
                 color="primary"
                 variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.palatenotes[0]}</div></Popup></div>
+                Notes</Button>}><div className='popup'>{allWineInfo.palatenotes}</div></Popup></div>
 
             <div className='body-text'>The overall rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}</div></div>
             <div><Popup trigger={<Button
@@ -70,7 +70,7 @@ function SuccessPage() {
                 size='small'
                 color="primary"
                 variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.overallnotes[0]}</div></Popup></div>
+                Notes</Button>}><div className='popup'>{allWineInfo.overallnotes}</div></Popup></div>
 
             <h5>Tasting with friends?
                 <div>

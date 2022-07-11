@@ -202,7 +202,8 @@ FROM journal_entry
 JOIN scores
 	ON journal_entry.id = scores.journal_entry_id
     WHERE journal_entry.user_id = $1
-	GROUP BY journal_entry.id;
+	GROUP BY journal_entry.id
+    ORDER BY id;
     `;
 
     pool.query(sqlQuery, [req.user.id])
