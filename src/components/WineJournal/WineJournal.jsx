@@ -13,6 +13,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 
 function WineJournal() {
@@ -36,7 +37,7 @@ function WineJournal() {
                         <>
                             <Card
                                 sx={{
-                                    display: 'inline-block'
+                                    display: 'inline-block', backgroundColor: '#f5f5f5'
                                 }}
                                 variant='outlined'
                                 key={wineItem.id}>
@@ -69,7 +70,8 @@ function WineJournal() {
                                     color="primary"
                                     onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id })}
                                     variant="outlined">
-                                    <FavoriteIcon /></IconButton>
+                                        {wineItem.favorited ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
+                                    </IconButton>
 
                             </Card>
                         </>

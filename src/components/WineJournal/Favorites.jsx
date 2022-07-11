@@ -34,7 +34,7 @@ function Favorites() {
                     return (
                         <Card
                             sx={{
-                                display: 'inline-block'
+                                display: 'inline-block', backgroundColor: '#f5f5f5'
                             }}
                             variant='outlined'
                             key={wineItem.id}>
@@ -58,26 +58,36 @@ function Favorites() {
                                 onClick={() => dispatch({ type: 'DELETE_WINE_ITEM', payload: wineItem.id })}
                                 variant="outlined">
                                 <DeleteOutlineOutlinedIcon /></IconButton>
+                            <IconButton
+
+                                className="button"
+                                type="button"
+                                color="primary"
+                                onClick={() => dispatch({ type: 'FAVORITE_WINE_ITEM', payload: wineItem.id })}
+                                variant="outlined">
+                                {wineItem.favorited ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
+                            </IconButton>
+
                             {/* </div> */}
                         </Card>
                     )
                 }
             })}
             <div>
-            <Button
-                onClick={() => {
-                    history.push('/wine-journal');
-                }}
-                sx={{
-                    height: '50px'
-                }}
-                type='submit'
-                color="primary"
-                size='large'
+                <Button
+                    onClick={() => {
+                        history.push('/wine-journal');
+                    }}
+                    sx={{
+                        height: '50px'
+                    }}
+                    type='submit'
+                    color="primary"
+                    size='large'
 
-                variant="contained">
-                Back To Journal</Button>
-                </div>
+                    variant="contained">
+                    Back To Journal</Button>
+            </div>
         </>
     )
 };
