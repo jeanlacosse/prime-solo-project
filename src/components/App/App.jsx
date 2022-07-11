@@ -49,15 +49,15 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import './App.css';
 
 const theme = createTheme({
-    palette: {
-      type: 'light',
-      primary: {
-        main: '#a64141',
-      },
-      secondary: {
-        main: '#41a6a6',
-      },
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#a64141',
     },
+    secondary: {
+      main: '#41a6a6',
+    },
+  },
 })
 
 function App() {
@@ -73,7 +73,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <div>
+        <div className='body-content'>
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -258,9 +258,9 @@ function App() {
               <h1>404 Page Not Found</h1>
             </Route>
           </Switch>
-          <BottomNavBar />
-          {/* <Footer /> */}
         </div>
+          <BottomNavBar />
+          
       </Router>
     </ThemeProvider>
   );
