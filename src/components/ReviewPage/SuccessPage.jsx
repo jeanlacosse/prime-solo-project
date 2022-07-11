@@ -40,37 +40,44 @@ function SuccessPage() {
         <>
             <h2>Wine Ratings For:</h2>
             <h3>{allWineInfo.vintage} {allWineInfo.winery_name} {allWineInfo.varietal} from {allWineInfo.region}</h3>
-            <div className='body-text'>The appearance rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_appearance).toFixed(2)}</div></div>
-            <div><Popup trigger={<Button
-                sx={{ color: '#41a641', borderColor: '#41a641' }}
-                size='small'
-                color="primary"
-                variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.appearnotes}</div></Popup></div>
+            <div className='body-text'>The appearance rating for this wine is </div>
+            <div className='body-text'>{Number(allWineInfo.avg_appearance).toFixed(2)}
+                <Popup trigger={<Button
+                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
+                    size='small'
+                    color="primary"
+                    variant="outlined">
+                    Notes</Button>}><div className='popup'>{allWineInfo.appearnotes}</div></Popup>
+            </div>
 
-            <div className='body-text'>The nose rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_nose).toFixed(2)}</div></div>
-            <div><Popup trigger={<Button
-                sx={{ color: '#41a641', borderColor: '#41a641' }}
-                size='small'
-                color="primary"
-                variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.nosenotes}</div></Popup></div>
 
-            <div className='body-text'>The palate rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}</div></div>
-            <div><Popup trigger={<Button
-                sx={{ color: '#41a641', borderColor: '#41a641' }}
-                size='small'
-                color="primary"
-                variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.palatenotes}</div></Popup></div>
+            <div className='body-text'>The nose rating for this wine is </div>
+            <div className='body-text'>{Number(allWineInfo.avg_nose).toFixed(2)}
+                <Popup trigger={<Button
+                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
+                    size='small'
+                    color="primary"
+                    variant="outlined">
+                    Notes</Button>}><div className='popup'>{allWineInfo.nosenotes}</div></Popup></div>
 
-            <div className='body-text'>The overall rating for this wine is <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}</div></div>
-            <div><Popup trigger={<Button
-                sx={{ color: '#41a641', borderColor: '#41a641' }}
-                size='small'
-                color="primary"
-                variant="outlined">
-                Notes</Button>}><div className='popup'>{allWineInfo.overallnotes}</div></Popup></div>
+            <div className='body-text'>The palate rating for this wine is </div>
+            <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}
+                <Popup trigger={<Button
+                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
+                    size='small'
+                    color="primary"
+                    variant="outlined">
+                    Notes</Button>}><div className='popup'>{allWineInfo.palatenotes}</div></Popup></div>
+
+            <div className='body-text'>The overall rating for this wine is </div>
+            <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}
+                <Popup trigger={<Button
+                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
+                    size='small'
+                    color="primary"
+                    variant="outlined">
+                    Notes</Button>}><div className='popup'>{allWineInfo.overallnotes}</div></Popup>
+            </div>
 
             <h5>Tasting with friends?
                 <div>
@@ -81,7 +88,7 @@ function SuccessPage() {
                             }}
                             color="secondary"
                             variant="contained">
-                            Share with QR Code</Button>}>
+                            Share with QR Code</Button>} modal>
                         <div className='popup'><img src={qrCode} /></div>
                     </Popup>
                 </div>
