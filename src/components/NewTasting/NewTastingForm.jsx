@@ -67,8 +67,7 @@ function NewTastingForm() {
                     />
                     <TextField
                         required
-                        name="varietal"
-                        
+                        name="varietal" 
                         type='text'
                         label="Varietal of Grape"
                         variant="standard"
@@ -78,8 +77,7 @@ function NewTastingForm() {
                     <TextField
                         required
                         name="vintage"
-                        
-                        type='text'
+                        type='number'
                         label="Vintage/Year Produced"
                         variant="standard"
                         onChange={handleWineInfo}

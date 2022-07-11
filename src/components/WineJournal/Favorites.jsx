@@ -76,7 +76,7 @@ function Favorites() {
                 size='large'
 
                 variant="contained">
-                To Wine Journal</Button>
+                Back To Journal</Button>
                 </div>
         </>
     )
