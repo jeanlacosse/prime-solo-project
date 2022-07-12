@@ -20,7 +20,8 @@ function AppearanceRating() {
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [appearanceRatingAndNotes, setAppearanceRatingAndNotes] = useState({
         appearanceRating: 50,
-        appearanceNotes: ''
+        appearanceNotes: '',
+        // color: '#ad0303'
     });
 
     let [qrCode, setQrCode] = useState('');
@@ -91,6 +92,7 @@ function AppearanceRating() {
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <div>
+                   
                     <Slider
                         sx={{
                             width: '60%',
