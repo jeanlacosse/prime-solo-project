@@ -42,8 +42,8 @@ router.post('/ratings', (req, res) => {
 
     // This will post all info, returning *
     let queryText = `
-    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes", "color")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *;
     `;
 
@@ -56,7 +56,8 @@ router.post('/ratings', (req, res) => {
         req.body.appearanceNotes,
         req.body.noseNotes,
         req.body.palateNotes,
-        req.body.overallNotes
+        req.body.overallNotes,
+        req.body.color
     ]
 
     pool.query(queryText, queryParams)

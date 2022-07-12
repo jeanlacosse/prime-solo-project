@@ -23,8 +23,6 @@ function SuccessPage() {
 
     const allWineInfo = useSelector((store) => store.wineInfo.allInfoRatingsAndNotes);
 
-    console.log('the notes are >>>>>>>> ', allWineInfo.nosenotes)
-
     // this will set the qr code to bring others to the beginning of the rating pages for this specific wine
     const setQR = () => {
         axios.get(`/api/wineInfo/${id}/qrCode`)
@@ -61,14 +59,18 @@ function SuccessPage() {
                     color="primary"
                     variant="outlined">
                     All Notes</Button>}><div className='popup'>
-                        {allWineInfo.nosenotes/*.map((note) => {
-                            return (
-                                <div>
-                                {note}
-                                </div>
-                            )
-                        })*/}
-                        </div></Popup></div>
+                        {allWineInfo.nosenotes ?
+                            allWineInfo.nosenotes.map((note) => {
+                                return (
+                                    <div>
+                                        {note}
+                                    </div>
+                                )
+                            })
+                            :
+                            <div>loading...</div>
+                        }
+                    </div></Popup></div>
 
             <div className='body-text'>The palate rating for this wine is </div>
             <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}

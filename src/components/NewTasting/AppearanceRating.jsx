@@ -21,7 +21,7 @@ function AppearanceRating() {
     const [appearanceRatingAndNotes, setAppearanceRatingAndNotes] = useState({
         appearanceRating: 50,
         appearanceNotes: '',
-        // color: '#ad0303'
+        color: '#ad0303'
     });
 
     let [qrCode, setQrCode] = useState('');
@@ -92,7 +92,15 @@ function AppearanceRating() {
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <div>
-                   
+                    <div>
+                    <h5>What color is the wine?</h5>
+                    <input type="color"
+                     value={appearanceRatingAndNotes.color}
+                     onChange={event => setAppearanceRatingAndNotes({
+                         ...appearanceRatingAndNotes, color: event.target.value
+                     })}
+                     />
+                     </div>
                     <Slider
                         sx={{
                             width: '60%',
