@@ -7,6 +7,7 @@ import 'reactjs-popup/dist/index.css';
 import '../App/App.css';
 
 import Button from '@mui/material/Button';
+import Slider from '@mui/material/Slider';
 
 function SuccessPage() {
 
@@ -41,13 +42,66 @@ function SuccessPage() {
             <h2>Wine Ratings For:</h2>
             <h3>{allWineInfo.vintage} {allWineInfo.winery_name} {allWineInfo.varietal} from {allWineInfo.region}</h3>
             <div className='body-text'>The appearance rating for this wine is </div>
-            <div className='body-text'>{Number(allWineInfo.avg_appearance).toFixed(2)}
+
+            <div className='body-text'>
+                {/* {Number(allWineInfo.avg_appearance).toFixed(2)} */}
+                <Slider
+                    sx={{
+                        width: '60%',
+                        justifyContent: 'center'
+                    }}
+                    aria-label="Wine Rating"
+                    // defaultValue={50}
+
+                    valueLabelDisplay="auto"
+                    readOnly
+                    value={Number(allWineInfo.avg_appearance).toFixed(2)}
+
+
+                />
+                <div>Pale    -    Medium    -    Deep</div>
+
+                {/* this popup shows all notes */}
                 <Popup trigger={<Button
                     sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
                     size='small'
                     color="primary"
                     variant="outlined">
-                    All Notes</Button>}><div className='popup'>{allWineInfo.appearnotes}</div></Popup>
+                    All Notes</Button>}><div className='popup'>{allWineInfo.appearnotes ?
+                        allWineInfo.appearnotes.map((note) => {
+                            return (
+                                <div>
+                                    {note}
+                                </div>
+                            )
+                        })
+                        :
+                        <div>loading...</div>
+                    }</div></Popup>
+
+                {/* this popup shows all colors picked */}
+                <Popup trigger={<Button
+                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
+                    size='small'
+                    color="primary"
+                    variant="outlined">
+                    All Colors Picked</Button>}><div className='popup'>{allWineInfo.colors ?
+                        allWineInfo.colors.map((color) => {
+                            if (color === null) {
+                                return;
+                            }
+                            else {
+                            return (
+                                <input type="color"
+                                    value={color}
+                                    readOnly
+                                />
+                            )}
+                            
+                        })
+                        :
+                        <div>loading...</div>
+                    }</div></Popup>
             </div>
 
 

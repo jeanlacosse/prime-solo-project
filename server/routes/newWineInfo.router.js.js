@@ -114,7 +114,8 @@ router.get('/:id/ratings_info', (req, res) => {
     array_agg(scores.appearance_notes) AS appearNotes,
 	array_agg(scores.nose_notes) AS noseNotes,
 	array_agg(scores.palate_notes) AS palateNotes,
-	array_agg(scores.overall_notes) AS overallNotes
+	array_agg(scores.overall_notes) AS overallNotes,
+    array_agg(scores.color) AS colors
 FROM journal_entry
 JOIN scores
 	ON journal_entry.id = scores.journal_entry_id
