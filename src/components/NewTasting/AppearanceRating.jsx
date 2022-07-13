@@ -93,50 +93,75 @@ function AppearanceRating() {
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <div className='body-text'>
-                    <div 
-                    style={{marginTop: '15px'}}>
-                    <span >What color is the wine?
-                    <input type="color"
-                    style={{marginLeft: '15px'}}
-                     value={appearanceRatingAndNotes.color}
-                     onChange={event => setAppearanceRatingAndNotes({
-                         ...appearanceRatingAndNotes, color: event.target.value
-                     })}
-                     />
-                     </span>
-                     </div>
-                     <Divider />
-                     <div style={{marginTop: '15px'}}>
-                     <span>How intense is the wine color?</span> 
-                    <Slider
-                        sx={{
-                            width: '70%',
-                            justifyContent: 'center'
-                        }}
-                        aria-label="Wine Rating"
-                        defaultValue={50}
-
-                        // valueLabelDisplay="auto"
-                        step={5}
-                        // marks
-                        min={0}
-                        max={100}
-                        value={appearanceRatingAndNotes.appearanceRating}
-                        onChange={event => setAppearanceRatingAndNotes({
-                            ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
-                        })}
-                    />
+                    <div
+                        style={{ marginTop: '15px' }}>
+                        <span >What color is the wine?
+                            <input type="color"
+                                style={{ marginLeft: '15px' }}
+                                value={appearanceRatingAndNotes.color}
+                                onChange={event => setAppearanceRatingAndNotes({
+                                    ...appearanceRatingAndNotes, color: event.target.value
+                                })}
+                            />
+                        </span>
                     </div>
-                <span>Pale</span>
-                <span style={{marginRight: '75px', marginLeft: '75px'}}>Medium</span>
-                <span>Deep</span>
+                    <Divider />
+                    <div style={{ marginTop: '15px' }}>
+                        <span>How intense is the wine color?</span>
+                        <Slider
+                            sx={{
+                                width: '70%',
+                                justifyContent: 'center'
+                            }}
+                            aria-label="Wine Rating"
+                            defaultValue={50}
+
+                            // valueLabelDisplay="auto"
+                            step={5}
+                            // marks
+                            min={0}
+                            max={100}
+                            value={appearanceRatingAndNotes.appearanceRating}
+                            onChange={event => setAppearanceRatingAndNotes({
+                                ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+                            })}
+                        />
+                        <span>Pale</span>
+                        <span style={{ marginRight: '75px', marginLeft: '75px' }}>Medium</span>
+                        <span>Deep</span>
+                    </div>
+                    <Divider />
+                    <div style={{ marginTop: '15px' }}>
+                        <span>What is the clarity of the wine?</span>
+                        <Slider
+                            sx={{
+                                width: '70%',
+                                justifyContent: 'center'
+                            }}
+                            aria-label="Wine Rating"
+                            defaultValue={50}
+
+                            // valueLabelDisplay="auto"
+                            step={5}
+                            // marks
+                            min={0}
+                            max={100}
+                            value={appearanceRatingAndNotes.appearanceRating}
+                            onChange={event => setAppearanceRatingAndNotes({
+                                ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+                            })}
+                        />
+                        <span style={{ marginRight: '75px' }}>Hazy</span>
+                        <span style={{ marginLeft: '75px' }}>Clear</span>
+                    </div>
                 </div>
 
-
+                <Divider />
                 {/* text box for tasting notes */}
                 <TextField
                     sx={{
                         marginBottom: '20px',
+                        marginTop: '20px',
                         width: '75%',
                     }}
                     multiline
