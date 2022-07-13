@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import '../App/App.css';
 
 
@@ -91,27 +92,33 @@ function AppearanceRating() {
             </Popup>
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>
-                    <div>
-                    <h5>What color is the wine?</h5>
+                <div className='body-text'>
+                    <div 
+                    style={{marginTop: '15px'}}>
+                    <span >What color is the wine?
                     <input type="color"
+                    style={{marginLeft: '15px'}}
                      value={appearanceRatingAndNotes.color}
                      onChange={event => setAppearanceRatingAndNotes({
                          ...appearanceRatingAndNotes, color: event.target.value
                      })}
                      />
+                     </span>
                      </div>
+                     <Divider />
+                     <div style={{marginTop: '15px'}}>
+                     <span>How intense is the wine color?</span> 
                     <Slider
                         sx={{
-                            width: '60%',
+                            width: '70%',
                             justifyContent: 'center'
                         }}
                         aria-label="Wine Rating"
                         defaultValue={50}
 
-                        valueLabelDisplay="auto"
-                        step={10}
-                        marks
+                        // valueLabelDisplay="auto"
+                        step={5}
+                        // marks
                         min={0}
                         max={100}
                         value={appearanceRatingAndNotes.appearanceRating}
@@ -119,12 +126,12 @@ function AppearanceRating() {
                             ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
                         })}
                     />
+                    </div>
+                <span>Pale</span>
+                <span style={{marginRight: '75px', marginLeft: '75px'}}>Medium</span>
+                <span>Deep</span>
                 </div>
-                <span className='poor'>Poor</span>
-                <span className='outstanding'>Outstanding</span>
 
-
-                <h2>{appearanceRatingAndNotes.appearanceRating}</h2>
 
                 {/* text box for tasting notes */}
                 <TextField
@@ -133,9 +140,9 @@ function AppearanceRating() {
                         width: '75%',
                     }}
                     multiline
-                    rows={3}
+                    rows={1}
                     type="text"
-                    label="Notes on wine appearance"
+                    label="Other notes on wine appearance"
                     variant="outlined"
                     onChange={event => setAppearanceRatingAndNotes({
                         ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
