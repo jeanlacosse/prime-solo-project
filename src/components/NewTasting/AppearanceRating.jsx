@@ -21,8 +21,9 @@ function AppearanceRating() {
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [appearanceRatingAndNotes, setAppearanceRatingAndNotes] = useState({
         appearanceRating: 50,
+        clarityRating: 50,
         appearanceNotes: '',
-        color: '#ad0303'
+        color: '#ad0303',
     });
 
     let [qrCode, setQrCode] = useState('');
@@ -146,9 +147,9 @@ function AppearanceRating() {
                             // marks
                             min={0}
                             max={100}
-                            value={appearanceRatingAndNotes.appearanceRating}
+                            value={appearanceRatingAndNotes.clarityRating}
                             onChange={event => setAppearanceRatingAndNotes({
-                                ...appearanceRatingAndNotes, appearanceRating: (Number(event.target.value))
+                                ...appearanceRatingAndNotes, clarityRating: (Number(event.target.value))
                             })}
                         />
                         <span style={{ marginRight: '75px' }}>Hazy</span>
