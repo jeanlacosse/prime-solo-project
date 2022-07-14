@@ -63,7 +63,7 @@ function AppearanceRating() {
     return (
         <>
             <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
-            <h3 className='rating-header'>Appearance Rating</h3>
+            <h3 className='rating-header'>Appearance Ratings</h3>
             {/* popup for seeing wine tasting tips in a modal */}
             <Popup
                 trigger={<Button
@@ -106,7 +106,7 @@ function AppearanceRating() {
                             />
                         </span>
                     </div>
-                    <Divider />
+                    <Divider sx={{ marginTop: '15px' }} />
                     <div style={{ marginTop: '15px' }}>
                         <span>How intense is the wine color?</span>
                         <Slider
@@ -131,7 +131,7 @@ function AppearanceRating() {
                         <span style={{ marginRight: '75px', marginLeft: '75px' }}>Medium</span>
                         <span>Deep</span>
                     </div>
-                    <Divider />
+                    <Divider sx={{ marginTop: '15px' }} />
                     <div style={{ marginTop: '15px' }}>
                         <span>What is the clarity of the wine?</span>
                         <Slider
@@ -155,50 +155,51 @@ function AppearanceRating() {
                         <span style={{ marginRight: '75px' }}>Hazy</span>
                         <span style={{ marginLeft: '75px' }}>Clear</span>
                     </div>
-                </div>
 
-                <Divider />
-                {/* text box for tasting notes */}
-                <TextField
-                    sx={{
-                        marginBottom: '20px',
-                        marginTop: '20px',
-                        width: '75%',
-                    }}
-                    multiline
-                    rows={1}
-                    type="text"
-                    label="Other notes on wine appearance"
-                    variant="outlined"
-                    onChange={event => setAppearanceRatingAndNotes({
-                        ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
-                    })}
-                />
 
-                <div>
-                    <Button
+                    <Divider sx={{ marginTop: '15px' }} />
+                    {/* text box for tasting notes */}
+                    <TextField
                         sx={{
-                            marginRight: '8px',
-                            width: '25%',
-                            height: '50px'
+                            marginBottom: '20px',
+                            marginTop: '20px',
+                            width: '75%',
                         }}
-                        className="button"
-                        type="button"
-                        color="primary"
-                        onClick={() => history.push('/new-tasting')}
-                        variant="outlined">
-                        Back</Button>
-                    <Button
-                        sx={{
-                            marginLeft: '8px',
-                            width: '25%',
-                            height: '50px'
-                        }}
-                        type='submit'
-                        color="primary"
+                        multiline
+                        rows={1}
+                        type="text"
+                        label="Other notes on wine appearance..."
+                        variant="outlined"
+                        onChange={event => setAppearanceRatingAndNotes({
+                            ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)
+                        })}
+                    />
 
-                        variant="contained">
-                        Next</Button>
+                    <div>
+                        <Button
+                            sx={{
+                                marginRight: '8px',
+                                width: '25%',
+                                height: '50px'
+                            }}
+                            className="button"
+                            type="button"
+                            color="primary"
+                            onClick={() => history.push('/new-tasting')}
+                            variant="outlined">
+                            Back</Button>
+                        <Button
+                            sx={{
+                                marginLeft: '8px',
+                                width: '25%',
+                                height: '50px'
+                            }}
+                            type='submit'
+                            color="primary"
+
+                            variant="contained">
+                            Next</Button>
+                    </div>
                 </div>
             </form>
             <h5>Tasting with Friends?

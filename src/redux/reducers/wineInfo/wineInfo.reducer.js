@@ -17,7 +17,8 @@ const wineRatingsAndNotes = (state = {}, action) => {
                 ...state, 
                 appearanceRating: action.payload.appearanceRating,
                 appearanceNotes: action.payload.appearanceNotes,
-                color: action.payload.color
+                color: action.payload.color,
+                clarityRating: action.payload.clarityRating
             }
         case 'ADD_NOSE_INFO':
             return { 
