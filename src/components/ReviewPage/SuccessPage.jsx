@@ -125,6 +125,7 @@ function SuccessPage() {
 
             <h3>Aroma Ratings:</h3>
             <div className='body-text'>
+
                 {/* slider for intensity */}
                 <h4>Aroma Intensity</h4>
                 <Slider
@@ -165,14 +166,79 @@ function SuccessPage() {
             <Divider
                 sx={{ marginTop: '15px', marginBottom: '15px' }} />
 
-            <div className='body-text'>The palate rating for this wine is </div>
-            <div className='body-text'>{Number(allWineInfo.avg_palate).toFixed(2)}
+            <h3>Palate Ratings:</h3>
+            <div className='body-text'>
+
+                {/* slider for intensity */}
+                <div>
+                <h4>Sweetness</h4>
+                <Slider
+                    sx={{
+                        width: '70%',
+                        justifyContent: 'center'
+                    }}
+                    aria-label="Wine Rating"
+                    valueLabelDisplay="auto"
+                    readOnly
+                    value={Number(allWineInfo.avg_palate).toFixed(2)}
+                />
+                </div>
+                <span style={{ marginRight: '10px', marginLeft: '10px' }}>dry</span>
+                <span style={{ marginRight: '10px', marginLeft: '10px' }}>off-dry</span>
+                <span style={{ marginRight: '10px', marginLeft: '10px' }}>medium-sweet</span>
+                <span style={{ marginRight: '10px', marginLeft: '10px' }}>sweet</span>
+
+
+                <h4>Acid Level</h4>
+                <Slider
+                    sx={{
+                        width: '70%',
+                        justifyContent: 'center'
+                    }}
+                    aria-label="Wine Rating"
+                    valueLabelDisplay="auto"
+                    readOnly
+                    value={Number(allWineInfo.avg_acid).toFixed(2)}
+                />
+                <span style={{ marginRight: '40px', marginLeft: '40px' }}>Low</span>
+                <span style={{ marginRight: '40px', marginLeft: '40px' }}>Medium</span>
+                <span style={{ marginRight: '40px', marginLeft: '40px' }}>High</span>
+
+                <h4>Tannin Level</h4>
+                <Slider
+                    sx={{
+                        width: '70%',
+                        justifyContent: 'center'
+                    }}
+                    aria-label="Wine Rating"
+                    valueLabelDisplay="auto"
+                    readOnly
+                    value={Number(allWineInfo.avg_tannin).toFixed(2)}
+                />
+                <span style={{ marginRight: '40px', marginLeft: '40px' }}>Low</span>
+                <span style={{ marginRight: '40px', marginLeft: '40px' }}>Medium</span>
+                <span style={{ marginRight: '40px', marginLeft: '40px' }}>High</span>
+
+
                 <Popup trigger={<Button
-                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
+                    sx={{ color: '#41a641', borderColor: '#41a641', marginTop: '15px' }}
                     size='small'
                     color="primary"
                     variant="outlined">
-                    All Notes</Button>} modal><div className='popup'>{allWineInfo.palatenotes}</div></Popup></div>
+                    All Flavors Picked</Button>} modal><div className='popup'>
+                        {allWineInfo.palatenotes ?
+                            allWineInfo.palatenotes.map((note) => {
+                                return (
+                                    <div>
+                                        {note}
+                                    </div>
+                                )
+                            })
+                            :
+                            <div>loading...</div>
+                        }
+                    </div></Popup>
+            </div>
 
             <div className='body-text'>The overall rating for this wine is </div>
             <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}

@@ -57,12 +57,12 @@ function Nav() {
               variant="h5"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, alignSelf: 'flex-end', marginLeft: '25px' }}
+              sx={{ flexGrow: 1, alignSelf: 'flex-end', marginLeft: '25px', fontSize: '60px' }}
 
             >
               <Link to="/wine-journal">
-              <h2 className="nav-title" key="journallink">
-              Sip Central</h2>
+              <h1 className="nav-title" key="journallink">
+              Tasting Room</h1>
               </Link>
 
             </Typography>

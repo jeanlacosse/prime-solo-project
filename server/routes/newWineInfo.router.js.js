@@ -42,8 +42,8 @@ router.post('/ratings', (req, res) => {
 
     // This will post all info, returning *
     let queryText = `
-    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes", "color", "clarity_score")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes", "color", "clarity_score", "acid_score", "tannin_score")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
     RETURNING *;
     `;
 
@@ -59,6 +59,8 @@ router.post('/ratings', (req, res) => {
         req.body.overallNotes,
         req.body.color,
         req.body.clarityRating,
+        req.body.acidRating,
+        req.body.tanninRating,
     ]
 
     pool.query(queryText, queryParams)
@@ -113,6 +115,8 @@ router.get('/:id/ratings_info', (req, res) => {
 	AVG(scores.palate_score) AS avg_palate,
 	AVG(scores.overall_score) AS avg_overall,
 	AVG(scores.clarity_score) AS avg_clarity,
+	AVG(scores.acid_score) AS avg_acid,
+	AVG(scores.tannin_score) AS avg_tannin,
     array_agg(scores.appearance_notes) AS appearNotes,
 	array_agg(scores.nose_notes) AS noseNotes,
 	array_agg(scores.palate_notes) AS palateNotes,

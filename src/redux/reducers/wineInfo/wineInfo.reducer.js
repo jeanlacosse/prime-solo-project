@@ -31,6 +31,8 @@ const wineRatingsAndNotes = (state = {}, action) => {
                 ...state, 
                 palateRating: action.payload.palateRating,
                 palateNotes: action.payload.palateNotes,
+                acidRating: action.payload.acidRating,
+                tanninRating: action.payload.tanninRating,
             }
         case 'ADD_OVERALL_INFO':
             return { 

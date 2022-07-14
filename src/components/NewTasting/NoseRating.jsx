@@ -100,9 +100,6 @@ function NoseRating() {
                                 multiple
                                 value={noseRatingAndNotes.noseNotes}
                                 onChange={handleChange}
-                                // onChange={event => setNoseRatingAndNotes({
-                                //     ...noseRatingAndNotes, noseNotes: (event.target.value)
-                                // })}
                                 input={<OutlinedInput label="Name" />}
                                 MenuProps={MenuProps}
                             >
