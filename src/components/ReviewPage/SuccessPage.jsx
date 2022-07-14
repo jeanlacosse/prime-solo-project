@@ -171,17 +171,17 @@ function SuccessPage() {
 
                 {/* slider for intensity */}
                 <div>
-                <h4>Sweetness</h4>
-                <Slider
-                    sx={{
-                        width: '70%',
-                        justifyContent: 'center'
-                    }}
-                    aria-label="Wine Rating"
-                    valueLabelDisplay="auto"
-                    readOnly
-                    value={Number(allWineInfo.avg_palate).toFixed(2)}
-                />
+                    <h4>Sweetness</h4>
+                    <Slider
+                        sx={{
+                            width: '70%',
+                            justifyContent: 'center'
+                        }}
+                        aria-label="Wine Rating"
+                        valueLabelDisplay="auto"
+                        readOnly
+                        value={Number(allWineInfo.avg_palate).toFixed(2)}
+                    />
                 </div>
                 <span style={{ marginRight: '10px', marginLeft: '10px' }}>dry</span>
                 <span style={{ marginRight: '10px', marginLeft: '10px' }}>off-dry</span>
@@ -240,15 +240,28 @@ function SuccessPage() {
                     </div></Popup>
             </div>
 
-            <div className='body-text'>The overall rating for this wine is </div>
-            <div className='body-text'>{Number(allWineInfo.avg_overall).toFixed(2)}
-                <Popup trigger={<Button
-                    sx={{ color: '#41a641', borderColor: '#41a641', marginLeft: '15px' }}
-                    size='small'
-                    color="primary"
-                    variant="outlined">
-                    All Notes</Button>} modal><div className='popup'>{allWineInfo.overallnotes}</div></Popup>
-            </div>
+            <Divider
+                sx={{ marginTop: '15px', marginBottom: '15px' }} />
+
+            <h3>Final Ratings:</h3>
+
+            <Slider
+                sx={{
+                    width: '70%',
+                    justifyContent: 'center'
+                }}
+                aria-label="Wine Rating"
+                valueLabelDisplay="auto"
+                readOnly
+                value={Number(allWineInfo.avg_overall).toFixed(2)}
+            />
+            <span style={{ marginRight: '75px' }}>Poor</span>
+            <span style={{ marginLeft: '75px' }}>Outstanding</span>
+
+            <h2>{Number(allWineInfo.avg_overall).toFixed(2)}</h2>
+
+            <Divider
+                sx={{ marginTop: '15px', marginBottom: '15px' }} />
 
             <h5>Tasting with friends?
                 <div>
