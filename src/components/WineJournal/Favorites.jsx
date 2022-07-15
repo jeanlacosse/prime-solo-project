@@ -41,6 +41,7 @@ function Favorites() {
                             <CardContent>
                                 <Typography
                                     onClick={() => history.push(`/success-page/${wineItem.id}`)}>
+                                         <div className='body-text'>
                                     {/* <div key={wineItem.id} */}
                                     {/* onClick={() => history.push(`/success-page/${wineItem.id}`)}> */}
                                     {/* {wineItem.date} */}
@@ -48,6 +49,7 @@ function Favorites() {
                                     <div>{wineItem.winery_name}</div>
                                     <div>{wineItem.varietal}</div>
                                     <div>Overall Rating: {Number(wineItem.avg_overall).toFixed(2)}</div>
+                                    </div>
                                 </Typography>
                             </CardContent>
                             <IconButton

@@ -51,7 +51,7 @@ function ReveiwPage() {
                     size='small'
                     color="primary"
                     variant="outlined">
-                    Appearance Notes</Button>}><div>{wineRatingsAndNotes.appearanceNotes}</div></Popup>
+                    Appearance Notes</Button>}><h4 style={{fontSize: '20px'}}>{wineRatingsAndNotes.appearanceNotes}</h4></Popup>
             </div>
             <div className='body-text'><h2>Aromas</h2>
                 <Popup trigger={<Button
@@ -64,7 +64,7 @@ function ReveiwPage() {
                     size='small'
                     color="primary"
                     variant="outlined">
-                   Aroma Notes</Button>}><div>{wineRatingsAndNotes.noseNotes}</div>
+                   Aroma Notes</Button>}><h4 style={{fontSize: '20px'}}>{wineRatingsAndNotes.noseNotes}</h4>
                     {/* <div>
                    {wineRatingsAndNotes.noseNotes ?
                             wineRatingsAndNotes.noseNotes.map((note) => {
@@ -90,7 +90,7 @@ function ReveiwPage() {
                     size='small'
                     color="primary"
                     variant="outlined">
-                    Flavor Notes</Button>}><div className='popup'>{wineRatingsAndNotes.palateNotes}</div></Popup>
+                    Flavor Notes</Button>}><h4 style={{fontSize: '20px'}}>{wineRatingsAndNotes.palateNotes}</h4></Popup>
             </div>
             <div className='body-text' style={{marginTop: '15px'}}><h2>Overall Rating: {wineRatingsAndNotes.overallRating}</h2>
                 {/* <Popup trigger={<Button

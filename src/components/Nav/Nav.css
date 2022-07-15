@@ -24,7 +24,7 @@
 
 .navLink {
   color: #f2f2f2;
-  background-color: #c34959;
+  background-color: none;
   text-align: center;
   padding: 3px 0px;
   text-decoration: none;
@@ -36,6 +36,7 @@
   border-radius: 4px;
   width: 100%;
   font-family: 'Merriweather';
+  color: black;
 }
 
 .navLink:hover {

@@ -107,11 +107,11 @@ function SuccessPage() {
                         size='small'
                         color="primary"
                         variant="outlined">
-                        All Notes</Button>} modal><div className='popup'>{allWineInfo.appearnotes ?
+                        Appearance Notes</Button>} modal><div className='popup'>{allWineInfo.appearnotes ?
                             allWineInfo.appearnotes.map((note) => {
                                 return (
                                     <div>
-                                        {note}
+                                        <h4 style={{fontSize: '20px'}}>{note}</h4>
                                     </div>
                                 )
                             })
@@ -153,7 +153,7 @@ function SuccessPage() {
                             allWineInfo.nosenotes.map((note) => {
                                 return (
                                     <div>
-                                        {note}
+                                        <h4 style={{fontSize: '20px'}}>{note}</h4>
                                     </div>
                                 )
                             })
@@ -230,7 +230,7 @@ function SuccessPage() {
                             allWineInfo.palatenotes.map((note) => {
                                 return (
                                     <div>
-                                        {note}
+                                        <h4 style={{fontSize: '20px'}}>{note}</h4>
                                     </div>
                                 )
                             })

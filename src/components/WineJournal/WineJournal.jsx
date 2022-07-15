@@ -44,6 +44,7 @@ function WineJournal() {
                                 <CardContent>
                                     <Typography
                                         onClick={() => history.push(`/success-page/${wineItem.id}`)}>
+                                            <div className='body-text'>
                                         {/* <div
                                         onClick={() => history.push(`/success-page/${wineItem.id}`)}> */}
                                         {/* <div>{date.year}</div> */}
@@ -52,6 +53,7 @@ function WineJournal() {
                                         <div>{wineItem.varietal}</div>
                                         <div>Overall Rating: {Number(wineItem.avg_overall).toFixed(2)}</div>
                                         {/* </div> */}
+                                        </div>
                                     </Typography>
                                 </CardContent>
 
