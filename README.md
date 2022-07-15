@@ -1,5 +1,5 @@
 # Project Name
-Sip Central - Solo Project
+Tasting Room - Solo Project
 
 ## Description
 This project took two weeks to develop.

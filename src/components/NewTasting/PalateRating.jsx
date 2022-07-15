@@ -9,7 +9,25 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import '../App/App.css';
+
+const flavors = ['Fruity', 'Floral', 'Herbal', 'Cream', 'Bready', 'Earthy', 'Buttery', 'Vanilla', 'Nuttiness', 'Coffee', 'Tabacco', 'Oaky']
+const ITEM_HEIGHT = 75;
+const ITEM_PADDING_TOP = 5;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
 
 
 function PalateRating() {
@@ -20,8 +38,16 @@ function PalateRating() {
     // This is local state to hold the rating and the comments to be sent to the Redux store
     const [palateRatingAndNotes, setPalateRatingAndNotes] = useState({
         palateRating: 50,
-        palateNotes: ''
+        acidRating: 50,
+        tanninRating: 50,
+        palateNotes: []
     });
+
+    const handleChange = (event) => {
+        setPalateRatingAndNotes({
+            ...palateRatingAndNotes, palateNotes: (event.target.value)
+        })
+    };
 
     useEffect(() => {
         // this is to fetch wine detail for the id of the url endpoint
@@ -47,7 +73,7 @@ function PalateRating() {
         <>
             <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
             <h3 className='rating-header'>Palate Rating</h3>
-            <Popup
+            {/* <Popup
                 trigger={<Button
                     color="secondary"
                     variant="outlined">
@@ -67,76 +93,163 @@ function PalateRating() {
                     </div>
 
                 </div>
-            </Popup>
+            </Popup> */}
             <form onSubmit={(event) => addNotesAndRating(event)}>
-                {/* slider input to change appearance rating */}
-                <div>
-                    <Slider
-                        sx={{
-                            width: '60%',
-                            justifyContent: 'center'
-                        }}
-                        aria-label="Wine Rating"
-                        defaultValue={50}
+                <div className='body-text'>
+                    {/* Taste picker dropdown */}
+                    <div style={{ marginTop: '15px' }}>
+                        {/* <FormControl sx={{ m: 1, width: 300 }}>
+                            <InputLabel>Pick a few wine flavors</InputLabel>
+                            <Select
+                                multiple
+                                value={palateRatingAndNotes.palateNotes}
+                                onChange={handleChange}
+                                input={<OutlinedInput label="Name" />}
+                                MenuProps={MenuProps}
+                            >
+                                {flavors.map((flavor) => (
+                                    <MenuItem
+                                        key={flavor}
+                                        value={flavor}
+                                    >
+                                        {flavor}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl> */}
+                    </div>
+                    {/* <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} /> */}
 
-                        valueLabelDisplay="auto"
-                        step={10}
-                        marks
-                        min={0}
-                        max={100}
-                        value={palateRatingAndNotes.palateRating}
+
+
+
+                    {/* text box for tasting notes */}
+                    <TextField
+                        sx={{
+                            // marginBottom: '20px',
+                            width: '75%',
+                        }}
+                        multiline
+                        rows={1}
+                        type="text"
+                        label="Flavor notes in the wine..."
+                        variant="outlined"
                         onChange={event => setPalateRatingAndNotes({
-                            ...palateRatingAndNotes, palateRating: (Number(event.target.value))
+                            ...palateRatingAndNotes, palateNotes: (event.target.value)
                         })}
                     />
-                    
-                </div>
-                <span className='poor'>Poor</span>
-                <span className='outstanding'>Outstanding</span>
 
-                <h2>{palateRatingAndNotes.palateRating}</h2>
+                    <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} />
 
-                {/* text box for tasting notes */}
-                <TextField
-                    sx={{
-                        marginBottom: '20px',
-                        width: '75%',
-                    }}
-                    multiline
-                    rows={3}
-                    type="text"
-                    label="Notes on wine palate"
-                    variant="outlined"
-                    onChange={event => setPalateRatingAndNotes({
-                        ...palateRatingAndNotes, palateNotes: (event.target.value)
-                    })}
-                />
-                
-                
-                <div>
-                    <Button
-                        sx={{
-                            marginRight: '8px',
-                            width: '25%',
-                            height: '50px'
-                        }}
-                        className="button"
-                        type="button"
-                        color="primary"
-                        onClick={() => history.push(`/nose-rating/${wineInfo.id}`)}
-                        variant="outlined">
-                        Back</Button>
-                    <Button
-                        sx={{
-                            marginLeft: '8px',
-                            width: '25%',
-                            height: '50px'
-                        }}
-                        type='submit'
-                        color="primary"
+                    {/* slider input to change appearance rating */}
+                    <div style={{ marginTop: '15px' }}>
+                        <span>How sweet is the wine?</span>
+                        <Slider
+                            sx={{
+                                width: '70%',
+                                justifyContent: 'center'
+                            }}
+                            aria-label="Wine Rating"
+                            defaultValue={50}
+                            step={5}
+                            min={0}
+                            max={100}
+                            value={palateRatingAndNotes.palateRating}
+                            onChange={event => setPalateRatingAndNotes({
+                                ...palateRatingAndNotes, palateRating: (Number(event.target.value))
+                            })}
+                        />
 
-                        variant="contained">
-                        Next</Button>
+                    </div>
+                    <span style={{ marginRight: '10px', marginLeft: '10px' }}>dry</span>
+                    <span style={{ marginRight: '10px', marginLeft: '10px' }}>off-dry</span>
+                    <span style={{ marginRight: '10px', marginLeft: '10px' }}>medium-sweet</span>
+                    <span style={{ marginRight: '10px', marginLeft: '10px' }}>sweet</span>
+
+                    <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} />
+
+                    {/* Begin acidity slider */}
+
+                    <div>
+                        <span>How acidic is the wine?</span>
+                        <Slider
+                            sx={{
+                                width: '70%',
+                                justifyContent: 'center'
+                            }}
+                            aria-label="Wine Rating"
+                            defaultValue={50}
+                            step={5}
+                            min={0}
+                            max={100}
+                            value={palateRatingAndNotes.acidRating}
+                            onChange={event => setPalateRatingAndNotes({
+                                ...palateRatingAndNotes, acidRating: (Number(event.target.value))
+                            })}
+                        />
+
+                    </div>
+                    <span style={{ marginRight: '40px', marginLeft: '40px' }}>Low</span>
+                    <span style={{ marginRight: '40px', marginLeft: '40px' }}>Medium</span>
+                    <span style={{ marginRight: '40px', marginLeft: '40px' }}>High</span>
+
+                    {/* Begin Tannins slider */}
+
+                    <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} />
+
+                    <div>
+                        <span>How strong are the tannins?</span>
+                        <Slider
+                            sx={{
+                                width: '70%',
+                                justifyContent: 'center'
+                            }}
+                            aria-label="Wine Rating"
+                            defaultValue={50}
+                            step={5}
+                            min={0}
+                            max={100}
+                            value={palateRatingAndNotes.tanninRating}
+                            onChange={event => setPalateRatingAndNotes({
+                                ...palateRatingAndNotes, tanninRating: (Number(event.target.value))
+                            })}
+                        />
+
+                    </div>
+                    <span style={{ marginRight: '40px', marginLeft: '40px' }}>Low</span>
+                    <span style={{ marginRight: '40px', marginLeft: '40px' }}>Medium</span>
+                    <span style={{ marginRight: '40px', marginLeft: '40px' }}>High</span>
+
+                    <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} />
+
+
+
+
+                    <div>
+                        <Button
+                            sx={{
+                                marginRight: '8px',
+                                width: '25%',
+                                height: '50px'
+                            }}
+                            className="button"
+                            type="button"
+                            color="primary"
+                            onClick={() => history.push(`/nose-rating/${wineInfo.id}`)}
+                            variant="outlined">
+                            Back</Button>
+                        <Button
+                            sx={{
+                                marginLeft: '8px',
+                                width: '25%',
+                                height: '50px'
+                            }}
+                            type='submit'
+                            color="primary"
+
+                            variant="contained">
+                            Next</Button>
+                    </div>
                 </div>
 
                 {/* back btn will go to wine inputs page again

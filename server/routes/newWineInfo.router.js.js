@@ -38,12 +38,12 @@ router.post('/new-wine', rejectUnauthenticated, (req, res) => {
 
 router.post('/ratings', (req, res) => {
     console.log('wine ratings is ', req.body);
-    
+
 
     // This will post all info, returning *
     let queryText = `
-    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    INSERT INTO "scores" ("journal_entry_id", "appearance_score", "nose_score", "palate_score", "overall_score", "appearance_notes", "nose_notes", "palate_notes", "overall_notes", "color", "clarity_score", "acid_score", "tannin_score")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
     RETURNING *;
     `;
 
@@ -56,13 +56,42 @@ router.post('/ratings', (req, res) => {
         req.body.appearanceNotes,
         req.body.noseNotes,
         req.body.palateNotes,
-        req.body.overallNotes
+        req.body.overallNotes,
+        req.body.color,
+        req.body.clarityRating,
+        req.body.acidRating,
+        req.body.tanninRating,
     ]
 
     pool.query(queryText, queryParams)
         .then(result => {
-            res.send(result.rows[0]);
 
+            console.log('nose >>>>>>>', req.body.noseNotes)
+            console.log('palate >>>>>>>', req.body.palateNotes)
+
+            let queryText = `
+    INSERT INTO "notes" ("journal_entry_id", "nose_notes")
+    VALUES ($1, $2)
+    RETURNING *;
+    `;
+
+            req.body.noseNotes.map((noseItem) => pool.query(queryText, [req.body.journal_entry_id, noseItem]))
+
+            //     .then(result => {
+            //         let queryText = `
+            // INSERT INTO "notes" ("journal_entry_id", "palate_notes")
+            // VALUES ($1, $2)
+            // RETURNING *;
+            // `;
+
+            //         req.body.palateNotes.map((palateItem) => pool.query(queryText, [req.body.journal_entry_id, palateItem]))
+
+            //     })
+            //     .catch(error => {
+            //         console.error('error adding in ratings', error);
+            //         res.sendStatus(500)
+            //     });
+            res.send(result.rows[0]);
         })
         .catch(error => {
             console.error('error adding in ratings', error);
@@ -98,6 +127,34 @@ router.get('/:id/info', (req, res) => {
 // Getting the rating average from the server
 router.get('/:id/ratings_info', (req, res) => {
 
+    //     const sqlQuery = `
+    //     SELECT 
+    //     journal_entry.id,
+    // 	journal_entry.date,
+    // 	journal_entry.winery_name,
+    // 	journal_entry.varietal,
+    // 	journal_entry.vintage,
+    // 	journal_entry.region,
+    // 	AVG(scores.appearance_score) AS avg_appearance,
+    // 	AVG(scores.nose_score) AS avg_nose,
+    // 	AVG(scores.palate_score) AS avg_palate,
+    // 	AVG(scores.overall_score) AS avg_overall,
+    // 	AVG(scores.clarity_score) AS avg_clarity,
+    // 	AVG(scores.acid_score) AS avg_acid,
+    // 	AVG(scores.tannin_score) AS avg_tannin,
+    //     array_agg(notes.appearance_notes) AS appearNotes,
+    // 	array_agg(notes.nose_notes) AS noseNotes,
+    // 	array_agg(scores.palate_notes) AS palateNotes,
+    // 	array_agg(notes.overall_notes) AS overallNotes,
+    //     array_agg(scores.color) AS colors
+    // FROM journal_entry
+    // JOIN scores
+    // 	ON journal_entry.id = scores.journal_entry_id
+    // JOIN notes
+    // 	ON journal_entry.id = notes.journal_entry_id
+    // 	WHERE journal_entry.id = $1
+    // 	GROUP BY journal_entry.id;
+    //     `;
     const sqlQuery = `
     SELECT 
     journal_entry.id,
@@ -110,10 +167,14 @@ router.get('/:id/ratings_info', (req, res) => {
 	AVG(scores.nose_score) AS avg_nose,
 	AVG(scores.palate_score) AS avg_palate,
 	AVG(scores.overall_score) AS avg_overall,
+	AVG(scores.clarity_score) AS avg_clarity,
+	AVG(scores.acid_score) AS avg_acid,
+	AVG(scores.tannin_score) AS avg_tannin,
     array_agg(scores.appearance_notes) AS appearNotes,
 	array_agg(scores.nose_notes) AS noseNotes,
 	array_agg(scores.palate_notes) AS palateNotes,
-	array_agg(scores.overall_notes) AS overallNotes
+	array_agg(scores.overall_notes) AS overallNotes,
+    array_agg(scores.color) AS colors
 FROM journal_entry
 JOIN scores
 	ON journal_entry.id = scores.journal_entry_id
@@ -133,12 +194,12 @@ JOIN scores
 
 // 3rd party API call in order to generate a QR code to bring a new user to the same rating url
 router.get('/:id/qrCode', (req, res) => {
-    
+
     axios({
         method: 'GET',
         url: 'https://api.qrserver.com/v1/create-qr-code/',
         params: {
-            
+
             data: `https://serene-lassen-volcanic-92087.herokuapp.com/#/appearance-rating/${req.params.id}`
         }
     })
@@ -168,7 +229,8 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
 	AVG(scores.appearance_score) AS avg_appearance,
 	AVG(scores.nose_score) AS avg_nose,
 	AVG(scores.palate_score) AS avg_palate,
-	AVG(scores.overall_score) AS avg_overall
+	AVG(scores.overall_score) AS avg_overall,
+    AVG(scores.clarity_score) AS avg_clarity
 FROM journal_entry
 JOIN scores
 	ON journal_entry.id = scores.journal_entry_id

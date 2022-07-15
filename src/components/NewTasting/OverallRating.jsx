@@ -48,7 +48,7 @@ function OverallRating() {
         <>
             <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
             <h3 className='rating-header'>Final/Overall Rating</h3>
-            <Popup
+            {/* <Popup
                 trigger={<Button
                     color="secondary"
                     variant="outlined">
@@ -65,75 +65,61 @@ function OverallRating() {
                     </div>
 
                 </div>
-            </Popup>
+            </Popup> */}
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
-                <div>
-                    <Slider
-                        sx={{
-                            width: '60%',
-                            justifyContent: 'center'
-                        }}
-                        aria-label="Wine Rating"
-                        defaultValue={50}
+                <div className='body-text'>
+                    <h4>Considering all previous factors, how would you rate this wine?</h4>
+                    <div>
+                        <Slider
+                            sx={{
+                                width: '70%',
+                                justifyContent: 'center'
+                            }}
+                            aria-label="Wine Rating"
+                            defaultValue={50}
 
-                        valueLabelDisplay="auto"
-                        step={10}
-                        marks
-                        min={0}
-                        max={100}
-                        value={overallRatingAndNotes.overallRating}
-                        onChange={event => setOverallRatingAndNotes({
-                            ...overallRatingAndNotes, overallRating: (Number(event.target.value))
-                        })}
-                    />
+                            valueLabelDisplay="auto"
+                            step={5}
+                            min={0}
+                            max={100}
+                            value={overallRatingAndNotes.overallRating}
+                            onChange={event => setOverallRatingAndNotes({
+                                ...overallRatingAndNotes, overallRating: (Number(event.target.value))
+                            })}
+                        />
 
-                </div>
-                <span className='poor'>Poor</span>
-                <span className='outstanding'>Outstanding</span>
+                    </div>
+                    <span style={{marginRight: '75px'}}>Poor</span>
+                    <span style={{marginLeft: '75px'}}>Outstanding</span>
 
-                <h2>{overallRatingAndNotes.overallRating}</h2>
+                    <h2>{overallRatingAndNotes.overallRating}</h2>
 
-                {/* text box for tasting notes */}
-                <TextField
-                    sx={{
-                        marginBottom: '20px',
-                        width: '75%',
-                    }}
-                    multiline
-                    rows={3}
-                    type="text"
-                    label="Notes on wine overall"
-                    variant="outlined"
-                    onChange={event => setOverallRatingAndNotes({
-                        ...overallRatingAndNotes, overallNotes: (event.target.value)
-                    })}
-                />
-                
-                <div>
-                    <Button
-                        sx={{
-                            marginRight: '8px',
-                            width: '25%',
-                            height: '50px'
-                        }}
-                        className="button"
-                        type="button"
-                        color="primary"
-                        onClick={() => history.push(`/palate-rating/${wineInfo.id}`)}
-                        variant="outlined">
-                        Back</Button>
-                    <Button
-                        sx={{
-                            marginLeft: '8px',
-                            width: '25%',
-                            height: '50px'
-                        }}
-                        type='submit'
-                        color="primary"
+                    <div>
+                        <Button
+                            sx={{
+                                marginRight: '8px',
+                                width: '25%',
+                                height: '50px'
+                            }}
+                            className="button"
+                            type="button"
+                            color="primary"
+                            onClick={() => history.push(`/palate-rating/${wineInfo.id}`)}
+                            variant="outlined">
+                            Back</Button>
+                        <Button
+                            sx={{
+                                marginLeft: '8px',
+                                width: '25%',
+                                height: '50px'
+                            }}
+                            type='submit'
+                            color="primary"
 
-                        variant="contained">
-                        Next</Button>
+                            variant="contained">
+                            Next</Button>
+                    </div>
                 </div>
 
                 {/* back btn will go to wine inputs page again

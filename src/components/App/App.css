@@ -128,28 +128,20 @@ input {
   border: 1px solid black;
 }
 
-.poor {
-  margin-right: 60px;
-}
-
-.outstanding {
-  margin-left: 60px;
-}
-
 .rating-header {
   font-size: 24px;
   text-decoration: underline;
 }
 
 .body-text {
-  margin: 4px;
-  font-size: 19px;
+  margin: 1px;
+  font-size: 16px;
   font-family: 'Merriweather';
 }
 
 h1, h2, h3, h4, h5 {
   color: rgb(98, 80, 80);
-  margin: 27px;
+  margin: 20px;
   font-family: 'Merriweather';
 }
 
