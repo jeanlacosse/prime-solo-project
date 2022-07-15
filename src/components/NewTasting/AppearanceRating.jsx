@@ -65,18 +65,18 @@ function AppearanceRating() {
             <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
             <h3 className='rating-header'>Appearance Ratings</h3>
             {/* popup for seeing wine tasting tips in a modal */}
-            <Popup
+            {/* <Popup
                 trigger={<Button
                     color="secondary"
                     variant="outlined">
                     How to Judge Appearance</Button>}
-                modal>
+                modal> */}
                 {/* <Box
                 sx={{
                     width: 200,
                     height: 200
                 }}> */}
-                <div className='popup'>
+                {/* <div className='popup'>
                     <h2>How to judge appearance of wine:</h2>
                     <div className='body-text'>Things to look for:
                         <div className='body-text'>Clarity: is it clear, hazy, somewhere in between? Is there any sediment?</div>
@@ -89,8 +89,8 @@ function AppearanceRating() {
                     </div>
 
                 </div>
-                {/* </Box> */}
-            </Popup>
+                
+            </Popup> */}
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 {/* slider input to change appearance rating */}
                 <div className='body-text'>
@@ -168,7 +168,7 @@ function AppearanceRating() {
                         multiline
                         rows={1}
                         type="text"
-                        label="Other notes on wine appearance..."
+                        label="Other notes on wine appearance"
                         variant="outlined"
                         onChange={event => setAppearanceRatingAndNotes({
                             ...appearanceRatingAndNotes, appearanceNotes: (event.target.value)

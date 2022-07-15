@@ -71,7 +71,7 @@ function NoseRating() {
         <>
             <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
             <h3 className='rating-header'>Aroma Ratings</h3>
-            <Popup
+            {/* <Popup
                 trigger={
                     <Button
                         color="secondary"
@@ -88,7 +88,7 @@ function NoseRating() {
                     </div>
 
                 </div>
-            </Popup>
+            </Popup> */}
             <form onSubmit={(event) => addNotesAndRating(event)}>
 
                 <div className='body-text'>

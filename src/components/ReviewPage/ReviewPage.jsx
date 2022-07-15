@@ -40,47 +40,58 @@ function ReveiwPage() {
             {/* <div>Date tasted: {Date(wineInfo.date)}</div> */}
             <span className='body-text'>Wine tasted: {wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</span>
             <div className='body-text'>Scores</div>
-            <div className='body-text'>Appearance: {wineRatingsAndNotes.appearanceRating}
+            <div className='body-text'><h2>Appearance: {wineRatingsAndNotes.appearanceRating}</h2>
                 <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
                         color: '#41a641',
                         borderColor: '#41a641',
-                        marginTop: '15px'
+                        // marginTop: '15px'
                     }}
                     size='small'
                     color="primary"
                     variant="outlined">
-                    Notes</Button>}><div className='popup'>{wineRatingsAndNotes.appearanceNotes}</div></Popup>
+                    Appearance Notes</Button>}><div>{wineRatingsAndNotes.appearanceNotes}</div></Popup>
             </div>
-            <div className='body-text'>Nose: {wineRatingsAndNotes.noseRating}
+            <div className='body-text'><h2>Aroma: {wineRatingsAndNotes.noseRating}</h2>
                 <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
                         color: '#41a641',
                         borderColor: '#41a641',
-                        marginTop: '15px'
+                        // marginTop: '15px'
                     }}
                     size='small'
                     color="primary"
                     variant="outlined">
-                    Notes</Button>}><div className='popup'>{wineRatingsAndNotes.noseNotes}</div></Popup>
+                   Aroma Notes</Button>}><div>
+                   {wineRatingsAndNotes.noseNotes ?
+                            wineRatingsAndNotes.noseNotes.map((note) => {
+                                return (
+                                    <div>
+                                        {note}
+                                    </div>
+                                )
+                            })
+                            :
+                            <div>loading...</div>
+                        }{wineRatingsAndNotes.noseNotes}</div></Popup>
             </div>
-            <div className='body-text'>Palate: {wineRatingsAndNotes.palateRating}
+            <div className='body-text'><h2>Palate: {wineRatingsAndNotes.palateRating}</h2>
                 <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
                         color: '#41a641',
                         borderColor: '#41a641',
-                        marginTop: '15px'
+                        // marginTop: '15px'
                     }}
                     size='small'
                     color="primary"
                     variant="outlined">
-                    Notes</Button>}><div className='popup'>{wineRatingsAndNotes.palateNotes}</div></Popup>
+                    Flavor Notes</Button>}><div className='popup'>{wineRatingsAndNotes.palateNotes}</div></Popup>
             </div>
-            <div className='body-text'>Overall: {wineRatingsAndNotes.overallRating}
-                <Popup trigger={<Button
+            <div className='body-text' style={{marginTop: '15px'}}><h2>Overall Rating: {wineRatingsAndNotes.overallRating}</h2>
+                {/* <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
                         color: '#41a641',
@@ -90,7 +101,7 @@ function ReveiwPage() {
                     size='small'
                     color="primary"
                     variant="outlined">
-                    Notes</Button>}><div className='popup'>{wineRatingsAndNotes.overallNotes}</div></Popup>
+                    Notes</Button>}><div className='popup'>{wineRatingsAndNotes.overallNotes}</div></Popup> */}
             </div>
             <span>
                 {/* this will add the wine to the favorites list */}

@@ -148,7 +148,7 @@ function SuccessPage() {
                     size='small'
                     color="primary"
                     variant="outlined">
-                    All Aromas Picked</Button>} modal><div className='popup'>
+                    All Aromas Picked</Button>} modal><div>
                         {allWineInfo.nosenotes ?
                             allWineInfo.nosenotes.map((note) => {
                                 return (

@@ -21,12 +21,12 @@ const flavors = ['Fruity', 'Floral', 'Herbal', 'Cream', 'Bready', 'Earthy', 'But
 const ITEM_HEIGHT = 75;
 const ITEM_PADDING_TOP = 5;
 const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
     },
-  },
 };
 
 
@@ -45,9 +45,9 @@ function PalateRating() {
 
     const handleChange = (event) => {
         setPalateRatingAndNotes({
-                ...palateRatingAndNotes, palateNotes: (event.target.value)
-            })
-      };
+            ...palateRatingAndNotes, palateNotes: (event.target.value)
+        })
+    };
 
     useEffect(() => {
         // this is to fetch wine detail for the id of the url endpoint
@@ -73,7 +73,7 @@ function PalateRating() {
         <>
             <h3>{wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</h3>
             <h3 className='rating-header'>Palate Rating</h3>
-            <Popup
+            {/* <Popup
                 trigger={<Button
                     color="secondary"
                     variant="outlined">
@@ -93,12 +93,12 @@ function PalateRating() {
                     </div>
 
                 </div>
-            </Popup>
+            </Popup> */}
             <form onSubmit={(event) => addNotesAndRating(event)}>
                 <div className='body-text'>
-{/* Taste picker dropdown */}
-                <div style={{marginTop: '15px'}}>
-                        <FormControl sx={{ m: 1, width: 300 }}>
+                    {/* Taste picker dropdown */}
+                    <div style={{ marginTop: '15px' }}>
+                        {/* <FormControl sx={{ m: 1, width: 300 }}>
                             <InputLabel>Pick a few wine flavors</InputLabel>
                             <Select
                                 multiple
@@ -116,8 +116,29 @@ function PalateRating() {
                                     </MenuItem>
                                 ))}
                             </Select>
-                        </FormControl>
+                        </FormControl> */}
                     </div>
+                    {/* <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} /> */}
+
+
+
+
+                    {/* text box for tasting notes */}
+                    <TextField
+                        sx={{
+                            // marginBottom: '20px',
+                            width: '75%',
+                        }}
+                        multiline
+                        rows={1}
+                        type="text"
+                        label="Flavor notes in the wine..."
+                        variant="outlined"
+                        onChange={event => setPalateRatingAndNotes({
+                            ...palateRatingAndNotes, palateNotes: (event.target.value)
+                        })}
+                    />
+
                     <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} />
 
                     {/* slider input to change appearance rating */}
@@ -202,21 +223,6 @@ function PalateRating() {
                     <Divider sx={{ marginTop: '15px', marginBottom: '15px' }} />
 
 
-                    {/* text box for tasting notes */}
-                    {/* <TextField
-                    sx={{
-                        marginBottom: '20px',
-                        width: '75%',
-                    }}
-                    multiline
-                    rows={1}
-                    type="text"
-                    label="Notes on wine palate"
-                    variant="outlined"
-                    onChange={event => setPalateRatingAndNotes({
-                        ...palateRatingAndNotes, palateNotes: (event.target.value)
-                    })}
-                /> */}
 
 
                     <div>
