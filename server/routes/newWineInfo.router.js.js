@@ -91,7 +91,7 @@ router.post('/ratings', (req, res) => {
             //         console.error('error adding in ratings', error);
             //         res.sendStatus(500)
             //     });
-                res.send(result.rows[0]);
+            res.send(result.rows[0]);
         })
         .catch(error => {
             console.error('error adding in ratings', error);
@@ -127,6 +127,34 @@ router.get('/:id/info', (req, res) => {
 // Getting the rating average from the server
 router.get('/:id/ratings_info', (req, res) => {
 
+    //     const sqlQuery = `
+    //     SELECT 
+    //     journal_entry.id,
+    // 	journal_entry.date,
+    // 	journal_entry.winery_name,
+    // 	journal_entry.varietal,
+    // 	journal_entry.vintage,
+    // 	journal_entry.region,
+    // 	AVG(scores.appearance_score) AS avg_appearance,
+    // 	AVG(scores.nose_score) AS avg_nose,
+    // 	AVG(scores.palate_score) AS avg_palate,
+    // 	AVG(scores.overall_score) AS avg_overall,
+    // 	AVG(scores.clarity_score) AS avg_clarity,
+    // 	AVG(scores.acid_score) AS avg_acid,
+    // 	AVG(scores.tannin_score) AS avg_tannin,
+    //     array_agg(notes.appearance_notes) AS appearNotes,
+    // 	array_agg(notes.nose_notes) AS noseNotes,
+    // 	array_agg(scores.palate_notes) AS palateNotes,
+    // 	array_agg(notes.overall_notes) AS overallNotes,
+    //     array_agg(scores.color) AS colors
+    // FROM journal_entry
+    // JOIN scores
+    // 	ON journal_entry.id = scores.journal_entry_id
+    // JOIN notes
+    // 	ON journal_entry.id = notes.journal_entry_id
+    // 	WHERE journal_entry.id = $1
+    // 	GROUP BY journal_entry.id;
+    //     `;
     const sqlQuery = `
     SELECT 
     journal_entry.id,
@@ -142,45 +170,17 @@ router.get('/:id/ratings_info', (req, res) => {
 	AVG(scores.clarity_score) AS avg_clarity,
 	AVG(scores.acid_score) AS avg_acid,
 	AVG(scores.tannin_score) AS avg_tannin,
-    array_agg(notes.appearance_notes) AS appearNotes,
-	array_agg(notes.nose_notes) AS noseNotes,
+    array_agg(scores.appearance_notes) AS appearNotes,
+	array_agg(scores.nose_notes) AS noseNotes,
 	array_agg(scores.palate_notes) AS palateNotes,
-	array_agg(notes.overall_notes) AS overallNotes,
+	array_agg(scores.overall_notes) AS overallNotes,
     array_agg(scores.color) AS colors
 FROM journal_entry
 JOIN scores
 	ON journal_entry.id = scores.journal_entry_id
-JOIN notes
-	ON journal_entry.id = notes.journal_entry_id
 	WHERE journal_entry.id = $1
 	GROUP BY journal_entry.id;
     `;
-//     const sqlQuery = `
-//     SELECT 
-//     journal_entry.id,
-// 	journal_entry.date,
-// 	journal_entry.winery_name,
-// 	journal_entry.varietal,
-// 	journal_entry.vintage,
-// 	journal_entry.region,
-// 	AVG(scores.appearance_score) AS avg_appearance,
-// 	AVG(scores.nose_score) AS avg_nose,
-// 	AVG(scores.palate_score) AS avg_palate,
-// 	AVG(scores.overall_score) AS avg_overall,
-// 	AVG(scores.clarity_score) AS avg_clarity,
-// 	AVG(scores.acid_score) AS avg_acid,
-// 	AVG(scores.tannin_score) AS avg_tannin,
-//     array_agg(scores.appearance_notes) AS appearNotes,
-// 	array_agg(scores.nose_notes) AS noseNotes,
-// 	array_agg(scores.palate_notes) AS palateNotes,
-// 	array_agg(scores.overall_notes) AS overallNotes,
-//     array_agg(scores.color) AS colors
-// FROM journal_entry
-// JOIN scores
-// 	ON journal_entry.id = scores.journal_entry_id
-// 	WHERE journal_entry.id = $1
-// 	GROUP BY journal_entry.id;
-//     `;
 
     pool.query(sqlQuery, [req.params.id])
         .then(result => {

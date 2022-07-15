@@ -93,7 +93,7 @@ function NoseRating() {
 
                 <div className='body-text'>
                     {/* text box for tasting notes and dropdowns for a few starter ideas*/}
-                    <div style={{marginTop: '15px'}}>
+                    {/* <div style={{marginTop: '15px'}}>
                         <FormControl sx={{ m: 1, width: 300 }}>
                             <InputLabel>Pick a few wine aromas</InputLabel>
                             <Select
@@ -113,23 +113,23 @@ function NoseRating() {
                                 ))}
                             </Select>
                         </FormControl>
-                    </div>
-                    {/* <TextField
+                    </div> */}
+                    <TextField
                         sx={{
-                            marginBottom: '20px',
+                            // marginBottom: '20px',
                             marginTop: '20px',
                             width: '75%',
                         }}
                         multiline
                         rows={1}
                         type="text"
-                        label="Other aromas found in the wine..."
+                        label="Aromas found in the wine..."
                         variant="outlined"
                         onChange={handleChange}
                         // onChange={event => setNoseRatingAndNotes({
                         //     ...noseRatingAndNotes, noseNotes: (event.target.value)
                         // })}
-                    /> */}
+                    />
                     <Divider sx={{ marginTop: '15px' }} />
 
                     {/* slider input to change appearance rating */}

@@ -39,8 +39,8 @@ function ReveiwPage() {
             {/* not yet adding in date until correct format */}
             {/* <div>Date tasted: {Date(wineInfo.date)}</div> */}
             <span className='body-text'>Wine tasted: {wineInfo.vintage} {wineInfo.winery_name} {wineInfo.varietal} from {wineInfo.region}</span>
-            <div className='body-text'>Scores</div>
-            <div className='body-text'><h2>Appearance: {wineRatingsAndNotes.appearanceRating}</h2>
+            {/* <div className='body-text'>Scores</div> */}
+            <div className='body-text'><h2>Appearance</h2>
                 <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
@@ -53,7 +53,7 @@ function ReveiwPage() {
                     variant="outlined">
                     Appearance Notes</Button>}><div>{wineRatingsAndNotes.appearanceNotes}</div></Popup>
             </div>
-            <div className='body-text'><h2>Aroma: {wineRatingsAndNotes.noseRating}</h2>
+            <div className='body-text'><h2>Aromas</h2>
                 <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
@@ -64,7 +64,8 @@ function ReveiwPage() {
                     size='small'
                     color="primary"
                     variant="outlined">
-                   Aroma Notes</Button>}><div>
+                   Aroma Notes</Button>}><div>{wineRatingsAndNotes.noseNotes}</div>
+                    {/* <div>
                    {wineRatingsAndNotes.noseNotes ?
                             wineRatingsAndNotes.noseNotes.map((note) => {
                                 return (
@@ -75,9 +76,10 @@ function ReveiwPage() {
                             })
                             :
                             <div>loading...</div>
-                        }{wineRatingsAndNotes.noseNotes}</div></Popup>
+                        }{wineRatingsAndNotes.noseNotes}</div> */}
+                        </Popup>
             </div>
-            <div className='body-text'><h2>Palate: {wineRatingsAndNotes.palateRating}</h2>
+            <div className='body-text'><h2>Palate</h2>
                 <Popup trigger={<Button
                     sx={{
                         marginLeft: '15px',
