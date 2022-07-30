@@ -122,10 +122,15 @@ The goal was to build an application which utilizes the full stack in order to r
 7. In the deploy section, select manual deploy
 
 ## Authors
-Jean-Luc LaCosse - all work - jeanlacosse@gmail.com
+Jean-Luc LaCosse - all work -
+
+<a href="https://www.linkedin.com/in/jean-luc-lacosse-572b64172/" rel="nofollow"><img src="https://camo.githubusercontent.com/f80827f692b8a8ff3e0b4ce542f20931cca613dd401058f2366f32231683ef84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d4c696e6b6564496e2d626c75653f7374796c653d666f722d7468652d6261646765266c6f676f3d6c696e6b6564696e" alt="LinkedIn" data-canonical-src="https://img.shields.io/badge/-LinkedIn-blue?style=for-the-badge&amp;logo=linkedin" style="max-width: 100%;"></a>
+
+<a href="mailto:jeanlacosse@gmail.com"><img src="https://camo.githubusercontent.com/d39b68056b9a4c09bb85fb3a01302c28a28841f080b703028a238d627293a7ab/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d676d61696c2d6f72616e67653f7374796c653d666f722d7468652d6261646765266c6f676f3d676d61696c" alt="Email" data-canonical-src="https://img.shields.io/badge/-gmail-orange?style=for-the-badge&amp;logo=gmail" style="max-width: 100%;"></a>
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
 
 ## Support
 If you have suggestions or issues, please email me at [jeanlacosse@gmail.com](www.google.com)
+<a href="mailto:jeanlacosse@gmail.com"><img src="https://camo.githubusercontent.com/d39b68056b9a4c09bb85fb3a01302c28a28841f080b703028a238d627293a7ab/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d676d61696c2d6f72616e67653f7374796c653d666f722d7468652d6261646765266c6f676f3d676d61696c" alt="Email" data-canonical-src="https://img.shields.io/badge/-gmail-orange?style=for-the-badge&amp;logo=gmail" style="max-width: 100%;"></a>
