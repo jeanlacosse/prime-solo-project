@@ -10,10 +10,9 @@ The goal was to build an application which utilizes the full stack in order to r
 
 ## Screen Shots
 <img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.37%20PM.png" >
-![alt text](./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.37%20PM.png)
-![alt text](./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.49%20PM.png)
-![alt text](./documentation/images/Screen%20Shot%202022-07-11%20at%203.07.26%20PM.png)
-![alt text](./documentation/images/Screen%20Shot%202022-07-11%20at%203.07.59%20PM.png)
+<img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.49%20PM.png" >
+<img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.07.26%20PM.png" >
+<img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.07.59%20PM.png" style={width: 50%}>
 
 ### Prerequisites
 
