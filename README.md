@@ -9,7 +9,7 @@ I wanted to create a full-stack application that would allow a user to create a 
 The goal was to build an application which utilizes the full stack in order to run database requests, render items to the dom, and create a responsive and immersive experience within the app.
 
 ## Screen Shots
-<img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.37%20PM.png" style="max-width: 50%;">
+<img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.37%20PM.png" style="height: 250px;">
 <img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.06.49%20PM.png" style="max-width: 50%;">
 <img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.07.26%20PM.png" style="max-width: 50%;">
 <img src="./documentation/images/Screen%20Shot%202022-07-11%20at%203.07.59%20PM.png" style="max-width: 50%;">
