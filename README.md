@@ -2,7 +2,7 @@
 Tasting Room - Solo Project
 
 ## Description
-This project took two weeks to develop.
+Two Week Sprint
 
 I wanted to create a full-stack application that would allow a user to create a group wine tasting with friends where everyone can review and rate the wine they are drinking together.
 
